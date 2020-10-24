@@ -39,11 +39,10 @@ const RecommendedRecipe = () => {
         dispatch(fetchRecommendedRecipe(uid))
     },[]);
 
-    const pageTitle = 'オススメのレシピ一覧'
 
     return(
         <div className={classes.root}>
-            <Title pageTitle={pageTitle} />
+            <Title pageTitle={'登録済みレシピ一覧'} />
             <Grid container spacing={2}>
                 {recipes.length > 0 && (
                     recipes.map(recipe => (

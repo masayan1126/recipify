@@ -63,14 +63,63 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
         // date = year + month + day;
         // data.date = date;
 
-            console.log(id);
 
-        return recipeCalendarRef.doc(id).set(data, {merge: true})
+        return recipeCalendarRef.doc(uid + id).set(data, {merge: true})
         .then(() => {
             dispatch(push('/'))
         }).catch((error) => {
             throw new Error(error)
         })
+    }
+}
+
+export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDay, recipeNameList) => {
+    return async (dispatch) => {
+        const start = Number(startYear + startMonth + startDay) 
+        const end = Number(startYear + startMonth +endDay)
+        const difference = end - start;
+        console.log(recipeNameList);
+        for(let i = recipeNameList.length - 1; i > 0; i--){
+            let r = Math.floor(Math.random() * (i + 1));
+            let tmp = recipeNameList[i];
+            recipeNameList[i] = recipeNameList[r];
+            recipeNameList[r] = tmp;
+        }
+
+        // const year = String(date).substring(0, 4);
+        // const month = String(date).substring(5, 7);
+        // const day = String(date).substring(8, 10);
+        // date = year + month + day;
+        // data.date = date;
+
+        // console.log(uid + id);
+
+        const timestamp = FirebaseTimestamp.now();
+        let date = start;
+
+        for (let i = 0; i <= difference; i += 1) {
+            console.log(i);
+            // autoMaketTargetDates = start + 1
+            
+            const data = {
+                dinner: recipeNameList[i],
+                userId: uid,
+                updated_at: timestamp,
+                date: `${date + i}`, 
+                id: `${date + i}`,
+            }
+    
+
+            // data.id = autoMaketTargetDates
+            // data.created_at = timestamp 
+            recipeCalendarRef.doc(uid + ( start + i )).set(data, {merge: true})
+            .then(() => {
+                console.log('処理成功');
+            }).catch((error) => {
+                throw new Error(error)
+            })
+        }
+        dispatch(push('/'))
     }
 }
 

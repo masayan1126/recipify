@@ -24,7 +24,7 @@ const IngredientsEdit = () => {
         // [ingredientsNameThree, setIngredientsNameThree] = useState(""),
         // [ingredientsNameFour, setIngredientsNameFour] = useState(""),
         // [ingredientsNameFive, setIngredientsNameFive] = useState(""),
-        [ingredients, setIngredients] = useState([]);
+        [ingredientsName, setIngredients] = useState([]);
 
     const inputingredientsCategory = useCallback((event) => {
         setIngredientsCategory(event.target.value)
@@ -91,12 +91,12 @@ const IngredientsEdit = () => {
                 rows={1} value={ingredientsNameFive} type={"text"} onChange={inputIngredientsNameFive}
             /> */}
             <SetIngredients 
-                ingredients={ingredients} setIngredients={setIngredients}
+                ingredients={ingredientsName} setIngredients={setIngredients}
             />
 
             <PrimaryButton
                 label={"食材を追加"}
-                onClick={() => dispatch(saveIngredients(id, ingredientsCategory, ingredients))}
+                onClick={() => dispatch(saveIngredients(id, ingredientsCategory, ingredientsName))}
             />
         </div>
     )

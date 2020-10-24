@@ -18,7 +18,7 @@ export const fetchIngredients = () => {
             })
     }
 }
-export const saveIngredients = (id, ingredientsCategory, ingredients) => {
+export const saveIngredients = (id, ingredientsCategory, ingredientsName) => {
     return async (dispatch) => {
         const timestamp = FirebaseTimestamp.now();
         const data = {
@@ -28,7 +28,7 @@ export const saveIngredients = (id, ingredientsCategory, ingredients) => {
             // ingredientsNameThree: ingredientsNameThree,
             // ingredientsNameFour: ingredientsNameFour,
             // ingredientsNameFive: ingredientsNameFive,
-            ingredients: ingredients,
+            ingredientsList: ingredientsName,
             updated_at: timestamp,
         }
 

@@ -8,23 +8,25 @@ import '../../assets/styles/style.css';
 import { getUserId } from '../../redux/users/selecotors';
 import { getIngredients } from '../../redux/ingredients/selecotors';
 import { fetchIngredients } from '../../redux/ingredients/operations';
+import { vegs, meats, fishes, cereals } from '../../ingredients';
 
 const RecipeEdit = () => {
+    console.log(fishes);
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
     let ingredientsList = []
     ingredientsList = getIngredients(selector);
-    const idArr = ingredientsList.map((data) => data.id)
-    const nameArr = ingredientsList.map((data) => data.ingredientsList)
-    // const meats = nameArr.map((data) => data.name)
+    const ingredientsArr = []
+    ingredientsList.forEach(element => {
+        ingredientsArr.push(element.ingredients)
+    });
     
-    const arr = []
-    for (let i = 1; i <= ingredientsList.length; i += 1) {
-        const ingredients = { id: `${idArr[i]}`,name: nameArr[1] }
-        arr.push(ingredients);
-    }
-    console.log(nameArr);
+    // const arr = ingredientsList.filter((item => item.ingredientsCategory === '魚類'))
+    // const fishesArr = arr.map((value) => value.ingredients)
+    // const fishes = fishesArr.filter((value, index) => {
+    //     return index === 0
+    // })
 
     let id = window.location.pathname.split('/recipe/edit')[1];
     
@@ -36,7 +38,7 @@ const RecipeEdit = () => {
    
 
     const [recipeName, setRecipeName] = useState(""),
-            [necessaryIngredientsOne, setNecessaryIngredientsOne] = useState(""),
+            [necessaryIngredientsOne, setNecessaryIngredientsOne] = useState([]),
             [necessaryIngredientsTwo, setNecessaryIngredientsTwo] = useState(""),
             [necessaryIngredientsThree, setNecessaryIngredientsThree] = useState(""),
             [necessaryIngredientsFour, setNecessaryIngredientsFour] = useState(""),
@@ -99,9 +101,8 @@ const RecipeEdit = () => {
         { id:"all" ,name:"オールシーズン" },
     ]
 
-
-
     useEffect(() => {
+        
         dispatch(fetchIngredients())
         if (id !== "") {
             db.collection('recipes').doc(id).get()
@@ -131,14 +132,20 @@ const RecipeEdit = () => {
                 rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}
             />
             <SelectBox
-                label={"必要食材1"} required={true} options={ingredientsList} select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
-            />
-            {/* <SelectBox
-                label={"必要食材2"} required={true} options={categories} select={setNecessaryIngredientsTwo} value={categories}
+                label={"必要食材1(野菜類)"} required={true} options={vegs} select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
             />
             <SelectBox
-                label={"必要食材3"} required={true} options={categories} select={setNecessaryIngredientsThree} value={categories}
-            /> */}
+                label={"必要食材2(肉類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+            />
+            <SelectBox
+                label={"必要食材3(魚介類)"} required={true} options={fishes} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+            />
+            <SelectBox
+                label={"必要食材4(きのこ類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+            />
+            <SelectBox
+                label={"必要食材5(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+            />
             {/* <TextInput 
                 fullWidth={true} label={"必要食材1"} multiline={false} required={true}
                 rows={1} value={necessaryIngredientsOne} type={"text"} onChange={inputNecessaryIngredientsOne}
@@ -154,23 +161,23 @@ const RecipeEdit = () => {
             <TextInput 
                 fullWidth={true} label={"必要食材4"} multiline={false} required={true}
                 rows={1} value={necessaryIngredientsFour} type={"text"} onChange={inputNecessaryIngredientsFour}
-            /> */}
-            {/* <TextInput 
+            />
+            <TextInput 
                 fullWidth={true} label={"必要食材5"} multiline={false} required={true}
                 rows={1} value={necessaryIngredientsFive} type={"text"} onChange={inputNecessaryIngredientsFive}
             /> */}
-            {/* <SelectBox
+            <SelectBox
                 label={"カテゴリー"} required={true} options={categories} select={setRecipeCategory} value={recipeCategory}
             />
             <SelectBox
                 label={"ジャンル"} required={true} options={genres} select={setRecipeGenre} value={recipeGenre}
             />
-            <SelectBox
+            {/* <SelectBox
                 label={"オススメの季節"} required={true} options={recipeSeasons} select={setRecipeSeason} value={recipeSeason}
-            />
+            /> */}
             <SelectBox
                 label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
-            /> */}
+            />
             <PrimaryButton 
                 label={"レシピを追加"}
                 onClick={() => dispatch(saveRecipe(id,recipeName, necessaryIngredientsOne, necessaryIngredientsTwo, 
