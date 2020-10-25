@@ -18,11 +18,12 @@ import {deleteRecipe} from '../../redux/recipes/operations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 150,
+    maxWidth: "200",
     // flexGrow: 1,
   },
   media: {
     height: 150,
+    maxWidth: "200",
   },
   content: {
     display: 'flex',

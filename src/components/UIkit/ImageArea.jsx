@@ -54,15 +54,15 @@ const ImageArea = (props) => {
 
     return(
         <div>
-            <div>
+            <div className="p-grid__list-images">
                 {props.images.map(image => <ImagePreview delete={deleteImage} id={image.id} key={image.id} path={image.path}/>)}
             </div>
-            <div>
-                <span>商品画像を登録する</span>
+            <div className="u-text-right">
+                <span>レシピ画像の登録</span>
                 <IconButton className={classes.icon}>
                     <label>
                         <AddPhotoAlternateIcon />
-                        <input type="file" id="image"
+                        <input className="u-display-none" type="file" id="image"
                             onChange={(event) => uploadImage(event)}
                         />
                     </label>

@@ -1,22 +1,91 @@
 export const vegs = [
-  { id:"tomato", name: "トマト" },  
-  { id: "onion", name: "玉ねぎ" },   
+  { id: "asparagus", name: "アスパラガス" },  
+  { id: "green_beans", name: "いんげんまめ" },  
+  { id: "edamame", name: "えだまめ" },  
+  { id: "okra", name: "オクラ" },
+  { id: "kaiware_daikon", name: "かいわれだいこん" },
+  { id: "turnip", name: "かぶ" },
+  { id: "pumpkin", name: "かぼちゃ" },
+  { id: "cauliflower", name: "カリフラワー" },
+  { id: "kanpyo", name: "かんぴょう" },
+  { id: "cabbage", name: "キャベツ" },
+  { id: "cucumber", name: "きゅうり" },
+  { id: "green_peas", name: "グリンピース" },
+  { id: "burdock", name: "ごぼう" },
+  { id: "komatsuna", name: "こまつな" },
+  { id: "sayaendo", name: "さやえんどう" },
+  { id: "sunny_lettuce", name: "サニーレタス" },
+  { id: "shiso", name: "しそ" },
+  { id: "crowndaisy", name: "春菊" },
   { id: "potato", name: "じゃがいも" },
+  { id: "ginger", name: "しょうが" },
+  { id: "sweet_corn", name: "スイートコーン" },
+  { id: "celery", name: "セロリー" },
+  { id: "daikon_radish", name: "だいこん" },   
+  { id: "bambooshoot", name: "たけのこ" },   
+  { id: "onion", name: "玉ねぎ" },   
+  { id: "bok_choy", name: "チンゲン菜" },  
+  { id: "tomato", name: "トマト" },  
+  { id: "eggplant", name: "なす" },  
+  { id: "chinese_chive", name: "にら" },  
+  { id: "carrots", name: "にんじん" },  
+  { id: "garlic", name: "にんにく" },  
+  { id: "chinese_cabbage", name: "はくさい" },  
+  { id: "parsley", name: "パセリ" },  
+  { id: "green_pepper", name: "ピーマン" },  
+  { id: "broccoli", name: "ブロッコリー" },  
+  { id: "spinach", name: "ほうれんそう" },  
+  { id: "moroheiya", name: "モロヘイヤ" },  
+  { id: "bean_sprouts", name: "もやし" },  
+  { id: "mugwort", name: "よもぎ" },  
+  { id: "leaf_lettuce", name: "リーフレタス" },  
+  { id: "lettuce", name: "レタス" },  
+  { id: "lotus_root", name: "れんこん" },  
     
 ]
 
 export const meats = [
-  { id:"chicken", name: "鶏肉" },  
+  { id: "wiener", name: "ウインナー" },   
   { id: "beaf", name: "牛肉" },   
+  { id: "beef_liver", name: "牛レバー" },   
+  { id: "sausage", name: "ソーセージ" },   
+  { id:"chicken", name: "鶏肉" },  
+  { id:"chicken_liver", name: "鶏レバー" },  
+  { id: "horsemeat", name: "馬肉" },
+  { id: "ham", name: "ハム" },
   { id: "pork", name: "豚肉" },
+  { id: "pork_liver", name: "豚レバー" },
+  { id: "bacon", name: "ベーコン" },
+  { id: "grilled_pork", name: "焼き豚" },
     
 ]
 
 export const fishes = [
-  { id:"tomato", name: "あじ" },  
-  { id: "onion", name: "あなご" },   
-  { id: "potato", name: "いさき" },
-    
+  { id:"clams", name: "アサリ" },  
+  { id:"horse_mackerel", name: "アジ" },  
+  { id: "conger_eel", name: "アナゴ" },   
+  { id: "squid", name: "イカ" },   
+  { id: "sardine", name: "イワシ" },
+  { id: "shrimp", name: "エビ" },
+  { id: "swordfish", name: "カジキ" },
+  { id: "skipjack", name: "カツオ" },
+  { id: "katsuobushi", name: "かつお節" },
+  { id: "kamaboko", name: "かまぼこ" },
+  { id: "flatfish", name: "カレイ" },
+  { id: "salmon", name: "サケ" },
+  { id: "mackerel", name: "サバ" }, 
+  { id: "spanish_mackerel", name: "サワラ" },
+  { id: "shishamo", name: "シシャモ" },
+  { id: "shirasu", name: "シラス" },
+  { id: "sea_bass", name: "スズキ" },
+  { id: "thailand", name: "タイ" },
+  { id: "octopus", name: "タコ" },
+  { id: "chikuwa", name: "ちくわ" },
+  { id: "tuna_can", name: "ツナ缶" },
+  { id: "flounder", name: "ヒラメ" },
+  { id: "yellowtail", name: "ブリ" },
+  { id: "tuna", name: "マグロ" },
+  
 ]
       
 export const cereals = [
@@ -42,4 +111,29 @@ export const cereals = [
   { id: "potato", name: "コーンフレーク" },    
 ]
       
+export const potatoes_starches_beans_mushrooms = [
+  // potatoes
+  { id:"sweet_potato", name: "さつまいも" },
+  { id:"taro", name: "さといも" },
+  { id:"potatoes", name: "じゃがいも" },
+  { id:"nagaimo", name: "ながいも" },
+  // starches
+  { id:"konjac", name: "こんにゃく" },
+  { id:"shirataki", name: "しらたき" },
+  // beans
+  { id:"peas", name: "えんどうまめ" },
+  { id:"okara", name: "おから" },
+  { id:"soy", name: "大豆" },
+  { id:"soy_milk", name: "豆乳" },
+  { id:"tofu", name: "豆腐" },
+  { id:"natto", name: "納豆" },
+  // mushrooms
+  { id:"enokitake", name: "えのきたけ" },
+  { id:"shiitake", name: "しいたけ" },
+  { id:"nameko", name: "なめこ" },
+  { id:"shimeji_mushroom", name: "しめじ" },
+  { id:"maitake", name: "まいたけ" },
+  { id:"mushroom", name: "マシュルーム" },
 
+
+]

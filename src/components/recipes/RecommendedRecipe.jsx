@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getRecipes} from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
+import {Recipe} from "../UIkit/index";
 
 const recommendedRecipeList = [
     { recipeName: "サバのトマト煮", path: "/static/images/cards/サバのトマト煮.jpg" },
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     //   justifyContent: 'center',
     //   flexDirection: 'row',
+    },
+    max_width: {
+        maxWidth: "200",
     },
   }));
 
@@ -39,20 +43,22 @@ const RecommendedRecipe = () => {
         dispatch(fetchRecommendedRecipe(uid))
     },[]);
 
-
     return(
-        <div className={classes.root}>
-            <Title pageTitle={'登録済みレシピ一覧'} />
-            <Grid container spacing={2}>
+        <div>
+            {/* <h2 className="title">レシピ一覧</h2> */}
+            {/* <Grid container spacing={2}>
                 {recipes.length > 0 && (
                     recipes.map(recipe => (
-                        <Grid item xs={6}>
+                        <Grid item xs={6} sm={4} md={3} lg={2}>
                             <RecipeCard key={recipe.id} recommendedRecipe={recipe} />
                         </Grid>
                     ))
                 )}
                     
-            </Grid>
+            </Grid> */}
+            <Recipe recipes={recipes}
+                // onChange={handleChange} 
+            />
         </div>
     )
 }

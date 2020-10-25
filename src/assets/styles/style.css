@@ -1,13 +1,33 @@
 .mt-small {
-    margin-top:100px;
+    margin-top:50px;
 }
 
 .pt-small {
-    padding-top:70px;
+    padding-top:80px;
 }
 
 .display-toggle {
     display: none;
+}
+
+.max-width {
+    max-width: 200px !important;
+}
+
+.text-center { 
+    text-align: center;
+}
+
+/* .bg_color__action_button {
+    background-color: #D24136 !important;
+} */
+
+.title {
+    text-align: center;
+    /* color: #EBB582; */
+    color: #785A46;
+    margin: 0 auto 1rem auto;
+    /* margin-bottom: 0px; */
 }
 
 /*********** Module Spacer ***********/
@@ -145,15 +165,9 @@
     text-align: right;
 }
 
-.u-text-center {
-    text-align: center;
-}
 
-.u-text__headline {
-    color: #4dd0e1;
-    font-size: 1.563rem;
-    margin: 0 auto 1rem auto;
-}
+
+
 
 .u-display-none {
     display: none;

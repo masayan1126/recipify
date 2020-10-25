@@ -8,7 +8,7 @@ import '../../assets/styles/style.css';
 import { getUserId } from '../../redux/users/selecotors';
 import { getIngredients } from '../../redux/ingredients/selecotors';
 import { fetchIngredients } from '../../redux/ingredients/operations';
-import { vegs, meats, fishes, cereals } from '../../ingredients';
+import { vegs, meats, fishes, cereals, potatoes_starches_beans_mushrooms } from '../../ingredients';
 
 const RecipeEdit = () => {
     console.log(fishes);
@@ -77,14 +77,16 @@ const RecipeEdit = () => {
         { id:"japanese" ,name:"和食" },
         { id:"chinese" ,name:"中華" },
         { id:"western" ,name:"洋食" },
+        { id:"else" ,name:"その他" },
     ]
 
     const genres = [
         { id:"meat" ,name:"肉料理" },
         { id:"fish" ,name:"魚料理" },
-        { id:"vegetables" ,name:"野菜料理" },
+        { id:"vegetables" ,name:"サラダ" },
         { id:"pasta" ,name:"パスタ" },
         { id:"rice" ,name:"ご飯もの" },
+        { id:"else" ,name:"その他" },
     ]
 
     const cookingTimes = [
@@ -125,66 +127,70 @@ const RecipeEdit = () => {
 
     return(
         <section>
-            <h2>レシピの登録・編集</h2>
-            <ImageArea images={images} setImages={setImages}/>
-            <TextInput
-                fullWidth={true} label={"レシピ名"} multiline={false} required={true}
-                rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}
-            />
-            <SelectBox
-                label={"必要食材1(野菜類)"} required={true} options={vegs} select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
-            />
-            <SelectBox
-                label={"必要食材2(肉類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
-            />
-            <SelectBox
-                label={"必要食材3(魚介類)"} required={true} options={fishes} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
-            />
-            <SelectBox
-                label={"必要食材4(きのこ類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
-            />
-            <SelectBox
-                label={"必要食材5(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
-            />
-            {/* <TextInput 
-                fullWidth={true} label={"必要食材1"} multiline={false} required={true}
-                rows={1} value={necessaryIngredientsOne} type={"text"} onChange={inputNecessaryIngredientsOne}
-            />
-            <TextInput 
-                fullWidth={true} label={"必要食材2"} multiline={false} required={true}
-                rows={1} value={necessaryIngredientsTwo} type={"text"} onChange={inputNecessaryIngredientsTwo}
-            />
-            <TextInput 
-                fullWidth={true} label={"必要食材3"} multiline={false} required={true}
-                rows={1} value={necessaryIngredientsThree} type={"text"} onChange={inputNecessaryIngredientsThree}
-            />
-            <TextInput 
-                fullWidth={true} label={"必要食材4"} multiline={false} required={true}
-                rows={1} value={necessaryIngredientsFour} type={"text"} onChange={inputNecessaryIngredientsFour}
-            />
-            <TextInput 
-                fullWidth={true} label={"必要食材5"} multiline={false} required={true}
-                rows={1} value={necessaryIngredientsFive} type={"text"} onChange={inputNecessaryIngredientsFive}
-            /> */}
-            <SelectBox
-                label={"カテゴリー"} required={true} options={categories} select={setRecipeCategory} value={recipeCategory}
-            />
-            <SelectBox
-                label={"ジャンル"} required={true} options={genres} select={setRecipeGenre} value={recipeGenre}
-            />
-            {/* <SelectBox
-                label={"オススメの季節"} required={true} options={recipeSeasons} select={setRecipeSeason} value={recipeSeason}
-            /> */}
-            <SelectBox
-                label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
-            />
-            <PrimaryButton 
-                label={"レシピを追加"}
-                onClick={() => dispatch(saveRecipe(id,recipeName, necessaryIngredientsOne, necessaryIngredientsTwo, 
-                    necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
-                    recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid))}
-            />
-            
+            <h2 className="title">レシピの登録・編集</h2>
+            <div className="c-section-container">
+                <ImageArea images={images} setImages={setImages}/>
+                <TextInput
+                    fullWidth={true} label={"レシピ名"} multiline={false} required={true}
+                    rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}
+                />
+                <SelectBox
+                    label={"食材1(野菜類)"} required={true} options={vegs} select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
+                />
+                <SelectBox
+                    label={"食材2(肉類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+                />
+                <SelectBox
+                    label={"食材3(魚介類)"} required={true} options={fishes} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+                />
+                <SelectBox
+                    label={"食材4(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+                />
+                <SelectBox
+                    label={"食材5(芋・でん粉・豆・キノコ類)"} required={true} options={potatoes_starches_beans_mushrooms} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+                />
+                {/* <TextInput 
+                    fullWidth={true} label={"必要食材1"} multiline={false} required={true}
+                    rows={1} value={necessaryIngredientsOne} type={"text"} onChange={inputNecessaryIngredientsOne}
+                />
+                <TextInput 
+                    fullWidth={true} label={"必要食材2"} multiline={false} required={true}
+                    rows={1} value={necessaryIngredientsTwo} type={"text"} onChange={inputNecessaryIngredientsTwo}
+                />
+                <TextInput 
+                    fullWidth={true} label={"必要食材3"} multiline={false} required={true}
+                    rows={1} value={necessaryIngredientsThree} type={"text"} onChange={inputNecessaryIngredientsThree}
+                />
+                <TextInput 
+                    fullWidth={true} label={"必要食材4"} multiline={false} required={true}
+                    rows={1} value={necessaryIngredientsFour} type={"text"} onChange={inputNecessaryIngredientsFour}
+                />
+                <TextInput 
+                    fullWidth={true} label={"必要食材5"} multiline={false} required={true}
+                    rows={1} value={necessaryIngredientsFive} type={"text"} onChange={inputNecessaryIngredientsFive}
+                /> */}
+                <SelectBox
+                    label={"カテゴリー"} required={true} options={categories} select={setRecipeCategory} value={recipeCategory}
+                />
+                <SelectBox
+                    label={"ジャンル"} required={true} options={genres} select={setRecipeGenre} value={recipeGenre}
+                />
+                {/* <SelectBox
+                    label={"オススメの季節"} required={true} options={recipeSeasons} select={setRecipeSeason} value={recipeSeason}
+                /> */}
+                <SelectBox
+                    label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
+                />
+                <div className="module-spacer--small"/>
+                <div className="center">
+                    <PrimaryButton className="bg_color__action_button"
+                        label={"レシピを追加/更新"}
+                        onClick={() => dispatch(saveRecipe(id,recipeName, necessaryIngredientsOne, necessaryIngredientsTwo, 
+                            necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
+                            recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid))}
+                    />
+                </div>
+           </div> 
         </section>
     )
 }
