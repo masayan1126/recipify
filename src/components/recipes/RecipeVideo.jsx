@@ -2,7 +2,6 @@ import React from 'react';
 import YouTube from 'react-youtube';
 
 const RecipeVideo = (props) => {
-    console.log(props.videoIdList);
     return(
         <div>
             {props.videoIdList.length > 0 && (

@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { TextInput, PrimaryButton, SelectBox } from "../UIkit/index";
 import { useSelector,useDispatch } from 'react-redux';
-import { saveCalendar, autoSaveCalendar } from '../../redux/calendar/operations';
+import { saveCalendar, autoSaveCalendar, addCalendar } from '../../redux/calendar/operations';
 import {db, auth, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
@@ -15,6 +15,10 @@ const CalendarFlame = (props) => {
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
 
+    let id = window.location.pathname.split('/recipe/calendar')[1];
+    if(id) {        
+        id = id.split('/')[1]
+    }
 
     const recipes = []
     const recipeNameList = props.recipes.map((data) => data.recipeName)
@@ -26,10 +30,6 @@ const CalendarFlame = (props) => {
         };
         recipes.push(recipeObj)
     }
-
-
-    // console.log(recipes);
-
 
     const converMonth = (month) => {
         switch (month) {
@@ -112,17 +112,25 @@ const CalendarFlame = (props) => {
         let dateId = year + month + day
         dispatch(push('/recipe/calendar/' + dateId))
 
-        const calendarIds = props.calendar.map((calendar) => calendar.id )
-       
+
+
+        const calendarIds = props.calendar.map((calendar) => calendar.dateId )
+
         if (calendarIds.includes(dateId)) {
-            db.collection('calendar').doc(uid + dateId).get()
-                .then((snapshot) => {
-                    const data = snapshot.data();
+            const targetCalendar = props.calendar.filter(calendar => calendar.dateId == dateId)
+            console.log(targetCalendar[0]);
+            setBreakfast(targetCalendar[0].breakfast);
+            setLunch(targetCalendar[0].lunch);
+            setDinner(targetCalendar[0].dinner);
+
+            // db.collection('users').doc(uid).collection('calendar')
+            //     .then((snapshot) => {
+                    // const data = snapshot.data();
                     // setBreakfast(data.breakfast);
                     // setLunch(data.lunch);
-                    setDinner(data.dinner);
-                    console.log(data.dinner);
-                })
+                    // setDinner(data.dinner);
+                    
+                // })
         } else {
             setBreakfast("");
             setLunch("");
@@ -130,18 +138,36 @@ const CalendarFlame = (props) => {
         }  
     }
 
-    let id = window.location.pathname.split('/recipe/calendar')[1];
-    if(id) {        
-        id = id.split('/')[1]
-    }
+
 
     const autoMakeRecipeCalendar = (startYear, startMonth, startDay, endDay) => {
         dispatch(autoSaveCalendar(id, dinner, startYear, startMonth, startDay, endDay, uid, recipeNameList))
     }
 
     // useEffect(() => {
-    //     console.log(maxDate)
     // },[]);
+
+    const addRecipeCalendar = useCallback((id, breakfast, lunch, dinner, date) => {
+        
+        const year = String(date).substring(0, 4);
+        const month = String(date).substring(5, 7);
+        const day = String(date).substring(8, 10);
+        const dateId = year + month + day;
+        
+        const data = {
+            update: false,
+            breakfast: breakfast,
+            lunch: lunch,
+            dinner: dinner,
+            userId: uid,
+            date: date,
+            dateId: dateId,
+            id: id, 
+        }
+
+        
+        dispatch(addCalendar(data, date))
+    },[]);
 
     
     return (
@@ -160,6 +186,7 @@ const CalendarFlame = (props) => {
 
             <div id="recipe-calendar-form" className="display-toggle">
                 <h2>登録済みレシピ</h2>
+
                 <TextInput
                     fullWidth={true} label={"日付"} multiline={false} required={true}
                     rows={1} value={date} type={"text"}　
@@ -181,11 +208,19 @@ const CalendarFlame = (props) => {
                     label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
                 />
 
+                {/* <button onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date)}>
+                    カレンダーにレシピを追加
+                </button> */}
 
                 <PrimaryButton 
                     label={"レシピをカレンダーに追加"}
-                    onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
+                    onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date, uid)}
                 />
+
+                {/* <PrimaryButton 
+                    label={"レシピをカレンダーに追加"}
+                    onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
+                /> */}
                 
             </div>
             <div>

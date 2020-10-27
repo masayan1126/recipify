@@ -23,8 +23,6 @@ const IngredientsList = () => {
   const selector = useSelector((state) => state);
   const ingredientsList = getIngredients(selector);
 
-  console.log(ingredientsList);
-
   const useStyles = makeStyles((theme) => ({
       root: {
         width: '100%',

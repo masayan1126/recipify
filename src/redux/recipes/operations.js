@@ -88,8 +88,6 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date) => {
         date = year + month + day;
         data.date = date;
 
-        console.log(date);
-
         return recipeCalendarRef.doc(date).set(data, {merge: true})
         .then(() => {
             dispatch(push('/'))

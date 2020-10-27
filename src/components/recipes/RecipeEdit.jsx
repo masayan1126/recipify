@@ -11,7 +11,6 @@ import { fetchIngredients } from '../../redux/ingredients/operations';
 import { vegs, meats, fishes, cereals, potatoes_starches_beans_mushrooms } from '../../ingredients';
 
 const RecipeEdit = () => {
-    console.log(fishes);
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
@@ -32,7 +31,6 @@ const RecipeEdit = () => {
     
     if(id) {        
         id = id.split('/')[1]
-        console.log(id);
     }
 
    

@@ -12,7 +12,6 @@ const IngredientsEdit = () => {
     const ingredientsList = getIngredients(selector);
 
     let id = window.location.pathname.split('/ingredients/edit')[1];
-    console.log(id);
     if(id) {        
         id = id.split('/')[1]
         

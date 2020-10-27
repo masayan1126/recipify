@@ -37,8 +37,6 @@ const RecommendedRecipe = () => {
     const recipes = getRecipes(selector);
     const uid = getUserId(selector);
 
-    console.log(uid)
-
     useEffect(() => {
         dispatch(fetchRecommendedRecipe(uid))
     },[]);

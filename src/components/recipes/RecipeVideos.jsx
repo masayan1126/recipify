@@ -12,7 +12,6 @@ const RecipeVideos = () => {
         const json = await res.json();
         const itemes = await json.items;
         const videoIds = itemes.map((item) => item.id.videoId)
-        console.log(videoIds);
         // const videoIds = await itemes.id;
         videoIds.forEach(videoId => {
             videoIdList.push(videoId);

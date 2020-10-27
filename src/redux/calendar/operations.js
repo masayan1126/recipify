@@ -1,9 +1,10 @@
 import {db, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import {fetchCalendarAction} from '../calendar/actions';
-
+import { getUserId } from '../users/selecotors';
 
 const recipeCalendarRef = db.collection('calendar');
+
 
 // export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
 //     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
@@ -57,11 +58,7 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
         // id = ref.id
         data.id = id
         data.created_at = timestamp 
-        // const year = String(date).substring(0, 4);
-        // const month = String(date).substring(5, 7);
-        // const day = String(date).substring(8, 10);
-        // date = year + month + day;
-        // data.date = date;
+
 
 
         return recipeCalendarRef.doc(uid + id).set(data, {merge: true})
@@ -78,7 +75,6 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
         const start = Number(startYear + startMonth + startDay) 
         const end = Number(startYear + startMonth +endDay)
         const difference = end - start;
-        console.log(recipeNameList);
         for(let i = recipeNameList.length - 1; i > 0; i--){
             let r = Math.floor(Math.random() * (i + 1));
             let tmp = recipeNameList[i];
@@ -92,15 +88,11 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
         // date = year + month + day;
         // data.date = date;
 
-        // console.log(uid + id);
-
         const timestamp = FirebaseTimestamp.now();
         let date = start;
 
         for (let i = 0; i <= difference; i += 1) {
-            console.log(i);
-            // autoMaketTargetDates = start + 1
-            
+
             const data = {
                 dinner: recipeNameList[i],
                 userId: uid,
@@ -126,7 +118,8 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
 export const fetchCalendar = (uid) => {
 
     return async (dispatch) => {
-        recipeCalendarRef.where('userId', '==', uid).get()
+        const calendarRef = db.collection("users").doc(uid).collection('calendar');
+        calendarRef.get()
             .then(snapshots => {
                 const calendar = []
                 snapshots.forEach(snapshot => {
@@ -135,5 +128,45 @@ export const fetchCalendar = (uid) => {
                 })
                 dispatch(fetchCalendarAction(calendar))
             })
+    }
+}
+
+export const addCalendar = (data) => {
+
+    return async (dispatch, getState) => {
+
+        const uid = getState().users.uid
+        const timestamp = FirebaseTimestamp.now();
+        data.timestamp = timestamp;
+        const calendarRef = db.collection("users").doc(uid).collection('calendar');
+        let id = data.id;
+        // 新規登録の場合
+        console.log(id);
+        if(id == "") {
+            // const ref = calendarRef.doc();
+            // const newCalendarId = ref.id
+            data.id = id
+            data.created_at = timestamp 
+            data.dateId = id
+            // data['calendarId'] = id;
+            // id = calendarId
+            console.log('新規登録です');
+            // if(!calendarRef.where('dateId', '==', data.dateId).get()) {
+        } 
+        await calendarRef.doc(id).set(data, {merge: true}) 
+             
+
+        // data.id = calendarRef.id;
+        dispatch(push('/'));
+
+        // recipeCalendarRef.where('userId', '==', uid).get()
+        //     .then(snapshots => {
+        //         const calendar = []
+        //         snapshots.forEach(snapshot => {
+        //             const recipe = snapshot.data()
+        //             calendar.push(recipe)
+        //         })
+        //         dispatch(fetchCalendarAction(calendar))
+        //     })
     }
 }

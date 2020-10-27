@@ -25,8 +25,6 @@ const useStyles = makeStyles({
 })
 
 const SetIngredients = (props) => {
-
-    console.log(props.ingredients);
     const classes = useStyles()
 
     const [index, setIndex] = useState(0),

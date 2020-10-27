@@ -9,7 +9,6 @@ import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
 
 const AutoMakeRecipeCalendar = (props) => {
-    console.log(props);
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
@@ -24,10 +23,6 @@ const AutoMakeRecipeCalendar = (props) => {
     //     };
     //     recipes.push(recipeObj)
     // }
-
-
-    // console.log(recipes);
-
 
     // const converMonth = (month) => {
     //     switch (month) {
@@ -116,7 +111,6 @@ const AutoMakeRecipeCalendar = (props) => {
         //             // setBreakfast(data.breakfast);
         //             // setLunch(data.lunch);
         //             setDinner(data.dinner);
-        //             console.log(data.dinner);
         //         })
         // } else {
         //     setBreakfast("");
@@ -135,7 +129,6 @@ const AutoMakeRecipeCalendar = (props) => {
     // }
 
     // useEffect(() => {
-    //     console.log(maxDate)
     // },[]);
 
 
