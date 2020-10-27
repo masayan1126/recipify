@@ -95,7 +95,7 @@ export default function TemporaryDrawer() {
         <SideMenu primary={'ホーム'} menuAciton={menuHome} />
         <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
         <SideMenu primary={'レシピの追加/編集'} menuAciton={() => {menuEditRecipe()}} /> 
-        <SideMenu primary={'マイレシピ'} menuAciton={() => {menuMyRecipe()}} />
+        <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuMyRecipe()}} />
         <SideMenu primary={'食材追加'} menuAciton={() => {menuEditIngredients()}} />
         <SideMenu primary={'食材一覧'} menuAciton={() => {menuIngredientsList()}} />
         <SideMenu primary={'食材から献立'} menuAciton={() => {menuMyRecipe()}} />

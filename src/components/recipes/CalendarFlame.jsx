@@ -22,6 +22,7 @@ const CalendarFlame = (props) => {
 
     const recipes = []
     const recipeNameList = props.recipes.map((data) => data.recipeName)
+    console.log(recipeNameList);
     const recipeIdList = props.recipes.map((data) => data.id)
     for (let i = 0; i < props.recipes.length; i += 1) {
         const recipeObj = {
@@ -155,9 +156,6 @@ const CalendarFlame = (props) => {
         const dateId = year + month + day;
         
         const data = {
-            update: false,
-            breakfast: breakfast,
-            lunch: lunch,
             dinner: dinner,
             userId: uid,
             date: date,
@@ -165,7 +163,14 @@ const CalendarFlame = (props) => {
             id: id, 
         }
 
-        
+        if (breakfast == "") {
+            data.breakfast = ""
+        }
+
+        if (lunch == "") {
+            data.lunch = ""
+        }
+
         dispatch(addCalendar(data, date))
     },[]);
 

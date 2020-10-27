@@ -52,6 +52,8 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
             userId: uid,
             updated_at: timestamp,
             date: date,
+
+
         }
 
         // const ref = recipeCalendarRef.doc();
@@ -72,6 +74,7 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
 
 export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDay, recipeNameList) => {
     return async (dispatch) => {
+        
         const start = Number(startYear + startMonth + startDay) 
         const end = Number(startYear + startMonth +endDay)
         const difference = end - start;
@@ -99,12 +102,22 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
                 updated_at: timestamp,
                 date: `${date + i}`, 
                 id: `${date + i}`,
+                dateId: `${date + i}`,
+
+                // update: false,
+                // breakfast: ,
+                // lunch: lunch,
+                // dinner: dinner,
+                // userId: uid,
+                // date: date,
+                // dateId: dateId,
+                // id: id, 
             }
     
-
+            const calendarRef = db.collection("users").doc(uid).collection('calendar');
             // data.id = autoMaketTargetDates
-            // data.created_at = timestamp 
-            recipeCalendarRef.doc(uid + ( start + i )).set(data, {merge: true})
+            // data.created_at = timestamp calendarRef.doc(id).set(data, {merge: true})
+            calendarRef.doc(`${start + i}` ).set(data, {merge: true})
             .then(() => {
                 console.log('処理成功');
             }).catch((error) => {

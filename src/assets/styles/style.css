@@ -6,6 +6,17 @@
     padding-top:80px;
 }
 
+.bg-color__yellow {
+    color: #EBB582 !important;
+}
+
+
+.img-trimming {
+    width: 90%;
+    height: 90%;
+    max-width: 600px;
+}
+
 .display-toggle {
     display: none;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from "react-router";
-import { SignIn, SignUp, Reset } from "./templates";
+import { SignIn, SignUp, Reset, RecipeDetail } from "./templates";
 import App from './App';
 import Auth from './Auth';
 import { RecipeVideos, RecipeCalendar, RecipeEdit, RecommendedRecipe, MyRecipes,AutoMakeRecipeCalendar } from './components/recipes/index';
@@ -22,6 +22,7 @@ const Router = () => {
                 <Route exact path={"/recipe/auto"} component={AutoMakeRecipeCalendar} />
                 <Route exact path={"/recipe/video"} component={RecipeVideos} />
                 <Route path={"/recipe/edit(/:id)?"} component={RecipeEdit} />
+                <Route exact path={"/recipe/:id"} component={RecipeDetail} />
                 <Route path={"/ingredients/list"} component={IngredientsList} />
                 <Route path={"/ingredients/edit(/:id)?"} component={IngredientsEdit} />
             </Auth> 

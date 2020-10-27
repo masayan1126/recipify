@@ -24,6 +24,7 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             cookingTime: cookingTime,
             userId: uid,
             updated_at: timestamp,
+            favorite: false,
         }
 
         if(id === "") {
