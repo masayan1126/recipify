@@ -21,7 +21,7 @@ const SignIn = () => {
     return(
         <div>
             <h3 className="title">サインイン</h3>
-            <div className="auth-container">
+            <div className="form-container">
                 <TextInput 
                     fullWidth={true} label={'メールアドレス'}
                     multiline={false} required={true}

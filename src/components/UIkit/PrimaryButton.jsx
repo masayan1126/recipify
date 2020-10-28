@@ -5,10 +5,10 @@ const useStyles = makeStyles({
     'button': {
         backgroundColor: "#D24136",
         color: '#FFF',
-        fontSize: 16,
-        height :48,
+        fontSize: 14,
+        height :44,
         marginBottom: 16,
-        width: 210,
+        width: 200,
     }
 })
 

@@ -31,7 +31,7 @@ const SignUp = () => {
     return(
         <div>
             <h3 className="title">アカウント登録</h3>
-            <div className="auth-container">
+            <div className="form-container">
                 <TextInput 
                     fullWidth={true} label={'ユーザー名'}
                     multiline={false} required={true}

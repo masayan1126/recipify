@@ -125,8 +125,8 @@ const RecipeEdit = () => {
 
     return(
         <section>
-            <h2 className="title">レシピの登録・編集</h2>
-            <div className="basic-container">
+            <h3 className="title">レシピの登録・編集</h3>
+            <div className="form-container">
                 <ImageArea images={images} setImages={setImages}/>
                 <TextInput
                     fullWidth={true} label={"レシピ名"} multiline={false} required={true}

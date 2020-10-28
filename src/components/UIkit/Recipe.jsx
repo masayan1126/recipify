@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
   max_width: {
       maxWidth: "200",
   },
-  fixBottom : {
-    position:"fixed",
-    bottom: 120,
-    left:115,
-  }
+  // fixBottom : {
+  //   position:"fixed",
+  //   bottom: 120,
+  //   left:115,
+  // }
 }));  
 
 
@@ -39,7 +39,7 @@ const Recipe = (props) => {
   return (
     <div className={classes.root}>
       <h3 className="title">レシピ一覧</h3>
-      <Grid container spacing={2}>
+      <Grid container spacing={2}  className="min-heigth">
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)
               .map(recipe => (
@@ -51,7 +51,8 @@ const Recipe = (props) => {
               
       </Grid>
 
-      <Pagination className="text-center" className={classes.fixBottom}
+      <div className="spacer-md"/>
+      <Pagination className="text-center"
         limit={parPage}
         offset={offset}
         total={props.recipes.length}
