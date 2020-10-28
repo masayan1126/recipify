@@ -126,7 +126,7 @@ const RecipeEdit = () => {
     return(
         <section>
             <h2 className="title">レシピの登録・編集</h2>
-            <div className="c-section-container">
+            <div className="basic-container">
                 <ImageArea images={images} setImages={setImages}/>
                 <TextInput
                     fullWidth={true} label={"レシピ名"} multiline={false} required={true}
@@ -179,9 +179,9 @@ const RecipeEdit = () => {
                 <SelectBox
                     label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
                 />
-                <div className="module-spacer--small"/>
+                <div className="spacer-sm"/>
                 <div className="center">
-                    <PrimaryButton className="bg_color__action_button"
+                    <PrimaryButton
                         label={"レシピを追加/更新"}
                         onClick={() => dispatch(saveRecipe(id,recipeName, necessaryIngredientsOne, necessaryIngredientsTwo, 
                             necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 

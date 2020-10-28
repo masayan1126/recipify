@@ -15,7 +15,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {deleteRecipe} from '../../redux/recipes/operations';
-import StarOutlineIcon from '@material-ui/icons/StarOutlined';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,7 +71,6 @@ const RecipeCard = (props) => {
               </Typography>
             </div>
             
-            <StarOutlineIcon />
             <IconButton className={classes.icon} onClick={handleClick}>
               <MoreVertIcon />
               

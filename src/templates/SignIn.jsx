@@ -20,25 +20,30 @@ const SignIn = () => {
 
     return(
         <div>
-            <h2>サインイン</h2>
-            <TextInput 
-                fullWidth={true} label={'メールアドレス'}
-                multiline={false} required={true}
-                rows={1} value={email}
-                type={'email'} onChange={inputEmail}
-            />
-            <TextInput 
-                fullWidth={true} label={'パスワード'}
-                multiline={false} required={true}
-                rows={1} value={password}
-                type={'password'} onChange={inputPassword}
-            />
-            <PrimaryButton 
-                label={'サインイン'}
-                onClick={() => dispatch(signIn(email,password))}
-            />
-            <p onClick={() => dispatch(push('/signup'))}>アカウントをお持ちでない方はこちら</p>
-            <p onClick={() => dispatch(push('/signin/reset'))}>パスワードをお忘れの方はこちら</p>
+            <h3 className="title">サインイン</h3>
+            <div className="auth-container">
+                <TextInput 
+                    fullWidth={true} label={'メールアドレス'}
+                    multiline={false} required={true}
+                    rows={1} value={email}
+                    type={'email'} onChange={inputEmail}
+                />
+                <TextInput 
+                    fullWidth={true} label={'パスワード'}
+                    multiline={false} required={true}
+                    rows={1} value={password}
+                    type={'password'} onChange={inputPassword}
+                />
+                <div className="spacer-sm"/>
+                <div className="center">
+                    <PrimaryButton 
+                        label={'サインイン'}
+                        onClick={() => dispatch(signIn(email,password))}
+                    />
+                    <p className="p-link-menu" onClick={() => dispatch(push('/signup'))}>アカウントをお持ちでない方はこちら</p>
+                    <p className="p-link-menu" onClick={() => dispatch(push('/signin/reset'))}>パスワードをお忘れの方はこちら</p>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,{useCallback, useState, useEffect} from 'react';
 import { RecipeCard } from './index';
 import { Title } from '../../templates/index';
 import Paper from '@material-ui/core/Paper';
@@ -10,6 +10,10 @@ import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getRecipes} from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
 import {Recipe} from "../UIkit/index";
+import {
+    CSSTransition,
+    TransitionGroup,
+  } from 'react-transition-group';
 
 const recommendedRecipeList = [
     { recipeName: "サバのトマト煮", path: "/static/images/cards/サバのトマト煮.jpg" },
@@ -36,9 +40,17 @@ const RecommendedRecipe = () => {
     const selector = useSelector((state) => state);
     const recipes = getRecipes(selector);
     const uid = getUserId(selector);
+    const [fade, setFade] = useState(false);
+    
+
+    // useEffect(() => {
+          
+      
+    //   }, [])
 
     useEffect(() => {
         dispatch(fetchRecommendedRecipe(uid))
+        setFade(true);
     },[]);
 
     return(
@@ -54,9 +66,18 @@ const RecommendedRecipe = () => {
                 )}
                     
             </Grid> */}
-            <Recipe recipes={recipes}
-                // onChange={handleChange} 
-            />
+
+            <CSSTransition
+                in={fade}
+                timeout={4000}
+                classNames="fade"
+            >
+                <Recipe recipes={recipes}
+            
+            // onChange={handleChange} 
+                />
+
+            </CSSTransition>
         </div>
     )
 }
