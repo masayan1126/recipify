@@ -17,6 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { SetIngredients } from "../../templates/index"
 import { Ingredients } from './index';
 import {getIngredients} from '../../redux/ingredients/selecotors';
+import AddIcon from '@material-ui/icons/Add';
 
 const IngredientsList = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const IngredientsList = () => {
 
     return(
         <section>
+          <AddIcon/>
           {ingredientsList.length > 0 && (
             <Ingredients ingredientsList={ingredientsList} />
           )}  

@@ -16,6 +16,15 @@ import {useDispatch} from "react-redux";
 import {push, goBack} from 'connected-react-router';
 import {signOut} from '../redux/users/operations';
 import * as SetIngredients from './ingredients/SetIngredients';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EditIcon from '@material-ui/icons/Edit';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import EventIcon from '@material-ui/icons/Event';
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
+import KitchenIcon from '@material-ui/icons/Kitchen';
 
 const useStyles = makeStyles({
   list: {
@@ -92,16 +101,58 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <SideMenu primary={'ホーム'} menuAciton={menuHome} />
-        <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
-        <SideMenu primary={'レシピの追加/編集'} menuAciton={() => {menuEditRecipe()}} /> 
-        <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuMyRecipe()}} />
+        <ListItem Button> 
+          {/* <SideMenu primary={'Recipify'}/> */}
+          <h3>Recipify</h3>
+        </ListItem>
+
+        <ListItem Button> 
+          <HomeIcon/>
+          <SideMenu primary={'ホーム'} menuAciton={menuHome} />
+        </ListItem>
+
+        <ListItem Button> 
+          <ExitToAppIcon />
+          <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
+        </ListItem>
+
+        <ListItem Button> 
+          <EditIcon/>
+          <SideMenu primary={'レシピの追加/編集'} menuAciton={() => {menuEditRecipe()}} /> 
+        </ListItem>
+
+        <ListItem Button> 
+          <FavoriteIcon/>
+          <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuMyRecipe()}} />
+        </ListItem>
+
+        <ListItem Button> 
+          <EventIcon/>
+          <SideMenu primary={'献立カレンダー'} menuAciton={() => {menuRecipeCalendar()}} />
+        </ListItem>
+
+        <ListItem Button>
+          <RestaurantMenuIcon/>
+          <SideMenu primary={'食材から献立'} menuAciton={() => {menuMyRecipe()}} />
+        </ListItem>
+
+        <ListItem Button>
+          <ListAltIcon/>
+          <SideMenu primary={'買い物リスト'} menuAciton={() => {menuMyRecipe()}} />
+        </ListItem>
+
+        <ListItem Button>
+          <OndemandVideoIcon/>
+          <SideMenu primary={'レシピ動画'} menuAciton={() => {menuRecipeVideo()}} />
+        </ListItem>
+
+        <ListItem Button>
+          <KitchenIcon/>
+          <SideMenu primary={'食材一覧'} menuAciton={() => {menuIngredientsList()}} />
+        </ListItem>
+
         <SideMenu primary={'食材追加'} menuAciton={() => {menuEditIngredients()}} />
-        <SideMenu primary={'食材一覧'} menuAciton={() => {menuIngredientsList()}} />
-        <SideMenu primary={'食材から献立'} menuAciton={() => {menuMyRecipe()}} />
-        <SideMenu primary={'一括献立'} menuAciton={() => {menuRecipeCalendar()}} />
-        <SideMenu primary={'買い物リスト'} menuAciton={() => {menuMyRecipe()}} />
-        <SideMenu primary={'レシピ動画'} menuAciton={() => {menuRecipeVideo()}} />
+        
       </List>
       
     </div>

@@ -9,10 +9,12 @@ const SideMenu = (props) => {
     const dispatch = useDispatch();
 
     return(
-        <ListItem Button key={props.key} onClick={props.menuAciton}> 
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={props.primary} />
-        </ListItem>
+        <>
+            
+                {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                <ListItemText primary={props.primary} onClick={props.menuAciton}/>
+            
+        </>
     )
 }
 export default SideMenu
