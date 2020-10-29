@@ -9,20 +9,23 @@ import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
 import { AutoMakeRecipeCalendar } from './index';
 import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
+import * as Log from './AutoMakeRecipeCalendar';
+
 
 const CalendarFlame = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
 
+    // id(このコンポーネントでは選択した日付を指す)
     let id = window.location.pathname.split('/recipe/calendar')[1];
     if(id) {        
         id = id.split('/')[1]
     }
 
+    // 登録済みレシピから、登録可能候補となるレシピ一覧のoptions生成
     const recipes = []
     const recipeNameList = props.recipes.map((data) => data.recipeName)
-    console.log(recipeNameList);
     const recipeIdList = props.recipes.map((data) => data.id)
     for (let i = 0; i < props.recipes.length; i += 1) {
         const recipeObj = {
@@ -32,7 +35,8 @@ const CalendarFlame = (props) => {
         recipes.push(recipeObj)
     }
 
-    const converMonth = (month) => {
+    // 選択した月(month)の表記を条件分岐で英語から日本語に変換
+    const convertMonth = (month) => {
         switch (month) {
             case "Jan": month = "1"; break;
             case "Feb": month = "2"; break;
@@ -53,13 +57,10 @@ const CalendarFlame = (props) => {
     const [targetDate, setTargetDate] = useState(new Date()),
             [breakfast, setBreakfast] = useState(""),
             [lunch, setLunch] = useState(""),
-            [dinner, setDinner] = useState(""),
-            // [form, setForm] = useState(false);
-            [startYear, setStartYear] = useState(""),
-            [startMonth, setStartMonth] = useState(""),
-            [startDay, setStartDay] = useState(""),
-            [endDay, setEndDay] = useState("");
+            [dinner, setDinner] = useState("");
 
+
+    // 朝、昼ごはんの入力
     const inputBreakfast = useCallback((event) => {
         setBreakfast(event.target.value)
     },[setBreakfast])
@@ -68,70 +69,35 @@ const CalendarFlame = (props) => {
         setLunch(event.target.value)
     },[setLunch])
 
-    const inputDinner = useCallback((event) => {
-        setDinner(event.target.value)
-    },[setDinner])
-
-// 
-
-    const inputStartYear = useCallback((event) => {
-        setStartYear(event.target.value)
-    },[setStartYear])
-    
-    const inputStartMonth = useCallback((event) => {
-        setStartMonth(event.target.value)
-    },[setStartMonth])
-
-    const inputStartDay = useCallback((event) => {
-        setStartDay(event.target.value)
-    },[setStartDay])
-
-    const inputEndDay = useCallback((event) => {
-        setEndDay(event.target.value)
-    },[setEndDay])
-
+    // date変数(今選択している日付のYYYY/MM/DD)の生成
     const year = String(targetDate).substring(11, 15);
     let month = String(targetDate).substring(4, 7);
-    month = converMonth(month);
+    month = convertMonth(month);
     const day = String(targetDate).substring(8, 10);
     let date = `${year}/${month}/${day}`;
-    // let dateId = year + month + day
-    // window.location.pathname = '/recipe/calendar/' + dateId;
+    let dateId = year + month + day;
     
-    const makeUrl = (event, maxDate) =>　{
-        
-        // setForm(true);
+    // /recipe/calendar/日付　の「日付」部分を選択した日付でURLを生成する関数
+    const makeUrl = (event) =>　{
+        // どこかの日付を選択したら、レシピの登録フォームを表示する
         const recipeCalendarForm = document.getElementById('recipe-calendar-form')
         recipeCalendarForm.classList.remove("display-toggle");
-        // if (form === true) {
-        // }
 
         const year = String(event).substring(11, 15);
         let month = String(event).substring(4, 7);
-        month = converMonth(month);
+        month = convertMonth(month);
         const day = String(event).substring(8, 10);
-        let dateId = year + month + day
+        dateId = year + month + day
         dispatch(push('/recipe/calendar/' + dateId))
 
-
-
+        // 選択した日付に紐づく登録済みのレシピ情報の各日付id(YYYYMMDD)の配列を生成
         const calendarIds = props.calendar.map((calendar) => calendar.dateId )
-
+        // 上記の配列の中に、現在選択している日付id(YYYYMMDD)と一致するデータがあれば、それを表示する
         if (calendarIds.includes(dateId)) {
             const targetCalendar = props.calendar.filter(calendar => calendar.dateId == dateId)
-            console.log(targetCalendar[0]);
             setBreakfast(targetCalendar[0].breakfast);
             setLunch(targetCalendar[0].lunch);
             setDinner(targetCalendar[0].dinner);
-
-            // db.collection('users').doc(uid).collection('calendar')
-            //     .then((snapshot) => {
-                    // const data = snapshot.data();
-                    // setBreakfast(data.breakfast);
-                    // setLunch(data.lunch);
-                    // setDinner(data.dinner);
-                    
-                // })
         } else {
             setBreakfast("");
             setLunch("");
@@ -139,123 +105,85 @@ const CalendarFlame = (props) => {
         }  
     }
 
-
-
-    const autoMakeRecipeCalendar = (startYear, startMonth, startDay, endDay) => {
-        dispatch(autoSaveCalendar(id, dinner, startYear, startMonth, startDay, endDay, uid, recipeNameList))
-    }
-
-    // useEffect(() => {
-    // },[]);
-
-    const addRecipeCalendar = useCallback((id, breakfast, lunch, dinner, date) => {
-        
-        const year = String(date).substring(0, 4);
-        const month = String(date).substring(5, 7);
-        const day = String(date).substring(8, 10);
-        const dateId = year + month + day;
-        
+    // 入力されたデータをDBに保存するための関数(operationsを呼び出して、引数を渡すための関数)
+    const addRecipeCalendar = () => {
         const data = {
             dinner: dinner,
             userId: uid,
             date: date,
-            dateId: dateId,
+            dateId: id,
             id: id, 
         }
 
         if (breakfast == "") {
             data.breakfast = ""
+        } else {
+            data.breakfast = breakfast
         }
 
         if (lunch == "") {
             data.lunch = ""
+        } else {
+            data.lunch = lunch
         }
 
-        dispatch(addCalendar(data, date))
-    },[]);
-
+        dispatch(addCalendar(data))
+    }    
     
     return (
-        <div>
-            {/* <span onClick={() => dispatch(push('/recipe/auto'))}>一括登録はこちらから</span> */}
+        <>
+            
             
             <Calendar
                 onChange={setTargetDate}
-                // onActiveStartDateChange={initializeDate}
                 value={targetDate}
                 onClickDay={(event, id,) => makeUrl(event, id) }
-                // activeStartDate={activeStartDate}
-                // defaultActiveStartDate={defaultActiveStartDate}
-                // maxDate={maxDate}
             />
 
             <div id="recipe-calendar-form" className="display-toggle">
-                <h2>登録済みレシピ</h2>
+                <div className="form-container">
+                    <TextInput
+                        fullWidth={true} label={"日付"} multiline={false} required={true}
+                        rows={1} value={date} type={"text"}　
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"朝ごはん"} multiline={false} required={false}
+                        rows={1} value={breakfast} type={"text"} 
+                        onChange={inputBreakfast}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"昼ごはん"} multiline={false} required={false}
+                        rows={1} value={lunch} type={"text"} 
+                        onChange={inputLunch}
+                    />
+                    <SelectBox
+                        label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
+                    />
 
-                <TextInput
-                    fullWidth={true} label={"日付"} multiline={false} required={true}
-                    rows={1} value={date} type={"text"}　
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
-                <TextInput
-                    fullWidth={true} label={"朝ごはん"} multiline={false} required={false}
-                    rows={1} value={breakfast} type={"text"} 
-                    onChange={inputBreakfast}
-                />
-                <TextInput
-                    fullWidth={true} label={"昼ごはん"} multiline={false} required={false}
-                    rows={1} value={lunch} type={"text"} 
-                    onChange={inputLunch}
-                />
-                <SelectBox
-                    label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
-                />
+                    {/* <button onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date)}>
+                        カレンダーにレシピを追加
+                    </button> */}
 
-                {/* <button onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date)}>
-                    カレンダーにレシピを追加
-                </button> */}
+                <div className="spacer-sm"/>
+                <div className="center">
+                    <PrimaryButton 
+                        label={"レシピを登録"}
+                        onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date, uid)}
+                    />
+                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>一括登録はこちらから</p>
+                    {/* <PrimaryButton 
+                        label={"レシピをカレンダーに追加"}
+                        onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
+                    /> */}
+                </div>    
+                </div>
+                </div>
 
-                <PrimaryButton 
-                    label={"レシピをカレンダーに追加"}
-                    onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date, uid)}
-                />
-
-                {/* <PrimaryButton 
-                    label={"レシピをカレンダーに追加"}
-                    onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
-                /> */}
-                
-            </div>
-            <div>
-                <h2>レシピ一括登録</h2>
-                <TextInput
-                    fullWidth={false} label={"年"} multiline={false} required={false}
-                    rows={1} value={startYear} type={"number"} 
-                    onChange={inputStartYear}
-                />
-                <TextInput
-                    fullWidth={false} label={"月"} multiline={false} required={false}
-                    rows={1} value={startMonth} type={"text"} 
-                    onChange={inputStartMonth}
-                />
-                <TextInput
-                    fullWidth={false} label={"開始日"} multiline={false} required={false}
-                    rows={1} value={startDay} type={"text"} 
-                    onChange={inputStartDay}
-                />
-                <TextInput
-                    fullWidth={false} label={"終了日"} multiline={false} required={false}
-                    rows={1} value={endDay} type={"text"} 
-                    onChange={inputEndDay}
-                />
-                <PrimaryButton 
-                    label={"一括登録"}
-                    onClick={() => dispatch(autoSaveCalendar(uid, id, startYear, startMonth, startDay, endDay, recipeNameList))}
-                />
-            </div>   
-        </div>
+            
+        </>
     );
 }
 export default CalendarFlame

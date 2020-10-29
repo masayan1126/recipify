@@ -21,7 +21,7 @@ const RecipeCalendar = () => {
 
     return(
         <div>
-            <h2>献立カレンダー</h2>
+            <h3 className="title">献立カレンダー</h3>
             <CalendarFlame calendar={calendar} recipes={recipes}/>
         </div>
     )

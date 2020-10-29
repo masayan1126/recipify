@@ -124,7 +124,7 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
                 throw new Error(error)
             })
         }
-        dispatch(push('/'))
+        dispatch(push('/recipe/calendar'))
     }
 }
 

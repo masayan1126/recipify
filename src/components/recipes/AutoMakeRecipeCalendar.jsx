@@ -7,12 +7,46 @@ import { saveCalendar, autoSaveCalendar } from '../../redux/calendar/operations'
 import {db, auth, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
+import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
+import {getRecipes} from '../../redux/recipes/selecotors';
+import { fetchCalendar } from '../../redux/calendar/operations';
+import HelpIcon from '@material-ui/icons/Help';
 
 const AutoMakeRecipeCalendar = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
+    const recipes = getRecipes(selector);
+    const recipeNameList = recipes.map((data) => data.recipeName)
 
+    const [startYear, setStartYear] = useState(""),
+    [startMonth, setStartMonth] = useState(""),
+    [startDay, setStartDay] = useState(""),
+    [endDay, setEndDay] = useState("");
+
+
+    // 対象期間の入力(自動作成のコンポーネントに渡す関数)
+    const inputStartYear = useCallback((event) => {
+        setStartYear(event.target.value)
+    },[setStartYear])
+    
+    const inputStartMonth = useCallback((event) => {
+        setStartMonth(event.target.value)
+    },[setStartMonth])
+
+    const inputStartDay = useCallback((event) => {
+        setStartDay(event.target.value)
+    },[setStartDay])
+
+    const inputEndDay = useCallback((event) => {
+        setEndDay(event.target.value)
+    },[setEndDay])
+    
+    
+    const autoMakeRecipeCalendar = (startYear, startMonth, startDay, endDay) => {
+        dispatch(autoSaveCalendar(id, startYear, startMonth, startDay, endDay, uid, recipeNameList))
+    }
+    
     // const recipes = []
     // const recipeNameList = props.recipes.map((data) => data.recipeName)
     // const recipeIdList = props.recipes.map((data) => data.id)
@@ -131,81 +165,45 @@ const AutoMakeRecipeCalendar = (props) => {
     // useEffect(() => {
     // },[]);
 
+    useEffect(() => {
+        dispatch(fetchCalendar(uid))
+        dispatch(fetchRecommendedRecipe(uid))
+    }, [])
 
     return (
-        <div>
-            <h2>一括登録</h2>
-            <p>例)2020年10月1日 〜 10月31日</p>
-            <p> → 20201001　〜　20201031</p>
-            
-            <TextInput
-                    fullWidth={false} label={"年"} multiline={false} required={false}
-                    rows={1} value={props.startYear} type={"text"} 
-                    onChange={props.inputStartYear}
-            />
-            <TextInput
-                    fullWidth={false} label={"月"} multiline={false} required={false}
-                    rows={1} value={props.startMonth} type={"text"} 
-                    onChange={props.inputStartMonth}
-            />
-            <TextInput
-                    fullWidth={false} label={"開始日"} multiline={false} required={false}
-                    rows={1} value={props.startDay} type={"text"} 
-                    onChange={props.inputStartDay}
-            />
-            <TextInput
-                    fullWidth={false} label={"終了日"} multiline={false} required={false}
-                    rows={1} value={props.endDay} type={"text"} 
-                    onChange={props.inputEndDay}
-            />
-            {/* <Calendar
-                onChange={setTargetDate}
-                // onActiveStartDateChange={initializeDate}
-                value={targetDate}
-                onClickDay={(event, id,) => makeUrl(event, id) }
-                activeStartDate={activeStartDate}
-                defaultActiveStartDate={defaultActiveStartDate}
-                maxDate={maxDate}
-            /> */}
-
-            <div id="recipe-calendar-form">
-                
-                {/* <TextInput
-                    fullWidth={true} label={"日付"} multiline={false} required={true}
-                    rows={1} value={date} type={"text"}　
-                    InputProps={{
-                        readOnly: true,
-                    }}
+        <>
+          <div className="form-container">
+                <h3 className="title">レシピ一括登録</h3>
+                <TextInput
+                    fullWidth={true} label={"年"} multiline={false} required={false}
+                    rows={1} value={startYear} type={"number"} 
+                    onChange={inputStartYear}
                 />
                 <TextInput
-                    fullWidth={true} label={"朝ごはん"} multiline={false} required={false}
-                    rows={1} value={breakfast} type={"text"} 
-                    onChange={inputBreakfast}
+                    fullWidth={true} label={"月"} multiline={false} required={false}
+                    rows={1} value={startMonth} type={"text"} 
+                    onChange={inputStartMonth}
                 />
                 <TextInput
-                    fullWidth={true} label={"昼ごはん"} multiline={false} required={false}
-                    rows={1} value={lunch} type={"text"} 
-                    onChange={inputLunch}
-                /> */}
-                {/* <TextInput
-                    fullWidth={true} label={"晩ごはん"} multiline={false} required={true}
-                    rows={1} value={dinner} type={"text"} 
-                    onChange={inputDinner}
-                /> */}
-                {/* <SelectBox
-                    label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
+                    fullWidth={true} label={"開始日"} multiline={false} required={false}
+                    rows={1} value={startDay} type={"text"} 
+                    onChange={inputStartDay}
                 />
-                <PrimaryButton 
-                    label={"レシピをカレンダーに追加"}
-                    onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
-                /> */}
-                <PrimaryButton 
-                    label={"一括登録"}
-                    onClick={() => 
-                        dispatch(autoSaveCalendar(props.uid, props.id, props.startYear, props.startMonth, props.startDay, props.endDay, props.recipeNameList))}
+                <TextInput
+                    fullWidth={true} label={"終了日"} multiline={false} required={false}
+                    rows={1} value={endDay} type={"text"} 
+                    onChange={inputEndDay}
                 />
-            </div>
-        </div>
+                <div className="spacer-sm"/>
+                <div className="center">
+                    <PrimaryButton 
+                        label={"一括登録"}
+                        onClick={() => dispatch(autoSaveCalendar(uid, id, startYear, startMonth, startDay, endDay, recipeNameList))}
+                    />
+                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>カレンダーに戻る</p>
+                </div>
+            </div>     
+        </>
     );
 }
 export default AutoMakeRecipeCalendar

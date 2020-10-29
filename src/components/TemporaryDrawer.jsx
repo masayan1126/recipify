@@ -150,9 +150,6 @@ export default function TemporaryDrawer() {
           <KitchenIcon/>
           <SideMenu primary={'食材一覧'} menuAciton={() => {menuIngredientsList()}} />
         </ListItem>
-
-        <SideMenu primary={'食材追加'} menuAciton={() => {menuEditIngredients()}} />
-        
       </List>
       
     </div>
