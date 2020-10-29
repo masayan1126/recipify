@@ -21,6 +21,9 @@ const useStyles = makeStyles({
         padding: 0,
         height: 48,
         width: 48
+    },
+    paddingLeft: {
+        paddingLeft: "10px"
     }
 })
 
@@ -39,12 +42,12 @@ const SetIngredients = (props) => {
             // Required input is blank
             return false
         } else {
-            if (index === props.ingredients.length) {
+            if (index === props.ingredientsList.length) {
                 props.setIngredients(prevState => [...prevState, {ingredients: ingredients}]);
                 setIndex(index + 1);
                 setIngredients("");
             } else {
-                const newIngredients = props.ingredients;
+                const newIngredients = props.ingredientsList;
                 newIngredients[index] = {ingredients: ingredients};
                 props.setIngredients(newIngredients);
                 setIndex(newIngredients.length);
@@ -59,28 +62,28 @@ const SetIngredients = (props) => {
     }
 
     const deleteIngredients = (deleteIndex) => {
-        const newIngredients = props.ingredients.filter((item, index) => index !== deleteIndex)
+        const newIngredients = props.ingredientsList.filter((item, index) => index !== deleteIndex)
         props.setIngredients(newIngredients);
     }
 
     useEffect(() => {
-        setIndex(props.ingredients.length)
-    },[props.ingredients.length])
+        setIndex(props.ingredientsList.length)
+    },[props.ingredientsList.length])
     
     return(
         <div>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
-                    <TableHead>
+                    {/* <TableHead>
                         <TableRow>
                             <TableCell>食材名</TableCell>
                             <TableCell className={classes.iconCell} />
                             <TableCell className={classes.iconCell} />
                         </TableRow>
-                    </TableHead>
+                    </TableHead> */}
                     <TableBody>
-                        {props.ingredients.length > 0 && (
-                            props.ingredients.map((item, i) => (
+                        {props.ingredientsList.length > 0 && (
+                            props.ingredientsList.map((item, i) => (
                                 <TableRow key={item.ingredients}>
                                     <TableCell component="th" scope="row">{item.ingredients}</TableCell>
                                     <TableCell className={classes.iconCell}>
@@ -98,8 +101,9 @@ const SetIngredients = (props) => {
                         )}
                     </TableBody>
                 </Table>
-                <div>
+                <div className={classes.paddingLeft}>
                     <TextInput
+                        
                         fullWidth={false} label={"食材名(複数可)"} multiline={false} required={true}
                         onChange={inputIngredients} rows={1} value={ingredients} type={"text"}
                     />

@@ -1,3 +1,11 @@
+.mt-0 {
+    margin-top: 0px;
+}
+
+.text-right {
+    text-align: right;
+}
+
 .fade-enter {
     opacity: 0;
 }

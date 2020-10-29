@@ -127,7 +127,7 @@ const RecipeEdit = () => {
         <section>
             <h3 className="title">レシピの登録・編集</h3>
             <div className="form-container">
-                <ImageArea images={images} setImages={setImages}/>
+                <ImageArea images={images} setImages={setImages} title={"レシピ画像の登録"}/>
                 <TextInput
                     fullWidth={true} label={"レシピ名"} multiline={false} required={true}
                     rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}

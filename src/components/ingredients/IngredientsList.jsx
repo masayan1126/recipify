@@ -18,6 +18,7 @@ import { SetIngredients } from "../../templates/index"
 import { Ingredients } from './index';
 import {getIngredients} from '../../redux/ingredients/selecotors';
 import AddIcon from '@material-ui/icons/Add';
+import {push, goBack} from 'connected-react-router'
 
 const IngredientsList = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const IngredientsList = () => {
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
       },
+
     }));
 
     useEffect(() => {
@@ -38,10 +40,19 @@ const IngredientsList = () => {
 
     return(
         <section>
-          <AddIcon/>
+          <h3 className="title">食材分類一覧</h3>
+          
           {ingredientsList.length > 0 && (
             <Ingredients ingredientsList={ingredientsList} />
-          )}  
+          )}
+          <div className="spacer-sm"/>
+          <div className="center">
+              <PrimaryButton
+                  label={"分類を追加"}
+                  onClick={() => dispatch(push('/ingredients/edit'))}
+                  // onClick={() => }
+              />
+          </div>
         </section>
     )
 }

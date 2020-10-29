@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 
 const ImageArea = (props) => {
     const classes = useStyles();
-
     const deleteImage = useCallback(async (id) => {
         const ret = window.confirm('この画像を削除しますか？')
         if (!ret) {
@@ -53,12 +52,13 @@ const ImageArea = (props) => {
     }, [props.setImages])
 
     return(
+        
         <div>
             <div className="p-grid__list-images">
                 {props.images.map(image => <ImagePreview delete={deleteImage} id={image.id} key={image.id} path={image.path}/>)}
             </div>
             <div className="u-text-right">
-                <span>レシピ画像の登録</span>
+                <span>{props.title}</span>
                 <IconButton className={classes.icon}>
                     <label>
                         <AddPhotoAlternateIcon />

@@ -9,6 +9,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import {push} from 'connected-react-router';
 import { useDispatch } from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
+    iconCell: {
+        padding: 0,
+        height: 48,
+        width: 48
+    }
   }));
 
 const Ingredients = (props) => {
@@ -47,21 +55,24 @@ const Ingredients = (props) => {
             {props.ingredientsList.map((ingredients) => {
             const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
             return (
-            <ListItem onClick={() => routeIngredientsDetails(ingredients.id)} key={ingredients.ingredientsCategory} button>
+            <ListItem>
                 <ListItemAvatar>
                 <Avatar
-                    alt={`Avatar n°${ingredients.ingredientsCategory}`}
-                    src={`/static/images/avatar/${ingredients.ingredientsCategory + 1}.jpg`}
+                    alt={`${ingredients.ingredientsCategory}`}
+                    src={ingredients.images[0].path}
                 />
                 </ListItemAvatar>
                 <ListItemText id={labelId} primary={`${ingredients.ingredientsCategory}`} />
                 <ListItemSecondaryAction>
-                <Checkbox
-                    edge="end"
-                    onChange={handleToggle(ingredients.ingredientsCategory)}
-                    checked={checked.indexOf(ingredients.ingredientsCategory) !== -1}
-                    inputProps={{ 'aria-labelledby': labelId }}
-                />
+                    <IconButton className={classes.iconCell}> 
+                        <EditIcon onClick={() => routeIngredientsDetails(ingredients.id)} key={ingredients.ingredientsCategory} button/>
+                    </IconButton>
+                    <IconButton className={classes.iconCell} 
+                        // onClick={() => deleteIngredients(i)}
+                    >
+                        <DeleteIcon/>
+                    </IconButton>
+                    
                 </ListItemSecondaryAction>
             </ListItem>
         );
