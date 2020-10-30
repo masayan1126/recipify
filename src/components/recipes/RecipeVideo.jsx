@@ -2,11 +2,12 @@ import React from 'react';
 import YouTube from 'react-youtube';
 
 const RecipeVideo = (props) => {
-    return(
+    console.log(props.videoIdList);
+
+    return (
         <div>
-            {props.videoIdList.length > 0 && (
-                props.videoIdList.map(videoId => (
-                    <YouTube key={videoId}
+                {props.videoIdList.map(videoId => (
+                    <YouTube
                         videoId={`${videoId}`}                  // defaults -> null
                         // id={string}                       // defaults -> null
                         // className={string}                // defaults -> null
@@ -21,8 +22,8 @@ const RecipeVideo = (props) => {
                         // onPlaybackRateChange={func}       // defaults -> noop
                         // onPlaybackQualityChange={func}    // defaults -> noop
                     />
-                ))
-            )}
+                ))}
+         
         </div>
     )
 }

@@ -35,8 +35,6 @@ const useStyles = makeStyles({
   },
 });
 
-
-
 const menuList = [
   { id:'home', menuName: 'ホーム', menuLink: '/' },
   { id:'logout', menuName: 'ログアウト', menuLink: '/' },
@@ -70,8 +68,8 @@ export default function TemporaryDrawer() {
     dispatch(push('/recipe/edit'))
   }
 
-  const menuMyRecipe = () => {
-    dispatch(push('/recipe/myrecipe'))
+  const menuFavoriteRecipe = () => {
+    dispatch(push('/recipe/favorite'))
   }
 
   const menuEditIngredients = () => {
@@ -123,7 +121,7 @@ export default function TemporaryDrawer() {
 
         <ListItem Button> 
           <FavoriteIcon/>
-          <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuMyRecipe()}} />
+          <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
 
         <ListItem Button> 
@@ -133,12 +131,12 @@ export default function TemporaryDrawer() {
 
         <ListItem Button>
           <RestaurantMenuIcon/>
-          <SideMenu primary={'食材から献立'} menuAciton={() => {menuMyRecipe()}} />
+          <SideMenu primary={'食材から献立'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
 
         <ListItem Button>
           <ListAltIcon/>
-          <SideMenu primary={'買い物リスト'} menuAciton={() => {menuMyRecipe()}} />
+          <SideMenu primary={'買い物リスト'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
 
         <ListItem Button>

@@ -2,6 +2,11 @@
     margin-top: 0px;
 }
 
+.color-white {
+    color: white;
+    background-color: white;
+}
+
 .text-right {
     text-align: right;
 }
@@ -12,7 +17,7 @@
 
 .fade-enter-active {
     opacity: 1;
-    transition: opacity 5000ms;
+    transition: opacity 3000ms;
 }
 .fade-exit {
     opacity: 1;
@@ -20,7 +25,7 @@
 
 .fade-exit-active {
     opacity: 0;
-    transition: opacity 5000ms;
+    transition: opacity 3000ms;
 }
 
 .mt-small {

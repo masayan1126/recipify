@@ -18,9 +18,9 @@ const RecipeVideos = () => {
         });
     }
     
-    useEffect(() => {
-        fetchMusic()
-    }, [])
+    // useEffect(() => {
+    fetchMusic()
+    // }, [])
 
     return(
         <section>

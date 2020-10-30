@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     zIndex:999,
     backgroundColor:'#EB8A3E',
+    color:"#FFF"
   },
   headerLogo: {
     color: 'white',
@@ -67,13 +68,13 @@ const MenuAppBar = () => {
           label={auth ? 'Logout' : 'Login'}
         /> */}
       </FormGroup>
-      <AppBar position="static" className={classes.Navbar}>
+      <AppBar position="static" className={classes.Navbar} color="secondary">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <TemporaryDrawer />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <a href="" className={classes.headerLogo} >Recipify</a>
+            {/* <a href="" className={classes.headerLogo} ></a> */}
           </Typography>
           {auth && (
             <div>

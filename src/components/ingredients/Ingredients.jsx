@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from "@material-ui/core/IconButton";
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,33 +53,34 @@ const Ingredients = (props) => {
     return(
         <>
             <List dense className={classes.root}>
-            {props.ingredientsList.map((ingredients) => {
-            const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
-            return (
-            <ListItem>
-                <ListItemAvatar>
-                <Avatar
-                    alt={`${ingredients.ingredientsCategory}`}
-                    src={ingredients.images[0].path}
-                />
-                </ListItemAvatar>
-                <ListItemText id={labelId} primary={`${ingredients.ingredientsCategory}`} />
-                <ListItemSecondaryAction>
-                    <IconButton className={classes.iconCell}> 
-                        <EditIcon onClick={() => routeIngredientsDetails(ingredients.id)} key={ingredients.ingredientsCategory} button/>
-                    </IconButton>
-                    <IconButton className={classes.iconCell} 
-                        // onClick={() => deleteIngredients(i)}
-                    >
-                        <DeleteIcon/>
-                    </IconButton>
-                    
-                </ListItemSecondaryAction>
-            </ListItem>
-        );
-      })}
-    </List>
-
+                {props.ingredientsList.map((ingredients) => {
+                const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
+                return (
+                <ListItem>
+                    <ListItemAvatar>
+                    <Avatar
+                        alt={`${ingredients.ingredientsCategory}`}
+                        src={ingredients.images[0].path}
+                    />
+                    </ListItemAvatar>
+                    <ListItemText id={labelId} primary={`${ingredients.ingredientsCategory}`} />
+                    <ListItemSecondaryAction>
+                        <IconButton className={classes.iconCell}> 
+                            <EditIcon onClick={() => routeIngredientsDetails(ingredients.id)} key={ingredients.ingredientsCategory} button/>
+                        </IconButton>
+                        <IconButton className={classes.iconCell} 
+                            // onClick={() => deleteIngredients(i)}
+                        >
+                            <DeleteIcon/>
+                        </IconButton>
+                        
+                    </ListItemSecondaryAction>
+                    </ListItem>
+                    );
+                })}
+                <Divider variant="inset" component="li" />
+            </List>
+            
         </>
         // {props.options.map((value) => {
         //     return <MenuItem key={value.id} value={value.id}>{value.name}</MenuItem>

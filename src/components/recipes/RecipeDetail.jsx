@@ -48,7 +48,7 @@ const RecipeDetail = () => {
     const uid = getUserId(selector);
 
     const path = selector.router.location.pathname;
-    const id = path.split('/recipe/')[1];
+    const id = path.split('/recipe/detail')[1];
 
     const [recipe, setRecipe] = useState(null);
 

@@ -12,6 +12,9 @@ const initialState = {
     recipes: {
         list: []
     },
+    favoriteRecipes: {
+        list: []
+    },
     users: {
         cart: [],
         customer_id: "",

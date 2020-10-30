@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getRecipes} from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
-import {Recipe} from "../UIkit/index";
+import { Recipe } from "./index";
 import {
     CSSTransition,
     TransitionGroup,
@@ -69,7 +69,7 @@ const RecommendedRecipe = () => {
 
             <CSSTransition
                 in={fade}
-                timeout={4000}
+                timeout={1000}
                 classNames="fade"
             >
                 <Recipe recipes={recipes}

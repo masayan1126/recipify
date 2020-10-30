@@ -62,10 +62,10 @@ const RecipeCard = (props) => {
             component="img"
             image= {props.recommendedRecipe.images[0].path}
             title="Contemplative Reptile"
-            onClick={() => dispatch(push('/recipe/' + props.recommendedRecipe.id))}
+            onClick={() => dispatch(push('/recipe/detail/' + props.recommendedRecipe.id))}
           />
           <CardContent className={classes.content}>
-            <div onClick={() => dispatch(push('/recipe/' + props.recommendedRecipe.id))}>
+            <div onClick={() => dispatch(push('/recipe/detail/' + props.recommendedRecipe.id))}>
               <Typography gutterBottom variant="caption" component="p">
                 {props.recommendedRecipe.recipeName}
               </Typography>
