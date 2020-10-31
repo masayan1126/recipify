@@ -25,6 +25,7 @@ import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import KitchenIcon from '@material-ui/icons/Kitchen';
+import SmsIcon from '@material-ui/icons/Sms';
 
 const useStyles = makeStyles({
   list: {
@@ -72,8 +73,8 @@ export default function TemporaryDrawer() {
     dispatch(push('/recipe/favorite'))
   }
 
-  const menuEditIngredients = () => {
-    dispatch(push('/ingredients/edit'))
+  const menuRecipeBot = () => {
+    dispatch(push('/recipe/bot'))
   }
 
   const menuIngredientsList = () => {
@@ -86,6 +87,10 @@ export default function TemporaryDrawer() {
 
   const menuRecipeCalendar = () => {
     dispatch(push('/recipe/calendar'))
+  }
+  
+  const menuSearchIngredients = () => {
+    dispatch(push("/recipe/search/ingredients"))
   }
 
   const list = (anchor) => (
@@ -131,7 +136,12 @@ export default function TemporaryDrawer() {
 
         <ListItem Button>
           <RestaurantMenuIcon/>
-          <SideMenu primary={'食材から献立'} menuAciton={() => {menuFavoriteRecipe()}} />
+          <SideMenu primary={'食材から献立'} menuAciton={() => {menuSearchIngredients()}} />
+        </ListItem>
+
+        <ListItem Button>
+          <SmsIcon/>
+          <SideMenu primary={'献立くん'} menuAciton={() => {menuRecipeBot()}} />
         </ListItem>
 
         <ListItem Button>

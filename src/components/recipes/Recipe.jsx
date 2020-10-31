@@ -39,6 +39,7 @@ const Recipe = (props) => {
   return (
     <div className={classes.root}>
       <h3 className="title">レシピ一覧</h3>
+      <p>{props.recipes.length < 1  ? props.message : "" }</p>
       <Grid container spacing={2}  className="min-heigth">
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)

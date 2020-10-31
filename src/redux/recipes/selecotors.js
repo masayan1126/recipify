@@ -1,12 +1,17 @@
 import { createSelector } from "reselect";
 
 const recipesSelector = (state) => state.recipes;
-const favoriteRecipesSelector = (state) => state.favoriteRecipes;
+// const selectedIngredientsSelector = (state) => state.selectedIngredients;
 // const calendarSelector = (state) => state.calendar;
 
 export const getRecipes = createSelector(
     [recipesSelector],
     state => state.list
+);
+
+export const getSelectedIngredients = createSelector(
+    [recipesSelector],
+    state => state.selectedIngredients
 );
 
 // export const getFavoriteRecipes = createSelector(

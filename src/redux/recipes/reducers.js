@@ -13,11 +13,11 @@ export const RecipesReducer = (state = initialState.recipes, action)  => {
                 ...state,
                 list: [...action.payload]
             }
-        // case Actions.FETCH_CALENDAR:
-        //     return {
-        //         ...state,
-        //         list: [...action.payload] 
-        //     }
+        case Actions.SEARCH_INGREDIENTS:
+            return {
+                ...state,
+                selectedIngredients: [...action.payload] 
+            }
         default:
             return state
     }

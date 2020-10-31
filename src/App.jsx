@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import { MenuAppBar, RecommendedRecipe,Header, Title } from './components/index';
+import { MenuAppBar,Header, Title } from './components/index';
 import SimpleContainer from './components/SimpleContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from './Router';

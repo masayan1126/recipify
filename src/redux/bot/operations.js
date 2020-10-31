@@ -2,8 +2,10 @@ import {db, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import { 
     fetchRecommendedRecipeAction,deleteRecommendedRecipeAction,
-    fetchCalendarAction, fetchFavoriteRecipesAction, searchFromIngredientsAction
+    fetchCalendarAction, fetchFavoriteRecipesAction 
 } from '../recipes/actions';
+
+import { addBotResultAction } from "./actions";
 
 const recipesRef = db.collection('recipes');
 const recipeCalendarRef = db.collection('calendar');
@@ -103,10 +105,9 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date) => {
     }
 }
 
-export const searchFromIngredients = (selectedIngredients) => {
+export const addBotResult = (results) => {
     return async (dispatch) => {
-        dispatch(searchFromIngredientsAction(selectedIngredients))
-        dispatch(push("/recipe/search/ingredients/result"))
+        dispatch(addBotResultAction(results))
         
     }
 }

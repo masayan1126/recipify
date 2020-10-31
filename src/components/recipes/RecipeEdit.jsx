@@ -36,15 +36,15 @@ const RecipeEdit = () => {
    
 
     const [recipeName, setRecipeName] = useState(""),
-            [necessaryIngredientsOne, setNecessaryIngredientsOne] = useState([]),
+            [necessaryIngredientsOne, setNecessaryIngredientsOne] = useState(""),
             [necessaryIngredientsTwo, setNecessaryIngredientsTwo] = useState(""),
             [necessaryIngredientsThree, setNecessaryIngredientsThree] = useState(""),
             [necessaryIngredientsFour, setNecessaryIngredientsFour] = useState(""),
             [necessaryIngredientsFive, setNecessaryIngredientsFive] = useState(""),
-            [recipeCategory, setRecipeCategory] = useState([]),
-            [recipeGenre, setRecipeGenre] = useState([]),
-            [recipeSeason, setRecipeSeason] = useState([]),
-            [cookingTime, setCookingTime] = useState([]),
+            [recipeCategory, setRecipeCategory] = useState(""),
+            [recipeGenre, setRecipeGenre] = useState("0"),
+            [recipeSeason, setRecipeSeason] = useState(""),
+            [cookingTime, setCookingTime] = useState(""),
             [images , setImages] = useState([]);
 
     const inputRecipeName = useCallback((event) => {
@@ -142,10 +142,10 @@ const RecipeEdit = () => {
                     label={"食材3(魚介類)"} required={true} options={fishes} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
                 />
                 <SelectBox
-                    label={"食材4(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+                    label={"食材4(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsFour} value={necessaryIngredientsFour}
                 />
                 <SelectBox
-                    label={"食材5(芋・でん粉・豆・キノコ類)"} required={true} options={potatoes_starches_beans_mushrooms} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+                    label={"食材5(芋・でん粉・豆・キノコ類)"} required={true} options={potatoes_starches_beans_mushrooms} select={setNecessaryIngredientsFive} value={necessaryIngredientsFive}
                 />
                 {/* <TextInput 
                     fullWidth={true} label={"必要食材1"} multiline={false} required={true}

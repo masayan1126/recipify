@@ -8,12 +8,11 @@ export const fetchRecommendedRecipeAction = (recipes) => {
 
 
 
-export const SEARCH_INGREDIENTS = "SEARCH_INGREDIENTS";
-export const searchFromIngredientsAction = (selectedIngredients) => {
-    
+export const ADD_BOT_RESULT_ACTION = "ADD_BOT_RESULT_ACTION";
+export const addBotResultAction = (results) => {
     return {
-        type: "SEARCH_INGREDIENTS",
-        payload: selectedIngredients,
+        type: "ADD_BOT_RESULT_ACTION",
+        payload: results,
     }
 };
 

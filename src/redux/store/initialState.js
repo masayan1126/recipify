@@ -10,6 +10,10 @@ const initialState = {
         list: []
     },
     recipes: {
+        list: [],
+        selectedIngredients: []
+    },
+    results: {
         list: []
     },
     favoriteRecipes: {

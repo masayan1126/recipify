@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '75%', 
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -74,7 +74,6 @@ export default function RecipeReviewCard(props) {
         updated_at: timestamp,
       })
     }
-    console.log(favFlag)
     
     // if (favFlag === true) {
        
@@ -107,7 +106,7 @@ export default function RecipeReviewCard(props) {
           </IconButton>
         }
         title={props.recipe.recipeName}
-        subheader="September 14, 2016"
+        subheader={props.recipe.recipeGenre}
       />
       <CardMedia
         className={classes.media}
@@ -116,8 +115,7 @@ export default function RecipeReviewCard(props) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          カテゴリー：{props.recipe.recipeCategory}<br/>調理時間：{props.recipe.cookingTime}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

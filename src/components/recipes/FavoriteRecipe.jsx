@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 const FavoriteRecipe = (props) => {
     const classes = useStyles();
-    console.log(props.favoriteRecipes);
     const dispatch = useDispatch();
 
     // useEffect(() => {
