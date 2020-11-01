@@ -7,11 +7,11 @@ import {SelectBox, PrimaryButton} from "../UIkit/index";
 const SearchIngredients = (props) => {
   const dispatch = useDispatch();
 
-  const [veg, setVeg] = useState(""),
-  [meat, setMeat] = useState(""),
-  [fish, setFish] = useState(""),
-  [cereal, setCereal] = useState(""),
-  [others, setOthers] = useState("");
+  const [veg, setVeg] = useState("未指定"),
+  [meat, setMeat] = useState("未指定"),
+  [fish, setFish] = useState("未指定"),
+  [cereal, setCereal] = useState("未指定"),
+  [others, setOthers] = useState("未指定");
 
   const searchRecipe = (veg, meat, fish, cereal, others) => {
     const selectedIngredients = [

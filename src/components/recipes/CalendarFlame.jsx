@@ -132,9 +132,7 @@ const CalendarFlame = (props) => {
     
     return (
         <>
-            
-            
-            <Calendar
+            <Calendar className="recipe-calendar"
                 onChange={setTargetDate}
                 value={targetDate}
                 onClickDay={(event, id,) => makeUrl(event, id) }
@@ -173,7 +171,7 @@ const CalendarFlame = (props) => {
                         label={"レシピを登録"}
                         onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date, uid)}
                     />
-                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>一括登録はこちらから</p>
+                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>＞ 一括登録はこちらから</p>
                     {/* <PrimaryButton 
                         label={"レシピをカレンダーに追加"}
                         onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}

@@ -1,6 +1,7 @@
 import { Category } from "@material-ui/icons"
 
 export const vegs = [
+  { id: "unspecified", name: "未指定", category: "未指定" },  
   { id: "asparagus", name: "アスパラガス", category: "野菜" },  
   { id: "green_beans", name: "いんげんまめ", category: "野菜" },  
   { id: "edamame", name: "えだまめ", category: "野菜" },  
@@ -47,6 +48,7 @@ export const vegs = [
 ]
 
 export const meats = [
+  { id: "unspecified", name: "未指定", category: "未指定" },
   { id: "wiener", name: "ウインナー", category: "肉" },   
   { id: "beaf", name: "牛肉", category: "肉" },   
   { id: "beef_liver", name: "牛レバー", category: "肉" },   
@@ -63,6 +65,7 @@ export const meats = [
 ]
 
 export const fishes = [
+  { id: "unspecified", name: "未指定", category: "未指定" },
   { id:"clams", name: "アサリ", category: "魚" },  
   { id:"horse_mackerel", name: "アジ", category: "魚" },  
   { id: "conger_eel", name: "アナゴ", category: "魚" },   
@@ -91,6 +94,7 @@ export const fishes = [
 ]
       
 export const cereals = [
+  { id: "unspecified", name: "未指定", category: "未指定" },
   { id:"tomato", name: "白米", category: "穀類" },  
   { id: "onion", name: "おかゆ", category: "穀類" },   
   { id: "potato", name: "赤飯", category: "穀類" },
@@ -115,6 +119,7 @@ export const cereals = [
 ]
       
 export const potatoes_starches_beans_mushrooms = [
+  { id: "unspecified", name: "未指定", category: "未指定" },
   // potatoes
   { id:"sweet_potato", name: "さつまいも", category: "芋・でん粉・豆・キノコ類" },
   { id:"taro", name: "さといも", category: "芋・でん粉・豆・キノコ類" },

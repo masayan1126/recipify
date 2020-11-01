@@ -26,6 +26,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import SmsIcon from '@material-ui/icons/Sms';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 const useStyles = makeStyles({
   list: {
@@ -118,6 +119,13 @@ export default function TemporaryDrawer() {
           <ExitToAppIcon />
           <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
         </ListItem>
+
+        <ListItem Button> 
+          <AccountBoxIcon />
+          <SideMenu primary={'(作成中)アカウント情報'} menuAciton={() => { dispatch(signOut()) }} />
+        </ListItem>
+
+        <Divider />
 
         <ListItem Button> 
           <EditIcon/>

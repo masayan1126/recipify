@@ -105,7 +105,7 @@ export const signIn = (email, password) => {
                         uid: userId,
                         // username: data.username,
                     }));
-                    dispatch(push('/recipe/myrecipe'))
+                    dispatch(push('/'))
                 })
                 }
                     // dispatch(hideLoadingAction());

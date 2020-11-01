@@ -182,7 +182,7 @@ const RecipeEdit = () => {
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton
-                        label={"レシピを追加/更新"}
+                        label={"レシピを登録"}
                         onClick={() => dispatch(saveRecipe(id,recipeName, necessaryIngredientsOne, necessaryIngredientsTwo, 
                             necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
                             recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid))}

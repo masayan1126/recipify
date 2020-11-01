@@ -59,6 +59,15 @@
     max-width: 200px !important;
 }
 
+.recipe-calendar {
+    margin: 0 auto;
+}
+
+.react-calendar {
+    width: 100% !important;
+    max-width: 430px !important;
+}
+
 .text-center { 
     text-align: center;
 }
@@ -100,13 +109,14 @@
 
 .chat-box {
     background: #fff;
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid #EBB582;
     border-radius: 4px;
     box-sizing: border-box;
-    height: 592px;
+    /* height: 500px; */
     max-width: 432px;
     padding: 0 1rem;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .chat-grid__answer {
@@ -117,7 +127,7 @@
 }
 
 .p-chat__bubble {
-    background: #41B6E6;
+    background: #D24136;
     border-radius: 4px;
     color: #fff;
     font-size: 14px;

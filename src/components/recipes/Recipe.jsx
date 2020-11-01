@@ -3,6 +3,8 @@ import Pagination from "material-ui-flat-pagination";
 import { RecipeCard } from '../recipes/index';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { useDispatch } from 'react-redux';
+import {push} from 'connected-react-router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const Recipe = (props) => {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [offset, setOffset] = useState(0),
         [parPage, setParPage] = useState(4);
@@ -39,7 +42,13 @@ const Recipe = (props) => {
   return (
     <div className={classes.root}>
       <h3 className="title">レシピ一覧</h3>
-      <p>{props.recipes.length < 1  ? props.message : "" }</p>
+      <p className="nothing__message">{props.recipes.length < 1  ? props.message : "" }</p>
+      {props.recipes.length < 1  ?  
+        <div className="center">
+          <p className="p-link-menu" onClick={() => dispatch(push("/"))}>＞ トップ画面に戻る</p>
+        </div>
+        : ""
+      }
       <Grid container spacing={2}  className="min-heigth">
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)
