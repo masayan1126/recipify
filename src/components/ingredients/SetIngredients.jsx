@@ -8,7 +8,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from "@material-ui/styles";
@@ -27,6 +26,7 @@ const useStyles = makeStyles({
     }
 })
 
+// 食材登録・編集画面の複数登録用コンポーネント（テーブル）
 const SetIngredients = (props) => {
     const classes = useStyles()
 
@@ -39,7 +39,6 @@ const SetIngredients = (props) => {
 
     const addIngredients = (index, ingredients) => {
         if (ingredients === "") {
-            // Required input is blank
             return false
         } else {
             if (index === props.ingredientsList.length) {
@@ -71,28 +70,25 @@ const SetIngredients = (props) => {
     },[props.ingredientsList.length])
     
     return(
-        <div>
+        <>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
-                    {/* <TableHead>
-                        <TableRow>
-                            <TableCell>食材名</TableCell>
-                            <TableCell className={classes.iconCell} />
-                            <TableCell className={classes.iconCell} />
-                        </TableRow>
-                    </TableHead> */}
                     <TableBody>
                         {props.ingredientsList.length > 0 && (
                             props.ingredientsList.map((item, i) => (
                                 <TableRow key={item.ingredients}>
-                                    <TableCell component="th" scope="row">{item.ingredients}</TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {item.ingredients}
+                                    </TableCell>
                                     <TableCell className={classes.iconCell}>
-                                        <IconButton className={classes.iconCell} onClick={() => editIngredients(i, item.ingredients)}>
+                                        <IconButton className={classes.iconCell}
+                                            onClick={() => editIngredients(i, item.ingredients)}>
                                             <EditIcon />
                                         </IconButton>
                                     </TableCell>
                                     <TableCell className={classes.iconCell}>
-                                        <IconButton className={classes.iconCell} onClick={() => deleteIngredients(i)}>
+                                        <IconButton className={classes.iconCell}
+                                        onClick={() => deleteIngredients(i)}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
@@ -103,18 +99,16 @@ const SetIngredients = (props) => {
                 </Table>
                 <div className={classes.paddingLeft}>
                     <TextInput
-                        
                         fullWidth={false} label={"食材名(複数可)"} multiline={false} required={true}
                         onChange={inputIngredients} rows={1} value={ingredients} type={"text"}
                     />
                 </div>
-                <IconButton className={classes.checkIcon} onClick={() => addIngredients(index, ingredients)}>
+                <IconButton className={classes.checkIcon} 
+                    onClick={() => addIngredients(index, ingredients)}>
                     <CheckCircleIcon/>
                 </IconButton>
             </TableContainer>
-
-        </div>
-
+        </>
     )
 }
 export default SetIngredients

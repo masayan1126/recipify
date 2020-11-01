@@ -33,7 +33,7 @@
 }
 
 .pt-small {
-    padding-top:80px;
+    padding-top:100px;
 }
 
 .bg-color__yellow {
@@ -73,6 +73,7 @@
     color: #785A46;
     margin: 0 auto 1rem auto;
     /* margin-bottom: 0px; */
+    font-size: 21px;
 }
 
 .form-container {
@@ -81,6 +82,10 @@
     padding: 1rem;
     height: auto;
     width: calc(100% - 2rem);
+}
+
+.nothing__message {
+    text-align: center;
 }
 
 .p-link-menu {

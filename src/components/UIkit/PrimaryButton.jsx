@@ -8,7 +8,7 @@ const useStyles = makeStyles({
         fontSize: 14,
         height :44,
         marginBottom: 16,
-        width: 200,
+        width: 150,
     }
 })
 

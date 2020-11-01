@@ -41,8 +41,7 @@ const RecommendedRecipe = () => {
     const recipes = getRecipes(selector);
     const uid = getUserId(selector);
     const [fade, setFade] = useState(false);
-    
-    const message = "まだレシピはありません。"
+
     // useEffect(() => {
           
       
@@ -72,7 +71,7 @@ const RecommendedRecipe = () => {
                 timeout={1000}
                 classNames="fade"
             >
-                <Recipe recipes={recipes} message = {message}
+                <Recipe recipes={recipes} message = {"まだレシピはありません。"}
             
             // onChange={handleChange} 
                 />

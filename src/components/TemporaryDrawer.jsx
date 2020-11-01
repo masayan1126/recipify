@@ -146,12 +146,12 @@ export default function TemporaryDrawer() {
 
         <ListItem Button>
           <ListAltIcon/>
-          <SideMenu primary={'買い物リスト'} menuAciton={() => {menuFavoriteRecipe()}} />
+          <SideMenu primary={'(作成中)買い物リスト'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
 
         <ListItem Button>
           <OndemandVideoIcon/>
-          <SideMenu primary={'レシピ動画'} menuAciton={() => {menuRecipeVideo()}} />
+          <SideMenu primary={'(作成中)レシピ動画'} menuAciton={() => {menuRecipeVideo()}} />
         </ListItem>
 
         <ListItem Button>

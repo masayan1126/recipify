@@ -5,18 +5,22 @@ import App from './App';
 import Auth from './Auth';
 import { RecipeVideos, RecipeCalendar, RecipeEdit, RecommendedRecipe, FavoriteRecipes,AutoMakeRecipeCalendar, RecipeFromIngredients } from './components/recipes/index';
 import { RecipeBot, AiRecommendedRecipe } from './components/recipes/bot/index';
-import { IngredientsList, IngredientsEdit, SearchIngredients } from './components/ingredients/index';
+import { IngredientsList, IngredientsEdit, SearchIngredientsList } from './components/ingredients/index';
 // import Auth from "./Auth";
 
 
 const Router = () => {
     return(
         <Switch>
-            {/* <Route exact path="/signin/reset" component={Reset} /> */}
             <Route exact path={"/signup"} component={SignUp} />
             <Route exact path={"/signin"} component={SignIn} />
             <Route exact path={"/signin/reset"} component={Reset} />
             <Auth>
+                <Route exact path={"/ingredients/list"} component={IngredientsList} />
+                <Route exact path={"/recipe/search/ingredients"} component={SearchIngredientsList} />
+                {/* <Route exact path={"/ingredients/search"} component={SearchIngredientsList} /> */}
+                <Route path={"/ingredients/edit(/:id)?"} component={IngredientsEdit} />
+                
                 <Route exact path={"(/)?"} component={RecommendedRecipe} />
                 <Route path={"/recipe/calendar(/:id)?"} component={RecipeCalendar} />
                 <Route exact path={"/recipe/auto"} component={AutoMakeRecipeCalendar} />
@@ -25,13 +29,9 @@ const Router = () => {
                 <Route exact path={"/recipe/favorite"} component={FavoriteRecipes} />
                 <Route exact path={"/recipe/bot"} component={RecipeBot} />
                 <Route exact path={"/recipe/bot/recommend"} component={AiRecommendedRecipe} />
-                <Route exact path={"/recipe/search/ingredients"} component={SearchIngredients} />
                 <Route exact path={"/recipe/search/ingredients/result"} component={RecipeFromIngredients} />
                 <Route path={"/recipe/detail(/:id)?"} component={RecipeDetail} />
-                <Route exact path={"/ingredients/list"} component={IngredientsList} />
-                <Route exact path={"/ingredients/search"} component={SearchIngredients} />
-                <Route path={"/ingredients/edit(/:id)?"} component={IngredientsEdit} />
-            </Auth> 
+            </Auth>
         </Switch>
     )
 }

@@ -1,11 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import {push} from 'connected-react-router';
 import { useDispatch } from 'react-redux';
@@ -13,78 +11,53 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from "@material-ui/core/IconButton";
 import Divider from '@material-ui/core/Divider';
+import { deleteIngredients } from '../../redux/ingredients/operations';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
-    },
-    iconCell: {
-        padding: 0,
-        height: 48,
-        width: 48
-    }
-  }));
-
+// 食材分類一覧画面の子コンポーネント（親：IngredientsList.jsx）
 const Ingredients = (props) => {
     const dispatch = useDispatch();
 
-    const routeIngredientsDetails = (id) => {
-        dispatch(push('/ingredients/edit/' + id))
-    }
-
-    const classes = useStyles();
-    const [checked, setChecked] = React.useState([1]);
-
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-        newChecked.push(value);
-        } else {
-        newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
-    return(
+    return (
         <>
-            <List dense className={classes.root}>
-                {props.ingredientsList.map((ingredients) => {
-                const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
-                return (
-                <ListItem>
-                    <ListItemAvatar>
-                    <Avatar
-                        alt={`${ingredients.ingredientsCategory}`}
-                        src={ingredients.images[0].path}
-                    />
-                    </ListItemAvatar>
-                    <ListItemText id={labelId} primary={`${ingredients.ingredientsCategory}`} />
-                    <ListItemSecondaryAction>
-                        <IconButton className={classes.iconCell}> 
-                            <EditIcon onClick={() => routeIngredientsDetails(ingredients.id)} key={ingredients.ingredientsCategory} button/>
-                        </IconButton>
-                        <IconButton className={classes.iconCell} 
-                            // onClick={() => deleteIngredients(i)}
-                        >
-                            <DeleteIcon/>
-                        </IconButton>
-                        
-                    </ListItemSecondaryAction>
-                    </ListItem>
-                    );
-                })}
-                <Divider variant="inset" component="li" />
+            <p className="nothing__message">{props.ingredientsList.length < 1  ? props.message : "" }</p>
+            <List className="form-container">
+                {props.ingredientsList.length > 0 && (
+                    props.ingredientsList.map((ingredients) => {
+                        const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
+                        return (
+                            <>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar
+                                            alt={`${ingredients.ingredientsCategory}`}
+                                            src = { 
+                                                ingredients.images.length > 0 ? 
+                                                ingredients.images[0].path : "/static/images/cards/no-image.jpeg" } 
+                                    />
+                                    </ListItemAvatar>
+                                    <ListItemText id={labelId} primary={`${ingredients.ingredientsCategory}`} />
+                                    <ListItemSecondaryAction>
+                                        <IconButton> 
+                                            <EditIcon 
+                                                onClick={() => dispatch(push('/ingredients/edit/' + ingredients.id))}
+                                                key={ingredients.id}/>
+                                        </IconButton>
+                                        <IconButton>
+                                            <DeleteIcon
+                                                onClick={() => {
+                                                    dispatch(deleteIngredients(ingredients.id))
+                                                }}
+                                            />
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
+                                </ListItem>
+                                <Divider variant="inset" component="li" />
+                            </>
+                        );
+                    })
+                )}
             </List>
-            
         </>
-        // {props.options.map((value) => {
-        //     return <MenuItem key={value.id} value={value.id}>{value.name}</MenuItem>
-        // })}
     )
 }
 export default Ingredients

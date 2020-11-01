@@ -6,4 +6,3 @@ export const getIngredients = createSelector(
     [ingredientsSelector],
     state => state.list
 );
-
