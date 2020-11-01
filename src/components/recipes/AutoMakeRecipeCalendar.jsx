@@ -200,7 +200,7 @@ const AutoMakeRecipeCalendar = (props) => {
                         label={"一括登録"}
                         onClick={() => dispatch(autoSaveCalendar(uid, id, startYear, startMonth, startDay, endDay, recipeNameList))}
                     />
-                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>カレンダーに戻る</p>
+                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>＞ カレンダーに戻る</p>
                 </div>
             </div>     
         </>
