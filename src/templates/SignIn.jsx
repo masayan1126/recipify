@@ -18,6 +18,12 @@ const SignIn = () => {
         setPassword(event.target.value)
     },[setPassword]);
 
+    const signInGuestUser = () => {
+        setEmail("matsushin@gmail.com");
+        setPassword("matsushin");
+        dispatch(signIn(email,password))
+    }
+
     return(
         <div>
             <h3 className="title">サインイン</h3>
@@ -42,6 +48,7 @@ const SignIn = () => {
                     />
                     <p className="p-link-menu" onClick={() => dispatch(push('/signup'))}>アカウントをお持ちでない方はこちら</p>
                     <p className="p-link-menu" onClick={() => dispatch(push('/signin/reset'))}>パスワードをお忘れの方はこちら</p>
+                    <p className="p-link-menu" onClick={() => signInGuestUser() }>ゲストユーザーでサインインする</p>
                 </div>
             </div>
         </div>
