@@ -105,7 +105,7 @@ const RecipeEdit = () => {
         
         dispatch(fetchIngredients())
         if (id !== "") {
-            db.collection('recipes').doc(id).get()
+            db.collection('users').doc(uid).collection('recipes').doc(id).get()
                 .then((snapshot) => {
                     const data = snapshot.data();
                     setRecipeName(data.recipeName);

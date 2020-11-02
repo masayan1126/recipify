@@ -9,12 +9,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import {push} from 'connected-react-router';
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {deleteRecipe} from '../../redux/recipes/operations';
+import { getUserId } from '../../redux/users/selecotors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
 const RecipeCard = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -94,7 +97,7 @@ const RecipeCard = (props) => {
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  dispatch(deleteRecipe(props.recommendedRecipe.id))
+                  dispatch(deleteRecipe(props.recommendedRecipe.id, uid))
                   handleClose()
                 }}
               >

@@ -54,7 +54,7 @@ const RecipeDetail = () => {
 
     useEffect(() => {
         dispatch(fetchRecommendedRecipe(uid))
-        db.collection("recipes").doc(id).get()
+        db.collection("users").doc(uid).collection("recipes").doc(id).get()
             .then(doc => {
                 const data = doc.data();
                 setRecipe(data);

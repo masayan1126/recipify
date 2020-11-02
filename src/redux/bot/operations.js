@@ -7,7 +7,7 @@ import {
 
 import { addBotResultAction } from "./actions";
 
-const recipesRef = db.collection('recipes');
+// const recipesRef = db.collection('users');
 const recipeCalendarRef = db.collection('calendar');
 
 export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
@@ -33,13 +33,13 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
         }
 
         if(id === "") {
-            const ref = recipesRef.doc();
+            const ref = db.collection('users').doc(uid).colleciton("recipes").doc();
             id = ref.id
             data.id = id
             data.created_at = timestamp 
         }
 
-        return recipesRef.doc(id).set(data, {merge: true})
+        return db.collection('users').doc(uid).colleciton("recipes").doc(id).set(data, {merge: true})
         .then(() => {
             dispatch(push('/'))
         }).catch((error) => {
@@ -50,7 +50,7 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
 
 export const fetchRecommendedRecipe = (uid) => {
     return async (dispatch) => {
-        recipesRef.where('userId', '==', uid).get()
+        db.collection('users').doc(uid).colleciton("recipes").get()
             .then(snapshots => {
                 const recommendedRecipeList = []
                 snapshots.forEach(snapshot => {
@@ -64,9 +64,9 @@ export const fetchRecommendedRecipe = (uid) => {
 
 
 
-export const deleteRecipe = (id) => {
+export const deleteRecipe = (id, uid) => {
     return async (dispatch, getState) => {
-        recipesRef.doc(id).delete()
+        db.collection('users').doc(uid).colleciton("recipes").doc(id).delete()
             .then(() => {
                 const prevRecipes = getState().recipes.list
                 const nextRecipes = prevRecipes.filter(recipe => recipe.id !== id)

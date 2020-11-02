@@ -5,13 +5,13 @@ import {
     fetchCalendarAction, fetchFavoriteRecipesAction, searchFromIngredientsAction
 } from '../recipes/actions';
 
-const recipesRef = db.collection('recipes');
 const recipeCalendarRef = db.collection('calendar');
 
 export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
     recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid) => {
     return async (dispatch) => {
+        const recipesRef = db.collection('users').doc(uid).collection('recipes');
         const timestamp = FirebaseTimestamp.now();
         const data = {
             recipeName :recipeName,
@@ -48,7 +48,8 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
 
 export const fetchRecommendedRecipe = (uid) => {
     return async (dispatch) => {
-        recipesRef.where('userId', '==', uid).get()
+        const recipesRef = db.collection('users').doc(uid).collection('recipes');
+        recipesRef.get()
             .then(snapshots => {
                 const recommendedRecipeList = []
                 snapshots.forEach(snapshot => {
@@ -62,8 +63,9 @@ export const fetchRecommendedRecipe = (uid) => {
 
 
 
-export const deleteRecipe = (id) => {
+export const deleteRecipe = (id, uid) => {
     return async (dispatch, getState) => {
+        const recipesRef = db.collection('users').doc(uid).collection('recipes');
         recipesRef.doc(id).delete()
             .then(() => {
                 const prevRecipes = getState().recipes.list

@@ -3,6 +3,7 @@ import {db} from '../../firebase/index';
 import {saveIngredients} from '../../redux/ingredients/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import {getIngredients} from '../../redux/ingredients/selecotors';
+import { getUserId } from '../../redux/users/selecotors';
 import {TextInput,PrimaryButton, ImageArea} from "../UIkit/index";
 import { SetIngredients } from "./index";
 import {push} from 'connected-react-router'
@@ -12,6 +13,7 @@ const IngredientsEdit = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const ingredientsList = getIngredients(selector);
+    const uid = getUserId(selector);
 
     let id = window.location.pathname.split('/ingredients/edit')[1];
     if(id) {        
@@ -29,7 +31,7 @@ const IngredientsEdit = () => {
     // idが空白でない時（編集モードの時）は、DBからデータ取得して表示する
     useEffect(() => {
         if (id !== "") {
-            db.collection('ingredients').doc(id).get()
+            db.collection('users').doc(uid).collection('ingredients').doc(id).get()
                 .then((snapshot) => {
                     const data = snapshot.data();
                     setIngredientsCategory(data.ingredientsCategory);

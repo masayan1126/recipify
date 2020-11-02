@@ -1,7 +1,6 @@
 import React,{useCallback, useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {push} from 'connected-react-router';
-import { useDispatch } from 'react-redux';
 import {db, FirebaseTimestamp} from '../../firebase/index';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -18,6 +17,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { getUserId } from '../../redux/users/selecotors';
+import { useSelector,useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,8 +49,8 @@ export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [favFlag, setFavFlag] = React.useState(false);
-
-  
+  const uid = getUserId(selector);
+  const selector = useSelector((state) => state);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -61,7 +62,7 @@ export default function RecipeReviewCard(props) {
       setFavFlag(true)
       const favIcon = document.getElementById("favIcon");
       favIcon.classList.add("bg-color__yellow");    
-      db.collection('recipes').doc(props.recipe.id).update({
+      db.collection('users').doc(uid).collection('recipes').doc(props.recipe.id).update({
         favorite: true,
         updated_at: timestamp,
       })
@@ -69,7 +70,7 @@ export default function RecipeReviewCard(props) {
       setFavFlag(false)
       const favIcon = document.getElementById("favIcon");
       favIcon.classList.remove("bg-color__yellow"); 
-      db.collection('recipes').doc(props.recipe.id).update({
+      db.collection('users').doc(uid).collection('recipes').doc(props.recipe.id).update({
         favorite: false,
         updated_at: timestamp,
       })
@@ -81,7 +82,7 @@ export default function RecipeReviewCard(props) {
   }
 
   useEffect(() => {
-    db.collection("recipes").doc(props.recipe.id).get()
+    db.collection('users').doc(uid).collection("recipes").doc(props.recipe.id).get()
         .then(doc => {
             const data = doc.data();
             if (data.favorite === true) {
