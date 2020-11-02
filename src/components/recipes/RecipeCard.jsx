@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
   content: {
     display: 'flex',
     textAlign: 'left',
-    '&:last-child': {
-        paddingBottom: 5
-    }
+    // '&:last-child': {
+    //     padding: 0
+    // }
   },
   icon: {
     marginRight: 0,
     marginLeft: 'auto'
-},
+  },
 }));
 
 const RecipeCard = (props) => {

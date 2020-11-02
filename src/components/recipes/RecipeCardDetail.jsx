@@ -49,8 +49,8 @@ export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [favFlag, setFavFlag] = React.useState(false);
-  const uid = getUserId(selector);
   const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

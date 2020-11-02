@@ -33,7 +33,7 @@ const Recipe = (props) => {
   const dispatch = useDispatch();
 
   const [offset, setOffset] = useState(0),
-        [parPage, setParPage] = useState(4);
+        [parPage, setParPage] = useState(8);
 
   const handleClickPagination = offset => {
     setOffset(offset)
