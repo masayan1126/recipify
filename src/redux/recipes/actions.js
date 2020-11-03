@@ -6,6 +6,14 @@ export const fetchRecommendedRecipeAction = (recipes) => {
     }
 };
 
+export const FETCH_SEARCH_RECIPE = "FETCH_SEARCH_RECIPE";
+export const fetchSearchRecipeAction = (recipes) => {
+    return {
+        type: "FETCH_SEARCH_RECIPE",
+        payload: recipes,
+    }
+};
+
 
 
 export const SEARCH_INGREDIENTS = "SEARCH_INGREDIENTS";

@@ -2,7 +2,7 @@ import {db, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import { 
     fetchRecommendedRecipeAction,deleteRecommendedRecipeAction,
-    fetchCalendarAction, fetchFavoriteRecipesAction, searchFromIngredientsAction
+    fetchCalendarAction, fetchSearchRecipeAction, searchFromIngredientsAction
 } from '../recipes/actions';
 
 const recipeCalendarRef = db.collection('calendar');
@@ -57,6 +57,24 @@ export const fetchRecommendedRecipe = (uid) => {
                     recommendedRecipeList.push(recipe)
                 })
                 dispatch(fetchRecommendedRecipeAction(recommendedRecipeList))
+            })
+    }
+}
+
+export const fetchSearchRecipe = (uid, query) => {
+    return async (dispatch) => {
+        const recipesRef = db.collection('users').doc(uid).collection('recipes');
+        recipesRef.get()
+            .then(snapshots => {
+                const searchRecipeList = []
+                snapshots.forEach(snapshot => {
+                    const recipe = snapshot.data()
+                    if(recipe.recipeName.indexOf(query) === 0){
+                        // 前方一致のときの処理
+                        searchRecipeList.push(recipe)
+                    }
+                })
+                dispatch(fetchSearchRecipeAction(searchRecipeList))
             })
     }
 }

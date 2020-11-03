@@ -41,7 +41,7 @@ const Recipe = (props) => {
   
   return (
     <div className={classes.root}>
-      <h3 className="title">レシピ一覧</h3>
+      
       <p className="nothing__message">{props.recipes.length < 1  ? props.message : "" }</p>
       {props.recipes.length < 1  ?  
         <div className="center">

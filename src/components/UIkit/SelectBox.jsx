@@ -7,9 +7,10 @@ import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        marginBottom: 10,
+        marginBottom: 7,
         minWidth: 100,
-        width: "100%"
+        width: "100%",
+        fontSize: "8px"
     }
 }));
 
@@ -22,6 +23,7 @@ const SelectBox = (props) => {
             <Select
                 value={props.value} required={props.required}
                 onChange={(e) => props.select(e.target.value)}
+
             >
                 {props.options.map((value) => {
                     return <MenuItem key={value.id} value={value.name}>{value.name}</MenuItem>

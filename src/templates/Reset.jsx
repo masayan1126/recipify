@@ -24,6 +24,9 @@ const Reset = () => {
                     type={'email'} onChange={inputEmail}
                 />
                 <div className="spacer-sm"/>
+                <div className="spacer-sm"/>
+            </div>
+                <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton 
                         label={'リセットする'}
@@ -31,7 +34,7 @@ const Reset = () => {
                     />
                     <p className="p-link-menu" onClick={() => dispatch(push('/signin'))}>サインイン画面に戻る</p>
                 </div>
-            </div>
+            
         </div>
     )
 }

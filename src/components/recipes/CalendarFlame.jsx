@@ -164,7 +164,7 @@ const CalendarFlame = (props) => {
                     {/* <button onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date)}>
                         カレンダーにレシピを追加
                     </button> */}
-
+                </div>
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton 
@@ -178,7 +178,7 @@ const CalendarFlame = (props) => {
                     /> */}
                 </div>    
                 </div>
-                </div>
+                
 
             
         </>

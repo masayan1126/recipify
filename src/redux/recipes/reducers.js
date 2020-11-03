@@ -18,6 +18,11 @@ export const RecipesReducer = (state = initialState.recipes, action)  => {
                 ...state,
                 selectedIngredients: [...action.payload] 
             }
+        case Actions.FETCH_SEARCH_RECIPE:
+            return {
+                ...state,
+                list: [...action.payload] 
+            }
         default:
             return state
     }

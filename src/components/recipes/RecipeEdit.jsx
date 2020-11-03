@@ -177,8 +177,10 @@ const RecipeEdit = () => {
                     label={"オススメの季節"} required={true} options={recipeSeasons} select={setRecipeSeason} value={recipeSeason}
                 /> */}
                 <SelectBox
-                    label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
+                    autoComplete="on"
+                    autoWidth={true} label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
                 />
+            </div> 
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton
@@ -188,7 +190,7 @@ const RecipeEdit = () => {
                             recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid))}
                     />
                 </div>
-           </div> 
+           
         </section>
     )
 }

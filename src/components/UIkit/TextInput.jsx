@@ -24,6 +24,8 @@ const TextInput = (props) => {
             type={props.type}
             onChange={props.onChange}
             InputProps={props.InputProps}
+            size={props.size}
+            variant={props.variant}
         />
     )
 }

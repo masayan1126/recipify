@@ -27,6 +27,7 @@ const SearchIngredients = (props) => {
 
   return (
     <>
+    <section className="form-container">
       <SelectBox
         label={"食材(野菜)"} required={true} options={props.vegs} select={setVeg} value={veg}
       />
@@ -47,6 +48,7 @@ const SearchIngredients = (props) => {
         label={"食材(芋・でん粉・豆・キノコ類)"} required={true} options={props.others} 
         select={setOthers} value={others}
       />   
+    </section>
           
       <div className="spacer-sm"/>
       <div className="center">
