@@ -1,68 +1,85 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# FitnessApp
+- これは献立管理アプリです
 
-## Available Scripts
+# DEMO
 
-In the project directory, you can run:
+# Features
+- カレンダーから毎日のフィットネスデータが容易に記録でき、消費カロリーのリアルタイム測定/登録も可能です
+- 今日の天気を簡単に確認できるので、ジョギングなどのアウトドアトレーニングが可能かをすぐに把握できます
+- YouTube APIを使用して、お気に入りのワークアウト音楽を選択してモチベーションの向上に貢献します。また、あなただけのプレイリスト機能を使用することができます
+- サインアップ時に目標体重を計算して、いつでもマイデータ画面から確認できるため、あなたの目標にサポートします
+- 毎月の折れ線グラフを使用して、毎日のフィットネス記録から計算された消費カロリーと体重の変化を分析し、あなたの目標改善に貢献します
 
-### `npm start`
+# Requirement
+- fontawesome 5.13.0
+- fullcalendar 4.4.2
+- bootstrap 4.5.0
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Installation
+With node.js, npm and git installed run:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+git clone https://github.com/masayan1126/recipify.git
+cd FitnessApp
+npm install
+npm start
+```
+The application can then be accessed at http://localhost:8080.
 
-### `npm test`
+To create a production build on the gh-pages branch run:
+```
+npm run build
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Usage
+- まず、サインインします
+  - アカウントをお持ちでない場合は、サインアップしてください
+- カレンダーから日々のワークアウトの内容とその日の体重を記録します
+- ナビゲーションメニューからさまざまな機能を使用できます
+  - ワークアウトの音楽メニューからお気に入りの音楽を選択します
+  - My Dataメニューから目標体重とプロファイルを簡単に確認できます
+  - 分析メニューから、毎月の体重と消費カロリーの変化を確認できます
 
-### `npm run build`
+- Demo user
+  - name:matsushin
+  - mail:matsushin@gmail.com
+  - password:matsushin
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Author
+- name
+  - @masayan1126
+- email
+  - masa199311266@gmail.com
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# Test
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Layout verified browser
+- Google chrome
+- Safari
+- Google
+- Microsoft Edge
+- Firefox 
+- Yahoo
 
-### `npm run eject`
+## Project setup
+```
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Compiles and minifies for production
+```
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Lints and fixes files
+```
+npm run lint
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
