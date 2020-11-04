@@ -11,6 +11,17 @@ export const signInAction = (userState) => {
     }
 };
 
+export const FETCH_USER_IMAGE = "FETCH_USER_IMAGE";
+export const fetchUserProfileImageAction = (userImagePath) => {
+    return {
+        type: "FETCH_USER_IMAGE",
+        payload: {
+            type: "FETCH_SEARCH_RECIPE",
+            payload: userImagePath,
+        }
+    }
+};
+
 export const SIGN_OUT = "SIGN_OUT";
 export const signOutAction = () => {
     return {

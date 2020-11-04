@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     // marginRight: theme.spacing(2),
+    color:"white"
   },
   title: {
     flexGrow: 1,
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     zIndex:999,
     backgroundColor:'#EB8A3E',
-    color:"#FFF"
+    color:"white"
   },
   headerLogo: {
     color: 'white',
@@ -68,9 +69,9 @@ const MenuAppBar = () => {
           label={auth ? 'Logout' : 'Login'}
         /> */}
       </FormGroup>
-      <AppBar position="static" className={classes.Navbar} color="secondary">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+      <AppBar position="static" className={classes.Navbar} >
+        <Toolbar >
+          <IconButton edge="start" aria-label="menu">
             <TemporaryDrawer />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

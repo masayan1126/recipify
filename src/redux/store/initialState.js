@@ -29,7 +29,8 @@ const initialState = {
         payment_method_id: "",
         role: "",
         uid: "",
-        username: ""
+        username: "",
+        userProfileImage: "",
     }
 };
 

@@ -94,6 +94,10 @@ export default function TemporaryDrawer() {
     dispatch(push("/recipe/search/ingredients"))
   }
 
+  const menuProfile = () => {
+    dispatch(push("/profile"))
+  }
+
   const list = (anchor) => (
     
     <div
@@ -122,7 +126,7 @@ export default function TemporaryDrawer() {
 
         <ListItem Button> 
           <AccountBoxIcon />
-          <SideMenu primary={'(作成中)アカウント情報'} menuAciton={() => { dispatch(signOut()) }} />
+          <SideMenu primary={'アカウント情報'} menuAciton={() => menuProfile() } />
         </ListItem>
 
         <Divider />

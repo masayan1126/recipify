@@ -2,6 +2,7 @@ import {db, auth, FirebaseTimestamp} from '../../firebase/index';
 import {
     signOutAction,
     signInAction,
+    fetchUserProfileImageAction,
 } from "./actions";
 import {push, goBack} from 'connected-react-router'
 
@@ -58,7 +59,8 @@ export const signUp = (username, email, password, confirmPassword) => {
                         // payment_method_id: "",
                         uid: uid,
                         updated_at: timestamp,
-                        username: username
+                        username: username,
+                        userProfileImage: [],
                     };
 
                     db.collection('users').doc(uid).set(userInitialData).then(async () => {
@@ -140,5 +142,19 @@ export const resetPassword = (email) => {
                     alert('パスワードリセットに失敗しました。時間を置いて再度試してください');
                 })
         }
+    }
+}
+
+export const fetchUserProfileImage = (uid) => {
+    return async (dispatch) => {
+        db.collection('users').doc(uid).get().then(snapshot => {
+            const data = snapshot.data();
+            const userImage = data.userProfileImage;
+            console.log(userImage);
+            if (userImage) {
+                dispatch(fetchUserProfileImageAction(userImage[0].path))
+
+            }
+        })
     }
 }
