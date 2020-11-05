@@ -27,8 +27,6 @@ const Chat = (props) => {
 
     const classes = isQuestion ? "p-chat__row" : "p-chat__reverse";
 
-    
-
     useEffect(() => {
         dispatch(fetchUserProfileImage(uid));
     }, [])

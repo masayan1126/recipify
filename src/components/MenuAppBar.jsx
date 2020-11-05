@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useCallback, useState, useEffect} from 'react';
 import { TemporaryDrawer } from './index'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +12,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Avatar from "@material-ui/core/Avatar";
+import {push} from 'connected-react-router';
+import {fetchUserProfileImage} from "../redux/users/operations";
+import { getUserId, getUserProfileImage, getSignedIn} from "../redux/users/selecotors";
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,16 +43,23 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '60px',
     textDecoration: "none",
     fontSize: '20px',
-    
-}
+  },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
 
 }));
 
-const MenuAppBar = () => {
+const MenuAppBar = (props) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const isSignedIn = getSignedIn;
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  console.log(props.uid);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -77,38 +89,7 @@ const MenuAppBar = () => {
           <Typography variant="h6" className={classes.title}>
             {/* <a href="" className={classes.headerLogo} ></a> */}
           </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                
-              </Menu>
-            </div>
-          )}
+          
         </Toolbar>
       </AppBar>
     </div>

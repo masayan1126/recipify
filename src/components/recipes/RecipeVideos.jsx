@@ -4,27 +4,25 @@ import RecipeVideo from "./RecipeVideo";
 const RecipeVideos = () => {
 
     const selectArtistName = "AKLO"
-    const videoIdList = [];
+    let videoIdList = [];
     
-    const fetchMusic = async function () {
+    const fetchMusic = async () => {
         const res = await
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${selectArtistName} 曲&key=AIzaSyDENmeM9nK1AYLgE1xWl9ZUezZPTvXJYls&maxResults=5`);
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${selectArtistName} 曲&key=AIzaSyDENmeM9nK1AYLgE1xWl9ZUezZPTvXJYls&maxResults=3`);
         const json = await res.json();
         const itemes = await json.items;
         const videoIds = itemes.map((item) => item.id.videoId)
+
+        videoIdList =  [...videoIds]
         // const videoIds = await itemes.id;
-        videoIds.forEach(videoId => {
-            videoIdList.push(videoId);
-        });
+        // videoIds.forEach(videoId => {
+        //     videoIdList.push(videoId);
+        // });
     }
-    
-    // useEffect(() => {
-    fetchMusic()
-    // }, [])
 
     return(
         <section>
-            <RecipeVideo videoIdList={videoIdList} />
+            <RecipeVideo videoIdList={videoIdList} fetchMusic={fetchMusic} />
             
         </section>
     )

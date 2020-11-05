@@ -7,6 +7,7 @@ import Router from './Router';
 import { useSelector,useDispatch } from 'react-redux';
 import { signInAction } from './redux/users/actions';
 import './assets/styles/style.css';
+import { getUserId, getUserProfileImage, getSignedIn} from "./redux/users/selecotors";
 
 const useStyles = makeStyles({
   container: {
@@ -19,14 +20,17 @@ const useStyles = makeStyles({
 function App() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
 
   const classes = useStyles();
 
   return (
     <div className="pt-small">
-      <MenuAppBar />
-      <div className="App" className={classes.container}>
-        <Router />
+      <div className="App">
+        <MenuAppBar uid={uid} />
+        <div className={classes.container}>
+          <Router />
+        </div>
       </div>
     </div>
   );

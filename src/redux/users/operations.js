@@ -146,11 +146,12 @@ export const resetPassword = (email) => {
 }
 
 export const fetchUserProfileImage = (uid) => {
+    console.log(uid);
     return async (dispatch) => {
         db.collection('users').doc(uid).get().then(snapshot => {
             const data = snapshot.data();
             const userImage = data.userProfileImage;
-            console.log(userImage);
+            
             if (userImage) {
                 dispatch(fetchUserProfileImageAction(userImage[0].path))
 

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/styles/index.css';
 import App from './App';
+import ScrollToTop from "./ScrollToTop";
 import createStore from './redux/store/store';
 import * as serviceWorker from './serviceWorker';
 import { ConnectedRouter } from 'connected-react-router';
@@ -14,6 +15,7 @@ export const store = createStore(history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
+      <ScrollToTop />
       <App />
     </ConnectedRouter>
   </Provider>,

@@ -9,8 +9,9 @@ const recipeCalendarRef = db.collection('calendar');
 
 export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
-    recipeCategory, recipeGenre, recipeSeason, cookingTime, images, uid) => {
+    recipeCategory, recipeGenre, cookingTime, images, uid) => {
     return async (dispatch) => {
+        
         const recipesRef = db.collection('users').doc(uid).collection('recipes');
         const timestamp = FirebaseTimestamp.now();
         const data = {
@@ -23,19 +24,20 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             recipeCategory: recipeCategory,
             images: images,
             recipeGenre: recipeGenre,
-            recipeSeason: recipeSeason,
             cookingTime: cookingTime,
             userId: uid,
             updated_at: timestamp,
             favorite: false,
         }
 
-        if(id === "") {
+        if(id == "") {
             const ref = recipesRef.doc();
             id = ref.id
             data.id = id
             data.created_at = timestamp 
         }
+
+        console.log(id);
 
         return recipesRef.doc(id).set(data, {merge: true})
         .then(() => {

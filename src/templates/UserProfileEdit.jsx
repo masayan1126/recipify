@@ -48,10 +48,10 @@ const UserProfile = (props) => {
     const classes = useStyles();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
+    const dispatch = useDispatch();
     const profileImage = getUserProfileImage(selector);
     // const userName = "masayan"
     const recipes = getRecipes(selector);
-    const dispatch = useDispatch();
 
 
     const inputUserName = (event) => {

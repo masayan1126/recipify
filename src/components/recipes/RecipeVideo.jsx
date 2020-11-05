@@ -1,13 +1,21 @@
-import React from 'react';
+import React,{useCallback, useState, useEffect} from 'react';
 import YouTube from 'react-youtube';
 
 const RecipeVideo = (props) => {
 
+    
+    useEffect(() => {
+        props.fetchMusic()
+    }, [])
+    
+    console.log(props.videoIdList);
+    
     return (
         <div>
                 {props.videoIdList.map(videoId => (
                     <YouTube
-                        videoId={`${videoId}`}                  // defaults -> null
+                        videoId={videoId}                  // defaults -> null
+                        // videoId={`${videoId}`}                  // defaults -> null
                         // id={string}                       // defaults -> null
                         // className={string}                // defaults -> null
                         // containerClassName={string}       // defaults -> ''
