@@ -11,7 +11,12 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
     recipeCategory, recipeGenre, cookingTime, images, uid) => {
     return async (dispatch) => {
-        
+        console.log(images);
+        if (!recipeName || images.length == 0) {
+            alert("レシピ名とレシピ画像は必須です");
+            return;
+        }
+
         const recipesRef = db.collection('users').doc(uid).collection('recipes');
         const timestamp = FirebaseTimestamp.now();
         const data = {
@@ -30,14 +35,12 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             favorite: false,
         }
 
-        if(id == "") {
+        if(id === "") {
             const ref = recipesRef.doc();
             id = ref.id
             data.id = id
             data.created_at = timestamp 
         }
-
-        console.log(id);
 
         return recipesRef.doc(id).set(data, {merge: true})
         .then(() => {
