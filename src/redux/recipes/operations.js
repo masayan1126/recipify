@@ -5,13 +5,11 @@ import {
     fetchCalendarAction, fetchSearchRecipeAction, searchFromIngredientsAction
 } from '../recipes/actions';
 
-const recipeCalendarRef = db.collection('calendar');
-
 export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
     recipeCategory, recipeGenre, cookingTime, images, uid) => {
     return async (dispatch) => {
-        console.log(images);
+
         if (!recipeName || images.length == 0) {
             alert("レシピ名とレシピ画像は必須です");
             return;
@@ -27,9 +25,9 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             necessaryIngredientsFour: necessaryIngredientsFour,
             necessaryIngredientsFive: necessaryIngredientsFive,
             recipeCategory: recipeCategory,
-            images: images,
             recipeGenre: recipeGenre,
             cookingTime: cookingTime,
+            images: images,
             userId: uid,
             updated_at: timestamp,
             favorite: false,
@@ -95,36 +93,6 @@ export const deleteRecipe = (id, uid) => {
                 const nextRecipes = prevRecipes.filter(recipe => recipe.id !== id)
                 dispatch(deleteRecommendedRecipeAction(nextRecipes))
             })
-    }
-}
-
-export const saveCalendar = (id, breakfast, lunch, dinner, date) => {
-    return async (dispatch) => {
-        const timestamp = FirebaseTimestamp.now();
-        const data = {
-            breakfast: breakfast,
-            lunch: lunch,
-            dinner: dinner,
-            updated_at: timestamp,
-            date: date,
-        }
-
-        const ref = recipeCalendarRef.doc();
-        id = ref.id
-        data.id = id
-        data.created_at = timestamp 
-        const year = String(date).substring(0, 4);
-        const month = String(date).substring(5, 7);
-        const day = String(date).substring(8, 10);
-        date = year + month + day;
-        data.date = date;
-
-        return recipeCalendarRef.doc(date).set(data, {merge: true})
-        .then(() => {
-            dispatch(push('/'))
-        }).catch((error) => {
-            throw new Error(error)
-        })
     }
 }
 

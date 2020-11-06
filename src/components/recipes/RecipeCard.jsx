@@ -2,12 +2,9 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import {push} from 'connected-react-router';
 import { useSelector,useDispatch } from 'react-redux';
 import IconButton from "@material-ui/core/IconButton";
@@ -17,25 +14,20 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {deleteRecipe} from '../../redux/recipes/operations';
 import { getUserId } from '../../redux/users/selecotors';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "200",
-    // flexGrow: 1,
-  },
+const useStyles = makeStyles(() => ({
   media: {
-    height: 150,
-    maxWidth: "200",
+    height: 130,
+    maxWidth: "180",
   },
   content: {
     display: 'flex',
     textAlign: 'left',
-    // '&:last-child': {
-    //     padding: 0
-    // }
+    padding: 15,
   },
   icon: {
     marginRight: 0,
-    marginLeft: 'auto'
+    marginLeft: 'auto',
+    paddingRight:0,
   },
 }));
 
@@ -56,27 +48,24 @@ const RecipeCard = (props) => {
   };
 
   return (
-    <div>
-      
+    <>
       <Card key={1}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
             component="img"
-            image= {props.recommendedRecipe.images[0].path}
+            image= {props.recipe.images[0].path}
             title="Contemplative Reptile"
-            onClick={() => dispatch(push('/recipe/detail/' + props.recommendedRecipe.id))}
+            onClick={() => dispatch(push('/recipe/detail/' + props.recipe.id))}
           />
           <CardContent className={classes.content}>
-            <div onClick={() => dispatch(push('/recipe/detail/' + props.recommendedRecipe.id))}>
+            <div onClick={() => dispatch(push('/recipe/detail/' + props.recipe.id))}>
               <Typography gutterBottom variant="caption" component="p">
-                {props.recommendedRecipe.recipeName}
+                {props.recipe.recipeName}
               </Typography>
             </div>
-            
             <IconButton className={classes.icon} onClick={handleClick}>
               <MoreVertIcon />
-              
             </IconButton>
             <Menu
               anchorEl={anchorEl}
@@ -86,18 +75,15 @@ const RecipeCard = (props) => {
             >
               <MenuItem
                 onClick={() => {
-                  dispatch(push('/recipe/edit/' + props.recommendedRecipe.id))
+                  dispatch(push('/recipe/edit/' + props.recipe.id))
                   handleClose()
                 }}
-
-
-
               >
                 編集する
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  dispatch(deleteRecipe(props.recommendedRecipe.id, uid))
+                  dispatch(deleteRecipe(props.recipe.id, uid))
                   handleClose()
                 }}
               >
@@ -107,8 +93,7 @@ const RecipeCard = (props) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    
-    </div>
+    </>
   );
 }
 

@@ -85,7 +85,7 @@ const Modal = (props) => {
             />
           </Typography>
           <Typography gutterBottom>
-            <ImageArea images={images} setImages={setImages} title={"レシピ画像の登録"}/>
+            <ImageArea images={images} setImages={setImages} title={"ユーザー画像の登録"}/>
           </Typography>
         </DialogContent>
         <DialogActions>

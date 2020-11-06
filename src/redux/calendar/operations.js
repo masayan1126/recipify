@@ -72,27 +72,38 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
     }
 }
 
-export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDay, recipeNameList) => {
+export const autoSaveCalendar = (uid, startYear, startMonth, startDay, endDay, recipeNameList) => {
     return async (dispatch) => {
+        if (Number(startDay) > Number(endDay)) {
+            alert("終了日は開始日よりも後の日付を入力してください");
+            return
+        }
         
-        const start = Number(startYear + startMonth + startDay) 
-        const end = Number(startYear + startMonth +endDay)
-        const difference = end - start;
-        for(let i = recipeNameList.length - 1; i > 0; i--){
+        // recipeNameListの中身をランダムに入れ替える
+        for　(let i = recipeNameList.length - 1; i > 0; i--){
             let r = Math.floor(Math.random() * (i + 1));
             let tmp = recipeNameList[i];
             recipeNameList[i] = recipeNameList[r];
             recipeNameList[r] = tmp;
         }
+        
+        if (startMonth.length == 1) {
+            startMonth = `0${startMonth}`
+        }
 
-        // const year = String(date).substring(0, 4);
-        // const month = String(date).substring(5, 7);
-        // const day = String(date).substring(8, 10);
-        // date = year + month + day;
-        // data.date = date;
+        if (startDay.length == 1) {
+            startDay = `0${startDay}`
+        }
 
-        const timestamp = FirebaseTimestamp.now();
+        if (endDay.length == 1) {
+            endDay = `0${endDay}`
+        }
+
+        const start = Number(startYear + startMonth + startDay)
+        const end = Number(startYear + startMonth + endDay)
+        const difference = end - start;
         let date = start;
+        const timestamp = FirebaseTimestamp.now();
 
         for (let i = 0; i <= difference; i += 1) {
 
@@ -103,20 +114,9 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
                 date: `${date + i}`, 
                 id: `${date + i}`,
                 dateId: `${date + i}`,
-
-                // update: false,
-                // breakfast: ,
-                // lunch: lunch,
-                // dinner: dinner,
-                // userId: uid,
-                // date: date,
-                // dateId: dateId,
-                // id: id, 
             }
     
             const calendarRef = db.collection("users").doc(uid).collection('calendar');
-            // data.id = autoMaketTargetDates
-            // data.created_at = timestamp calendarRef.doc(id).set(data, {merge: true})
             calendarRef.doc(`${start + i}` ).set(data, {merge: true})
             .then(() => {
                 console.log('処理成功');
@@ -129,7 +129,6 @@ export const autoSaveCalendar = (uid, id, startYear, startMonth, startDay, endDa
 }
 
 export const fetchCalendar = (uid) => {
-
     return async (dispatch) => {
         const calendarRef = db.collection("users").doc(uid).collection('calendar');
         calendarRef.get()
@@ -144,42 +143,41 @@ export const fetchCalendar = (uid) => {
     }
 }
 
+// data(dinner, uid, date, dateId, id, breakfast, lunch)
 export const addCalendar = (data) => {
-
-    return async (dispatch, getState) => {
-
-        const uid = getState().users.uid
+    return async (dispatch) => {
         const timestamp = FirebaseTimestamp.now();
-        data.timestamp = timestamp;
-        const calendarRef = db.collection("users").doc(uid).collection('calendar');
-        let id = data.id;
+        const calendarRef = db.collection("users").doc(data.userId).collection('calendar');
+        const registeredCalendarDataArray = []
+        await calendarRef.get()
+            .then(snapshots =>{
+                snapshots.forEach(snapshot => {
+                    const data = snapshot.data()
+                    registeredCalendarDataArray.push(data)
+                    
+                });
+            })
+
+        // 登録済みカレンダーデータのidの配列
+        const registeredCalendarIdArray = registeredCalendarDataArray.map(registeredCalendarData =>
+            registeredCalendarData.dateId)
+        let modified = null
+
+        // 新規登録 or 編集 のチェック
+        if (registeredCalendarIdArray.includes(data.dateId)) {
+            modified = true
+        } else {
+            modified = false
+        }
+
+        console.log(modified);
+        data.updated_at = timestamp;
         // 新規登録の場合
-        console.log(id);
-        if(id == "") {
-            // const ref = calendarRef.doc();
-            // const newCalendarId = ref.id
-            data.id = id
+        if(modified === false) {
+            data.id = data.dateId
             data.created_at = timestamp 
-            data.dateId = id
-            // data['calendarId'] = id;
-            // id = calendarId
-            console.log('新規登録です');
-            // if(!calendarRef.where('dateId', '==', data.dateId).get()) {
         } 
-        await calendarRef.doc(id).set(data, {merge: true}) 
-             
-
-        // data.id = calendarRef.id;
+        await calendarRef.doc(data.dateId).set(data, {merge: true}) 
         dispatch(push('/'));
-
-        // recipeCalendarRef.where('userId', '==', uid).get()
-        //     .then(snapshots => {
-        //         const calendar = []
-        //         snapshots.forEach(snapshot => {
-        //             const recipe = snapshot.data()
-        //             calendar.push(recipe)
-        //         })
-        //         dispatch(fetchCalendarAction(calendar))
-        //     })
     }
 }

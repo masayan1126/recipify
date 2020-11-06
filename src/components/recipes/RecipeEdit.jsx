@@ -12,6 +12,8 @@ const RecipeEdit = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
+    const recipesRef = db.collection('users').doc(uid).collection('recipes');
+
     let id = window.location.pathname.split('/recipe/edit')[1];
     
     if(id) {        
@@ -26,7 +28,6 @@ const RecipeEdit = () => {
             [necessaryIngredientsFive, setNecessaryIngredientsFive] = useState(""),
             [recipeCategory, setRecipeCategory] = useState(""),
             [recipeGenre, setRecipeGenre] = useState(""),
-            [recipeSeason, setRecipeSeason] = useState(""),
             [cookingTime, setCookingTime] = useState(""),
             [images , setImages] = useState([]);
 
@@ -45,8 +46,9 @@ const RecipeEdit = () => {
         { id:"meat" ,name:"肉料理" },
         { id:"fish" ,name:"魚料理" },
         { id:"vegetables" ,name:"サラダ" },
-        { id:"pasta" ,name:"パスタ" },
+        { id:"noodle" ,name:"麺類" },
         { id:"rice" ,name:"ご飯もの" },
+        { id:"bread" ,name:"パン類" },
         { id:"else" ,name:"その他" },
     ]
 
@@ -65,9 +67,8 @@ const RecipeEdit = () => {
     // ]
 
     useEffect(() => {
-        console.log(id);
         if (id) {
-            db.collection('users').doc(uid).collection('recipes').doc(id).get()
+            recipesRef.doc(id).get()
                 .then((snapshot) => {
                     const data = snapshot.data();
                     setRecipeName(data.recipeName);
@@ -78,7 +79,6 @@ const RecipeEdit = () => {
                     setNecessaryIngredientsFive(data.necessaryIngredientsFive);
                     setRecipeCategory(data.recipeCategory);
                     setRecipeGenre(data.recipeGenre);
-                    setRecipeSeason(data.recipeSeason);
                     setCookingTime(data.cookingTime);
                     setImages(data.images);
                 })
@@ -91,7 +91,6 @@ const RecipeEdit = () => {
             setNecessaryIngredientsFive("");
             setRecipeCategory("");
             setRecipeGenre("");
-            setRecipeSeason("");
             setCookingTime("");
             setImages([]);
         }
@@ -107,32 +106,36 @@ const RecipeEdit = () => {
                     rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}
                 />
                 <SelectBox
-                    label={"食材1(野菜類)"} required={true} options={vegs} select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
+                    label={"食材1(野菜類)"} options={vegs}
+                    select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
                 />
                 <SelectBox
-                    label={"食材2(肉類)"} required={true} options={meats} select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
+                    label={"食材2(肉類)"} options={meats}
+                    select={setNecessaryIngredientsTwo} value={necessaryIngredientsTwo}
                 />
                 <SelectBox
-                    label={"食材3(魚介類)"} required={true} options={fishes} select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
+                    label={"食材3(魚介類)"} options={fishes} 
+                    select={setNecessaryIngredientsThree} value={necessaryIngredientsThree}
                 />
                 <SelectBox
-                    label={"食材4(穀類)"} required={true} options={cereals} select={setNecessaryIngredientsFour} value={necessaryIngredientsFour}
+                    label={"食材4(穀類)"} options={cereals} 
+                    select={setNecessaryIngredientsFour} value={necessaryIngredientsFour}
                 />
                 <SelectBox
-                    label={"食材5(芋・でん粉・豆・キノコ類)"} required={true} options={potatoes_starches_beans_mushrooms} select={setNecessaryIngredientsFive} value={necessaryIngredientsFive}
+                    label={"食材5(芋・でん粉・豆・キノコ類)"} select={setNecessaryIngredientsFive}
+                    options={potatoes_starches_beans_mushrooms}  value={necessaryIngredientsFive}
                 />
                 <SelectBox
-                    label={"カテゴリー"} required={true} options={categories} select={setRecipeCategory} value={recipeCategory}
+                    label={"カテゴリー"} options={categories} 
+                    select={setRecipeCategory} value={recipeCategory}
                 />
                 <SelectBox
-                    label={"ジャンル"} required={true} options={genres} select={setRecipeGenre} value={recipeGenre}
+                    label={"ジャンル"} options={genres} 
+                    select={setRecipeGenre} value={recipeGenre}
                 />
-                {/* <SelectBox
-                    label={"オススメの季節"} required={true} options={recipeSeasons} select={setRecipeSeason} value={recipeSeason}
-                /> */}
                 <SelectBox
-                    autoComplete="on"
-                    autoWidth={true} label={"調理時間"} required={true} options={cookingTimes} select={setCookingTime} value={cookingTime}
+                    label={"調理時間"} options={cookingTimes} 
+                    select={setCookingTime} value={cookingTime}
                 />
             </div> 
             <div className="spacer-sm"/>

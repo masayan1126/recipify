@@ -10,7 +10,7 @@ import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getBotResult} from '../../redux/bot/selecotors';
 import { getSelectedIngredients, getRecipes } from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
-import { Recipe } from "./index";
+import { Recipes } from "./index";
 import {
     CSSTransition,
     TransitionGroup,
@@ -132,7 +132,7 @@ const AiRecommendedRecipe = () => {
                 timeout={1000}
                 classNames="fade"
             >
-                <Recipe recipes={targetRecipes} message = {message}
+                <Recipes recipes={targetRecipes} message = {message}
             
             // onChange={handleChange} 
                 />

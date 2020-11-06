@@ -127,7 +127,6 @@ export const signOut = () => {
     }
 }
 
-
 export const resetPassword = (email) => {
     return async (dispatch) => {
         if(email === "") {
@@ -146,16 +145,15 @@ export const resetPassword = (email) => {
 }
 
 export const fetchUserProfileImage = (uid) => {
-    console.log(uid);
     return async (dispatch) => {
         db.collection('users').doc(uid).get().then(snapshot => {
             const data = snapshot.data();
             const userImage = data.userProfileImage;
-            
-            if (userImage) {
-                dispatch(fetchUserProfileImageAction(userImage[0].path))
-
+            console.log(userImage);
+            if (userImage.length < 1) {
+                return false
             }
+            dispatch(fetchUserProfileImageAction(userImage[0].path))
         })
     }
 }

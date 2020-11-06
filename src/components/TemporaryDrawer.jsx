@@ -108,7 +108,7 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
+      <List className="p-link-menu">
         <ListItem Button> 
           {/* <SideMenu primary={'Recipify'}/> */}
           <h3>Recipify</h3>
@@ -116,7 +116,7 @@ export default function TemporaryDrawer() {
 
         <ListItem Button> 
           <HomeIcon/>
-          <SideMenu primary={'ホーム'} menuAciton={menuHome} />
+          <SideMenu primary={'ホーム'} menuAciton={() => menuHome()} />
         </ListItem>
 
         <ListItem Button> 

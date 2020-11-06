@@ -1,29 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { TextInput, PrimaryButton, SelectBox } from "../UIkit/index";
 import { useSelector,useDispatch } from 'react-redux';
-import { saveCalendar, autoSaveCalendar, addCalendar } from '../../redux/calendar/operations';
-import {db, auth, FirebaseTimestamp} from '../../firebase/index';
+import { addCalendar } from '../../redux/calendar/operations';
 import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
-import { AutoMakeRecipeCalendar } from './index';
-import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
-import * as Log from './AutoMakeRecipeCalendar';
-
 
 const CalendarFlame = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
 
-    // id(このコンポーネントでは選択した日付を指す)
-    let id = window.location.pathname.split('/recipe/calendar')[1];
-    if(id) {        
-        id = id.split('/')[1]
-    }
-
-    // 登録済みレシピから、登録可能候補となるレシピ一覧のoptions生成
+    // 登録済みレシピから、登録可能候補となる晩ご飯のレシピ一覧（options）の生成
     const recipes = []
     const recipeNameList = props.recipes.map((data) => data.recipeName)
     const recipeIdList = props.recipes.map((data) => data.id)
@@ -82,15 +71,20 @@ const CalendarFlame = (props) => {
         // どこかの日付を選択したら、レシピの登録フォームを表示する
         const recipeCalendarForm = document.getElementById('recipe-calendar-form')
         recipeCalendarForm.classList.remove("display-toggle");
-
+        // 選択した日付をYYMMDD形式に調整する
         const year = String(event).substring(11, 15);
         let month = String(event).substring(4, 7);
         month = convertMonth(month);
+        if (month.length == 1) {
+            month = `0${month}`
+        }
         const day = String(event).substring(8, 10);
         dateId = year + month + day
+
         dispatch(push('/recipe/calendar/' + dateId))
 
-        // 選択した日付に紐づく登録済みのレシピ情報の各日付id(YYYYMMDD)の配列を生成
+        // ログインユーザーのカレンダーコレクションから全ドキュメントを取得し、
+        // 各ドキュメントに紐づく日付id(YYYYMMDD)の配列を生成
         const calendarIds = props.calendar.map((calendar) => calendar.dateId )
         // 上記の配列の中に、現在選択している日付id(YYYYMMDD)と一致するデータがあれば、それを表示する
         if (calendarIds.includes(dateId)) {
@@ -106,13 +100,12 @@ const CalendarFlame = (props) => {
     }
 
     // 入力されたデータをDBに保存するための関数(operationsを呼び出して、引数を渡すための関数)
-    const addRecipeCalendar = () => {
+    const addRecipeCalendar = (dinner, uid, date, dateId, breakfast, lunch) => {
         const data = {
             dinner: dinner,
             userId: uid,
             date: date,
-            dateId: id,
-            id: id, 
+            dateId: dateId,
         }
 
         if (breakfast == "") {
@@ -134,8 +127,9 @@ const CalendarFlame = (props) => {
         <>
             <Calendar className="recipe-calendar"
                 onChange={setTargetDate}
+                // YYMMDD形式の日付に変換される前の生の日付
                 value={targetDate}
-                onClickDay={(event, id,) => makeUrl(event, id) }
+                onClickDay={(event) => makeUrl(event) }
             />
 
             <div id="recipe-calendar-form" className="display-toggle">
@@ -160,27 +154,17 @@ const CalendarFlame = (props) => {
                     <SelectBox
                         label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
                     />
-
-                    {/* <button onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date)}>
-                        カレンダーにレシピを追加
-                    </button> */}
                 </div>
-                <div className="spacer-sm"/>
                 <div className="center">
+                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>
+                        ＞ 一括登録はこちらから
+                    </p>
                     <PrimaryButton 
                         label={"レシピを登録"}
-                        onClick={() => addRecipeCalendar(id, breakfast, lunch, dinner, date, uid)}
+                        onClick={() => addRecipeCalendar(dinner, uid, date, dateId, breakfast, lunch)}
                     />
-                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>＞ 一括登録はこちらから</p>
-                    {/* <PrimaryButton 
-                        label={"レシピをカレンダーに追加"}
-                        onClick={() => dispatch(saveCalendar(id, breakfast, lunch, dinner, date, uid))}
-                    /> */}
                 </div>    
-                </div>
-                
-
-            
+            </div>
         </>
     );
 }

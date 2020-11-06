@@ -1,78 +1,58 @@
 import React,{useCallback, useState, useEffect} from 'react';
-import { RecipeCard } from '../index';
-import { Title } from '../../../templates/index';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-// import '../../assets/styles/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchRecommendedRecipe} from '../../../redux/recipes/operations';
 import {getBotResult} from '../../../redux/bot/selecotors';
 import {getRecipes} from '../../../redux/recipes/selecotors';
 import { getUserId } from '../../../redux/users/selecotors';
-import { Recipe } from "../index";
-import {
-    CSSTransition,
-    TransitionGroup,
-  } from 'react-transition-group';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    //   justifyContent: 'center',
-    //   flexDirection: 'row',
-    },
-    max_width: {
-        maxWidth: "200",
-    },
-  }));
-
+import { Recipes } from "../index";
+import { CSSTransition } from 'react-transition-group';
+import {push} from 'connected-react-router';
 
 const AiRecommendedRecipe = () => {
-    
-    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const uid = getUserId(selector);
-    const [fade, setFade] = useState(false);
-    
-    const botResult = getBotResult(selector);
-
-    // 和食等
-    const answerOne = botResult[0].answer
-    // 肉料理等
-    const answerTwo = botResult[1].answer
-    // 調理時間
-    let answerThree = botResult[2].answer
-
-    switch (answerThree) {
-        case "あまり時間がない":
-            answerThree = "簡単にできる"
-            break;
-        case "普通":
-            answerThree = "普通"
-            break;
-        case "かなり時間がある":
-            answerThree = "手間がかかる"
-            break;
-        // default:
-        //     return answerThree
-    } 
-
     const recipes = getRecipes(selector);
-    const aiRecipes = recipes.filter((recipe) => {
-        return recipe.recipeCategory == answerOne
-        &&  recipe.recipeGenre == answerTwo
-        &&  recipe.cookingTime == answerThree
+    const [fade, setFade] = useState(false);
+    const botResult = getBotResult(selector);
+    const aiRecipes = [];
 
-    })
+    if (botResult.length > 1) {
+        // 1つ目の回答（和食等）
+        const answerOne = botResult[0].answer
+        // ２つ目の回答（肉料理等）
+        const answerTwo = botResult[1].answer
+        // ３つ目の回答（調理時間）
+        let answerThree = botResult[2].answer
 
+        switch (answerThree) {
+            case "あまり時間がない":
+                answerThree = "簡単にできる"
+                break;
+            case "普通":
+                answerThree = "普通"
+                break;
+            case "かなり時間がある":
+                answerThree = "手間がかかる"
+                break;
+        } 
+    
+        //　登録済みレシピのうち、選択した回答の条件と一致するレシピを抽出
+        const recipeList = recipes.filter((recipe) => {
+            return recipe.recipeCategory == answerOne
+            &&  recipe.recipeGenre == answerTwo
+            &&  recipe.cookingTime == answerThree
+        })
+
+        recipeList.forEach(recipe => {
+            aiRecipes.push(recipe)
+        });
+    } else {
+        dispatch(push("/recipe/bot"))
+    }
+
+    console.log(aiRecipes);
     const message = "該当するレシピはありませんでした"
-
-    // useEffect(() => {
-          
-      
-    //   }, [])
 
     useEffect(() => {
         dispatch(fetchRecommendedRecipe(uid))
@@ -80,31 +60,18 @@ const AiRecommendedRecipe = () => {
     },[]);
 
     return(
-        <div>
-            {/* <h2 className="title">レシピ一覧</h2> */}
-            {/* <Grid container spacing={2}>
-                {recipes.length > 0 && (
-                    recipes.map(recipe => (
-                        <Grid item xs={6} sm={4} md={3} lg={2}>
-                            <RecipeCard key={recipe.id} recommendedRecipe={recipe} />
-                        </Grid>
-                    ))
-                )}
-                    
-            </Grid> */}
-
-            <CSSTransition
+        <section>
+            {/* <CSSTransition
                 in={fade}
                 timeout={1000}
                 classNames="fade"
-            >
-                <Recipe recipes={aiRecipes} message = {message}
-            
-            // onChange={handleChange} 
-                />
+            > */}
+            <Recipes 
+                recipes={aiRecipes} message = {message}
+            />
 
-            </CSSTransition>
-        </div>
+            {/* </CSSTransition> */}
+        </section>
     )
 }
 export default AiRecommendedRecipe

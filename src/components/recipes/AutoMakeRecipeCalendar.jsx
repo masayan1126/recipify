@@ -7,91 +7,112 @@ import { getUserId } from '../../redux/users/selecotors';
 import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getRecipes} from '../../redux/recipes/selecotors';
 import { autoSaveCalendar, fetchCalendar } from '../../redux/calendar/operations';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() => ({
-    width: {
-        width: "70%"
-    }
-}));
+import Loading from "../../Loading";
 
 // レシピカレンダー一括作成用画面(親コンポーネント)
 const AutoMakeRecipeCalendar = () => {
     const dispatch = useDispatch();
-    const classes = useStyles();
-
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
     const recipes = getRecipes(selector);
     const recipeNameList = recipes.map((data) => data.recipeName)
 
-    const [startYear, setStartYear] = useState(""),
+    let [startYear, setStartYear] = useState(""),
     [startMonth, setStartMonth] = useState(""),
     [startDay, setStartDay] = useState(""),
-    [endDay, setEndDay] = useState("");
+    [endDay, setEndDay] = useState(""),
+    [loading, setLoading] = useState(false);
 
-    // 対象期間の入力(自動作成のコンポーネントに渡す関数)
+    // 対象期間の入力(TextInputのコンポーネントに渡す関数)
     const inputStartYear = useCallback((event) => {
         setStartYear(event.target.value)
     },[setStartYear])
     
+    // 対象期間の入力(TextInputのコンポーネントに渡す関数)
     const inputStartMonth = useCallback((event) => {
         setStartMonth(event.target.value)
     },[setStartMonth])
 
+    // 対象期間の入力(TextInputのコンポーネントに渡す関数)
     const inputStartDay = useCallback((event) => {
         setStartDay(event.target.value)
     },[setStartDay])
 
+    // 対象期間の入力(TextInputのコンポーネントに渡す関数)
     const inputEndDay = useCallback((event) => {
         setEndDay(event.target.value)
     },[setEndDay])
 
+    const dt =　new Date();
+    var nowYear = dt.getFullYear();
+
+    const autoSaveRecipeCalendar = (uid, startYear, startMonth, startDay, endDay, recipeNameList) => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            dispatch(autoSaveCalendar(uid, startYear, startMonth, startDay, endDay, recipeNameList))
+        }, 3500);    
+    }
+
     useEffect(() => {
+        setStartYear(nowYear)
         dispatch(fetchCalendar(uid))
         dispatch(fetchRecommendedRecipe(uid))
     }, [])
 
     return (
-        <>
-            <h3 className="title">レシピ一括登録</h3>
-            <div className="form-container text-center">
-                <TextInput
-                    fullWidth={false} label={"年"} multiline={false} required={true}
-                    rows={1} value={startYear} type={"number"} 
-                    onChange={inputStartYear}
-                    variant="outlined"
-                    size="small"
-                />
-                <TextInput
-                    fullWidth={false} label={"月"} multiline={false} required={true}
-                    rows={1} value={startMonth} type={"text"} 
-                    onChange={inputStartMonth}
-                    variant="outlined"
-                />
-                <TextInput
-                    fullWidth={false} label={"開始日"} multiline={false} required={true}
-                    rows={1} value={startDay} type={"text"} 
-                    onChange={inputStartDay}
-                    variant="outlined"
-                />
-                <TextInput
-                    fullWidth={false} label={"終了日"} multiline={false} required={true}
-                    rows={1} value={endDay} type={"text"} 
-                    onChange={inputEndDay}
-                    variant="filled"
-                />
-            </div> 
+        <section>
+            { loading == true ? <Loading /> : 
+            <>
+                <h3 className="title">レシピ一括登録</h3>
+                <div className="form-container text-center">
+                    <TextInput
+                        fullWidth={true} label={"年"} multiline={false} required={true}
+                        rows={1} value={startYear} type={"number"} 
+                        onChange={inputStartYear}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"月"} multiline={false} required={true}
+                        rows={1} value={startMonth} type={"number"} 
+                        onChange={inputStartMonth}
+                        InputProps={{
+                            inputProps: { 
+                                max: 12, min: 1 
+                            }
+                        }}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"開始日"} multiline={false} required={true}
+                        rows={1} value={startDay} type={"number"} 
+                        onChange={inputStartDay}
+                        InputProps={{
+                            inputProps: { 
+                                max: 31, min: 1 
+                            }
+                        }}
+                    />
+                    <TextInput
+                        fullWidth={true} label={"終了日"} multiline={false} required={true}
+                        rows={1} value={endDay} type={"number"} 
+                        onChange={inputEndDay}
+                        InputProps={{
+                            inputProps: { 
+                                max: 31, min: 1 
+                            }
+                        }}
+                    />
+                </div> 
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton 
                         label={"一括登録"}
-                        onClick={() => dispatch(autoSaveCalendar(uid, startYear, startMonth, startDay, endDay, recipeNameList))}
+                        onClick={() => autoSaveRecipeCalendar(uid, startYear, startMonth, startDay, endDay, recipeNameList)}
                     />
                     <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>＞ カレンダーに戻る</p>
                 </div>
-                
-        </>
+            </>
+            }  
+        </section>
     );
 }
 export default AutoMakeRecipeCalendar

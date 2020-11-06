@@ -20,10 +20,10 @@ const RecipeCalendar = () => {
     }, [])
 
     return(
-        <div>
+        <setcion>
             <h3 className="title">献立カレンダー</h3>
             <CalendarFlame calendar={calendar} recipes={recipes}/>
-        </div>
+        </setcion>
     )
 }
 export default RecipeCalendar

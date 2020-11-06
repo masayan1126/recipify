@@ -27,6 +27,7 @@ function App() {
   return (
     <div className="pt-small">
       <div className="App">
+        
         <MenuAppBar uid={uid} />
         <div className={classes.container}>
           <Router />

@@ -11,14 +11,19 @@ const RecipeVideos = () => {
         fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${selectArtistName} 曲&key=AIzaSyDENmeM9nK1AYLgE1xWl9ZUezZPTvXJYls&maxResults=3`);
         const json = await res.json();
         const itemes = await json.items;
-        const videoIds = itemes.map((item) => item.id.videoId)
+        console.log(res);
+        const videoIds = await itemes.map((item) => item.id.videoId)
 
-        videoIdList =  [...videoIds]
-        // const videoIds = await itemes.id;
-        // videoIds.forEach(videoId => {
-        //     videoIdList.push(videoId);
-        // });
+        videoIds.forEach(videoId => {
+            videoIdList.push(videoId);
+        });
     }
+
+    useEffect(() => {
+        fetchMusic()
+    }, [])
+    
+    console.log(videoIdList);
 
     return(
         <section>

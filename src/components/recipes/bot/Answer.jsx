@@ -1,5 +1,4 @@
-import React,{useCallback, useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -7,6 +6,7 @@ const useStyles = makeStyles(() =>
     createStyles({
         "button": {
             borderColor: "#EBB582",
+            border:"2px solid",
             color: "#EBB582",
             fontWeight: 600,
             marginBottom: "8px",
@@ -20,8 +20,7 @@ const useStyles = makeStyles(() =>
 
 const Answer = (props) => {
     const classes = useStyles();
-    
-    const selector = useSelector((state) => state);
+
     return(
         <Button
             className={classes.button} variant="outlined"
