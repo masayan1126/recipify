@@ -11,7 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import {TextInput, SelectBox, PrimaryButton} from "../components/UIkit/index";
 import { ImageArea } from '../components/UIkit/index';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { getUserId } from '../../src/redux/users/selecotors';
+import { db } from '../firebase/index';
 
 const styles = (theme) => ({
   root: {
@@ -58,14 +60,21 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-
-
 const Modal = (props) => {
   const classes = useStyles();
+  const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
+  const usersRef = db.collection('users').doc(uid)
   const [images , setImages] = useState([]);
 
-
-  
+  // useEffect(() => {
+  //   usersRef.get()
+  //       .then((snapshot) => {
+  //           const data = snapshot.data();
+  //           console.log(data.images);
+  //           setImages(data.images);
+  //     })
+  // }, [])
 
   return (
     <div>

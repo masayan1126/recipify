@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import Pagination from "material-ui-flat-pagination";
 import { RecipeCard } from './index';
 import Grid from '@material-ui/core/Grid';
@@ -7,17 +7,27 @@ import {goBack} from 'connected-react-router'
 import {FlashMessage} from "../../templates/index";
 
 const Recipes = (props) => {
+  console.log(props.recipes);
   const dispatch = useDispatch();
 
   const [offset, setOffset] = useState(0),
-        [parPage, setParPage] = useState(8);
+        [parPage, setParPage] = useState(18);
 
   const handleClickPagination = offset => {
+    if (offset > 0) {
+      props.setShow(false)
+    } else {
+      props.setShow(true)
+    }
+    console.log(offset);
     setOffset(offset)
+    window.scrollTo(0, 0)
+
   }
   
   return (
     <>
+    
       {/* <FlashMessage /> */}
       {props.recipes.length < 1  ?
         <>
@@ -46,10 +56,12 @@ const Recipes = (props) => {
       <div className="spacer-md"/>
       <Pagination className="text-center"
         limit={parPage}
+        // 選択しているページ
         offset={offset}
         total={props.recipes.length}
-        onClick={(offset) => handleClickPagination(offset)}
+        onClick={(e, offset) => handleClickPagination(offset)}
       />
+      <div className="spacer-md"/>
     </>
   );
 }

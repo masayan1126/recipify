@@ -92,6 +92,7 @@ const UserProfile = (props) => {
                     userName={props.userName}
                     setUserName={props.setUserName}
                     inputUserName={props.inputUserName}
+                    
                 />
                 <div className="form-container">
                 <div className="text-right">

@@ -11,7 +11,8 @@ const initialState = {
     },
     recipes: {
         list: [],
-        selectedIngredients: []
+        selectedIngredients: [],
+        searchRecipeList: []
     },
     results: {
         list: []

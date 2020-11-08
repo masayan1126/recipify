@@ -54,7 +54,8 @@ const RecipeCard = (props) => {
           <CardMedia
             className={classes.media}
             component="img"
-            image= {props.recipe.images[0].path}
+            image= {props.recipe.images.length == 0 ?  "/static/images/cards/no-image.png"
+              : props.recipe.images[0].path}
             title="Contemplative Reptile"
             onClick={() => dispatch(push('/recipe/detail/' + props.recipe.id))}
           />

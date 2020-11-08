@@ -14,6 +14,11 @@ export const getSelectedIngredients = createSelector(
     state => state.selectedIngredients
 );
 
+export const getsearchRecipeList = createSelector(
+    [recipesSelector],
+    state => state.searchRecipeList
+);
+
 // export const getFavoriteRecipes = createSelector(
 //     [favoriteRecipesSelector],
 //     state => state.list

@@ -48,8 +48,9 @@ const RecipeList = () => {
     const selector = useSelector((state) => state);
     const recipes = getRecipes(selector);
     const uid = getUserId(selector);
-    const [fade, setFade] = useState(false);
-    const [query, setQuery] = useState("");
+    const [fade, setFade] = useState(false),
+          [show, setShow] = useState(true),
+          [query, setQuery] = useState("");
 
     useEffect(() => {
         setFade(true);
@@ -67,6 +68,8 @@ const RecipeList = () => {
     return(
         <section>
             <h3 className="title">レシピ一覧</h3>
+            
+            {(show) ? 
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
                     <SearchIcon/>
@@ -82,13 +85,18 @@ const RecipeList = () => {
                     fullWidth={true}
                 />
             </div>
+            : ""}
             <div className="spacer-sm"/>
             {/* <CSSTransition
                 in={fade}
                 timeout={1000}
                 classNames="fade"
             > */}
-                <Recipes recipes={recipes} message = {"まだレシピはありません。"}/>
+                    <Recipes recipes={recipes} 
+                    message = {"まだレシピはありません。"}
+                    show={show}
+                    setShow={setShow}
+                />
             {/* </CSSTransition> */}
         </section>
     )

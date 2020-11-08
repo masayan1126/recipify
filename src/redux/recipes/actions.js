@@ -7,10 +7,10 @@ export const fetchRecommendedRecipeAction = (recipes) => {
 };
 
 export const FETCH_SEARCH_RECIPE = "FETCH_SEARCH_RECIPE";
-export const fetchSearchRecipeAction = (recipes) => {
+export const fetchSearchRecipeAction = (searchRecipeList) => {
     return {
         type: "FETCH_SEARCH_RECIPE",
-        payload: recipes,
+        payload: searchRecipeList,
     }
 };
 
