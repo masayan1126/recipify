@@ -86,7 +86,7 @@ const RecipeList = () => {
                 />
             </div>
             : ""}
-            <div className="spacer-sm"/>
+            <div className="spacer-xs"/>
             {/* <CSSTransition
                 in={fade}
                 timeout={1000}

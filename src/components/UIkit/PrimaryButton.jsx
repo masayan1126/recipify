@@ -3,12 +3,13 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
     'button': {
-        backgroundColor: "#D24136",
+        // backgroundColor: "#D24136",
+        backgroundColor: "#E29930",
         color: '#FFF',
         fontSize: 14,
-        height :44,
-        marginBottom: 16,
-        width: 150,
+        height :40,
+        marginBottom: 13,
+        width: "100%",
     }
 })
 

@@ -16,13 +16,13 @@ import { getUserId } from '../../redux/users/selecotors';
 
 const useStyles = makeStyles(() => ({
   media: {
-    height: 130,
-    maxWidth: "180",
+    height: 140,
+    // maxWidth: "150px",
   },
   content: {
     display: 'flex',
     textAlign: 'left',
-    padding: 15,
+    padding: "10px 10px 10px 10px",
   },
   icon: {
     marginRight: 0,

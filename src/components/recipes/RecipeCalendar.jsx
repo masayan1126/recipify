@@ -21,7 +21,7 @@ const RecipeCalendar = () => {
 
     return(
         <setcion>
-            <h3 className="title">献立カレンダー</h3>
+            {/* <h3 className="title">献立カレンダー</h3> */}
             <CalendarFlame calendar={calendar} recipes={recipes}/>
         </setcion>
     )

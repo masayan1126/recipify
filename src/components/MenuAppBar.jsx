@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     color:"white"
   },
   title: {
-    flexGrow: 1,
     textAlign: 'center',
   },
 
@@ -35,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: 0,
     zIndex:999,
-    backgroundColor:'#EB8A3E',
+    // backgroundColor:'#EB8A3E',
+    backgroundColor:'#785A46',
     color:"white"
   },
   headerLogo: {
@@ -87,7 +87,7 @@ const MenuAppBar = (props) => {
             <TemporaryDrawer />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            {/* <a href="" className={classes.headerLogo} ></a> */}
+            {/* <a href="" className={classes.headerLogo} >Recipify</a> */}
           </Typography>
           
         </Toolbar>

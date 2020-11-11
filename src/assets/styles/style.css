@@ -88,14 +88,16 @@
 
 .form-container {
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 320px;
     padding: 2rem;
-    background-color: #ede9e5;
+    background-color: rgba(207, 184, 131, 0.1);
+    /* background-color: none; */
     height: auto;
     width: calc(100% - 2rem);
     width: 70%;
-    border: #ede9e5 3px solid;
-    border-radius: 5px;
+    /* border: #ede9e5 3px solid; */
+    border-radius: 4px;
+    border: 2px dashed  rgba(255, 202, 77, 0.347);
 }
 
 .color__test {
@@ -189,7 +191,7 @@
 }
 
 /*********** Module Spacer ***********/
-.spacer-extra-sm {   
+.spacer-xs {   
     height: 12px
 }
 .spacer-sm {

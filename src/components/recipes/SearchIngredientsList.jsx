@@ -10,7 +10,6 @@ const SearchIngredientsList = () => {
 
     return(
         <section>
-            <h3 className="title">食材からレシピ検索</h3>
             <SearchIngredients 
                 vegs={vegs} meats={meats} fishes={fishes} cereals={cereals}
                 others={potatoes_starches_beans_mushrooms}

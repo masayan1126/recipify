@@ -28,6 +28,8 @@ const SearchIngredients = (props) => {
   return (
     <>
     <div className="form-container">
+      <h3 className="title">食材からレシピ検索</h3>
+      <div className="spacer-sm"/>
       <SelectBox
         label={"食材(野菜)"} required={true} options={props.vegs} select={setVeg} value={veg}
       />
@@ -48,8 +50,6 @@ const SearchIngredients = (props) => {
         label={"食材(芋・でん粉・豆・キノコ類)"} required={true} options={props.others} 
         select={setOthers} value={others}
       />   
-    </div>
-          
       <div className="spacer-sm"/>
       <div className="center">
           <PrimaryButton
@@ -57,6 +57,8 @@ const SearchIngredients = (props) => {
             onClick={() => searchRecipe(veg, meat, fish, cereal, others)}
           />
       </div>
+    </div>
+          
     </>
   );
 }

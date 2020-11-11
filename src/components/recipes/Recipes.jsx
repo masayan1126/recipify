@@ -5,8 +5,16 @@ import Grid from '@material-ui/core/Grid';
 import { useDispatch } from 'react-redux';
 import {goBack} from 'connected-react-router'
 import {FlashMessage} from "../../templates/index";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  card: {
+    // maxWidth: "200px",
+  },
+}));
 
 const Recipes = (props) => {
+  const classes = useStyles();
   console.log(props.recipes);
   const dispatch = useDispatch();
 
@@ -42,11 +50,11 @@ const Recipes = (props) => {
         </>
       : ""
       }
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)
               .map(recipe => (
-                  <Grid item xs={6} sm={4} md={3} lg={2}>
+                  <Grid item className={classes.card} xs={6} sm={4} md={3} lg={2}>
                     <RecipeCard key={recipe.id} recipe={recipe} />
                   </Grid>
               ))

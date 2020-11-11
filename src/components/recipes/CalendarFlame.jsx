@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React,{useCallback, useState, useEffect} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { TextInput, PrimaryButton, SelectBox } from "../UIkit/index";
@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { addCalendar } from '../../redux/calendar/operations';
 import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
+import { db } from '../../firebase/index';
 
 const CalendarFlame = (props) => {
     const dispatch = useDispatch();
@@ -16,6 +17,8 @@ const CalendarFlame = (props) => {
     const recipes = []
     const recipeNameList = props.recipes.map((data) => data.recipeName)
     const recipeIdList = props.recipes.map((data) => data.id)
+
+
     for (let i = 0; i < props.recipes.length; i += 1) {
         const recipeObj = {
           id: `${recipeIdList[i]}`,
@@ -65,9 +68,28 @@ const CalendarFlame = (props) => {
     const day = String(targetDate).substring(8, 10);
     let date = `${year}/${month}/${day}`;
     let dateId = year + month + day;
+
+    const getCalendarRecipe = async (dateId, calendarIds) => {
+        // ログインユーザーのカレンダーコレクションから全ドキュメントを取得し、
+        // 各ドキュメントに紐づく日付id(YYYYMMDD)の配列を生成
+        
+        console.log(calendarIds);
+        // 上記の配列の中に、現在選択している日付id(YYYYMMDD)と一致するデータがあれば、それを表示する
+        if (calendarIds.includes(dateId)) {
+            const targetCalendar = await props.calendar.filter(calendar => calendar.dateId == dateId)
+            setBreakfast(targetCalendar[0].breakfast);
+            setLunch(targetCalendar[0].lunch);
+            setDinner(targetCalendar[0].dinner);
+        } else {
+            db.collection("users")
+            setBreakfast("");
+            setLunch("");
+            setDinner("");            
+        }  
+    } 
     
     // /recipe/calendar/日付　の「日付」部分を選択した日付でURLを生成する関数
-    const makeUrl = (event) =>　{
+    const makeUrl = async (event) =>　{
         // どこかの日付を選択したら、レシピの登録フォームを表示する
         const recipeCalendarForm = document.getElementById('recipe-calendar-form')
         recipeCalendarForm.classList.remove("display-toggle");
@@ -80,23 +102,10 @@ const CalendarFlame = (props) => {
         }
         const day = String(event).substring(8, 10);
         dateId = year + month + day
-
-        dispatch(push('/recipe/calendar/' + dateId))
-
-        // ログインユーザーのカレンダーコレクションから全ドキュメントを取得し、
-        // 各ドキュメントに紐づく日付id(YYYYMMDD)の配列を生成
         const calendarIds = props.calendar.map((calendar) => calendar.dateId )
-        // 上記の配列の中に、現在選択している日付id(YYYYMMDD)と一致するデータがあれば、それを表示する
-        if (calendarIds.includes(dateId)) {
-            const targetCalendar = props.calendar.filter(calendar => calendar.dateId == dateId)
-            setBreakfast(targetCalendar[0].breakfast);
-            setLunch(targetCalendar[0].lunch);
-            setDinner(targetCalendar[0].dinner);
-        } else {
-            setBreakfast("");
-            setLunch("");
-            setDinner("");            
-        }  
+        await dispatch(push('/recipe/calendar/' + dateId))
+        await getCalendarRecipe(dateId, calendarIds);
+
     }
 
     // 入力されたデータをDBに保存するための関数(operationsを呼び出して、引数を渡すための関数)
@@ -122,6 +131,16 @@ const CalendarFlame = (props) => {
 
         dispatch(addCalendar(data))
     }    
+
+    useEffect(() => {
+        const targetData = db.collection('users').doc(uid).collection("calendar")
+            .where('dateId', '==', dateId).get()
+            .then(snapshots => {
+                snapshots.forEach((snapshot => {
+                    setDinner(snapshot.data().dinner);
+                }))
+            })
+    },[]);
     
     return (
         <>
@@ -132,7 +151,9 @@ const CalendarFlame = (props) => {
                 onClickDay={(event) => makeUrl(event) }
             />
 
-            <div id="recipe-calendar-form" className="display-toggle">
+            <div id="recipe-calendar-form" 
+                // className="display-toggle"
+            >
                 <div className="form-container">
                     <TextInput
                         fullWidth={true} label={"日付"} multiline={false} required={true}
@@ -141,7 +162,7 @@ const CalendarFlame = (props) => {
                             readOnly: true,
                         }}
                     />
-                    <TextInput
+                    {/* <TextInput
                         fullWidth={true} label={"朝ごはん"} multiline={false} required={false}
                         rows={1} value={breakfast} type={"text"} 
                         onChange={inputBreakfast}
@@ -150,20 +171,21 @@ const CalendarFlame = (props) => {
                         fullWidth={true} label={"昼ごはん"} multiline={false} required={false}
                         rows={1} value={lunch} type={"text"} 
                         onChange={inputLunch}
-                    />
+                    /> */}
                     <SelectBox
                         label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
                     />
+                    <div className="spacer-sm"/>
+                    <div className="center">
+                        <PrimaryButton 
+                            label={"レシピを登録"}
+                            onClick={() => addRecipeCalendar(dinner, uid, date, dateId, breakfast, lunch)}
+                        />
+                        <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>
+                            一括登録はこちらから
+                        </p>
+                    </div>    
                 </div>
-                <div className="center">
-                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/auto'))}>
-                        ＞ 一括登録はこちらから
-                    </p>
-                    <PrimaryButton 
-                        label={"レシピを登録"}
-                        onClick={() => addRecipeCalendar(dinner, uid, date, dateId, breakfast, lunch)}
-                    />
-                </div>    
             </div>
         </>
     );
