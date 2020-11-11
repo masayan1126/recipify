@@ -83,6 +83,7 @@ const RecipeList = () => {
                     }}
                     inputProps={{ 'aria-label': 'search' }}
                     fullWidth={true}
+                    autoFocus = {true}
                 />
             </div>
             : ""}

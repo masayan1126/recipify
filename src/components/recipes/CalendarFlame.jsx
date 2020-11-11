@@ -162,7 +162,10 @@ const CalendarFlame = (props) => {
                             readOnly: true,
                         }}
                     />
-                    {/* <TextInput
+                    <div className="spacer-xs"/>
+                    <details>
+                    <summary>朝・昼ご飯</summary>
+                    <TextInput
                         fullWidth={true} label={"朝ごはん"} multiline={false} required={false}
                         rows={1} value={breakfast} type={"text"} 
                         onChange={inputBreakfast}
@@ -171,7 +174,9 @@ const CalendarFlame = (props) => {
                         fullWidth={true} label={"昼ごはん"} multiline={false} required={false}
                         rows={1} value={lunch} type={"text"} 
                         onChange={inputLunch}
-                    /> */}
+                    />
+                    </details>
+                    <div className="spacer-xs"/>
                     <SelectBox
                         label={"晩ご飯"} required={true} options={recipes} select={setDinner} value={dinner}
                     />

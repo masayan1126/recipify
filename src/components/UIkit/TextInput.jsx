@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
     margin: {
         margin: 0
+    },
+    fontFamily: {
+        fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif",
     }
 })
 
@@ -12,8 +15,8 @@ const TextInput = (props) => {
     const classes = useStyles();
 
     return(
-        <TextField 
-            // className={textStyle}
+        <TextField
+            className={classes.fontFamily}
             fullWidth={props.fullWidth}
             label={props.label}
             margin="dense"

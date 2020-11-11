@@ -101,15 +101,15 @@ const AutoMakeRecipeCalendar = () => {
                             }
                         }}
                     />
+                    <div className="spacer-sm"/>
+                    <div className="center">
+                        <PrimaryButton 
+                            label={"一括登録"}
+                            onClick={() => autoSaveRecipeCalendar(uid, startYear, startMonth, startDay, endDay, recipeNameList)}
+                        />
+                        <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>＞ カレンダーに戻る</p>
+                    </div>
                 </div> 
-                <div className="spacer-sm"/>
-                <div className="center">
-                    <PrimaryButton 
-                        label={"一括登録"}
-                        onClick={() => autoSaveRecipeCalendar(uid, startYear, startMonth, startDay, endDay, recipeNameList)}
-                    />
-                    <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>＞ カレンダーに戻る</p>
-                </div>
             </>
             }  
         </section>

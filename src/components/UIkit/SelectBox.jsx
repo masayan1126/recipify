@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 7,
         minWidth: 100,
         width: "100%",
-        fontSize: "8px"
+        fontSize: "8px",
+    },
+    fontFamily: {
+        fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif",
     }
 }));
 
@@ -21,6 +24,7 @@ const SelectBox = (props) => {
         <FormControl className={classes.formControl}>
             <InputLabel >{props.label}</InputLabel>
             <Select
+                className={classes.fontFamily}
                 value={props.value} required={props.required}
                 onChange={(e) => props.select(e.target.value)}
 

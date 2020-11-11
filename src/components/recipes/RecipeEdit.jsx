@@ -105,6 +105,9 @@ const RecipeEdit = () => {
                     fullWidth={true} label={"レシピ名"} multiline={false} required={true}
                     rows={1} value={recipeName} type={"text"} onChange={inputRecipeName}
                 />
+                <div className="spacer-xs"/>
+                <details>
+                <summary>食材</summary>
                 <SelectBox
                     label={"食材1(野菜類)"} options={vegs}
                     select={setNecessaryIngredientsOne} value={necessaryIngredientsOne}
@@ -125,6 +128,10 @@ const RecipeEdit = () => {
                     label={"食材5(芋・でん粉・豆・キノコ類)"} select={setNecessaryIngredientsFive}
                     options={potatoes_starches_beans_mushrooms}  value={necessaryIngredientsFive}
                 />
+                </details>
+                <div className="spacer-xs"/>
+                <details>
+                <summary>補足情報</summary>
                 <SelectBox
                     label={"カテゴリー"} options={categories} 
                     select={setRecipeCategory} value={recipeCategory}
@@ -137,18 +144,20 @@ const RecipeEdit = () => {
                     label={"調理時間"} options={cookingTimes} 
                     select={setCookingTime} value={cookingTime}
                 />
+                </details>
+                <div className="spacer-sm"/>
+                <div className="center">
+                    <PrimaryButton
+                        label={"レシピを登録"}
+                        onClick={() => dispatch(saveRecipe(id, recipeName,
+                            necessaryIngredientsOne, necessaryIngredientsTwo, 
+                            necessaryIngredientsThree, necessaryIngredientsFour, 
+                            necessaryIngredientsFive, recipeCategory, recipeGenre, 
+                            cookingTime, images, uid))}
+                    />
+                </div>
             </div> 
             <div className="spacer-sm"/>
-            <div className="center">
-                <PrimaryButton
-                    label={"レシピを登録"}
-                    onClick={() => dispatch(saveRecipe(id, recipeName,
-                        necessaryIngredientsOne, necessaryIngredientsTwo, 
-                        necessaryIngredientsThree, necessaryIngredientsFour, 
-                        necessaryIngredientsFive, recipeCategory, recipeGenre, 
-                        cookingTime, images, uid))}
-                />
-            </div>
         </section>
     )
 }

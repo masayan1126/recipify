@@ -22,12 +22,14 @@ const useStyles = makeStyles(() => ({
   content: {
     display: 'flex',
     textAlign: 'left',
-    padding: "10px 10px 10px 10px",
+    padding: "7px 10px 0 10px",
+    fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif",
   },
   icon: {
     marginRight: 0,
     marginLeft: 'auto',
     paddingRight:0,
+    color: "#785A46",
   },
 }));
 
