@@ -56,7 +56,6 @@ const SignUp = () => {
                     rows={1} value={confirmPassword}
                     type={'password'} onChange={inputConfirmPassword}
                 />
-            </div>
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton 
@@ -65,6 +64,7 @@ const SignUp = () => {
                     />
                     <p className="p-link-menu" onClick={() => dispatch(push('/signin'))}>アカウントをお持ちの方はこちら</p>
                 </div>
+            </div>
             
         </div>
     )

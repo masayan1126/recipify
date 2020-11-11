@@ -111,7 +111,7 @@ export default function TemporaryDrawer() {
       <List className="p-link-menu">
         <ListItem Button> 
           {/* <SideMenu primary={'Recipify'}/> */}
-          <h3>Recipify</h3>
+          <h2>Recipify</h2>
         </ListItem>
 
         <ListItem Button> 

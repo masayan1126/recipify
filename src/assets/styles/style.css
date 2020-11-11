@@ -17,7 +17,7 @@ summary:hover {
 }
 
 .text-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 .fade-enter {
@@ -118,7 +118,7 @@ summary:hover {
 }
 
 .p-link-menu {
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -143,14 +143,14 @@ summary:hover {
 }
 
 .chat-box {
-    background: #ede9e5;
+    background: #ffffff;
     /* border: 5px solid #EBB582;
     border-radius: 4px; */
     box-sizing: border-box;
     /* height: 500px; */
     max-width: 432px;
     padding: 0 1rem;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 

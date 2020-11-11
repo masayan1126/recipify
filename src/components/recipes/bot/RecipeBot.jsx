@@ -89,7 +89,7 @@ const RecipeBot = () => {
 
     return(
         <section className="chat-container">
-            <h3 className="title">献立くん</h3>
+            {/* <h3 className="title">献立くん</h3> */}
             <div className="chat-box">
                 <Chats chats={chats} />
                 <AnswersList answers={answers} select={selectAnswer}/>

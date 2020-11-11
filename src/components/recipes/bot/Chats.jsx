@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 const useStyles = makeStyles(() =>
     createStyles({
         "chats": {
-            height: "400px",
+            height: "350px",
             padding: "0",
             overflow: "auto"
         }
