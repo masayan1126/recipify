@@ -7,7 +7,7 @@ import {
 
 export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIngredientsTwo,
     necessaryIngredientsThree, necessaryIngredientsFour, necessaryIngredientsFive, 
-    recipeCategory, recipeGenre, cookingTime, images, uid) => {
+    recipeCategory, recipeGenre, cookingTime, images, uid, recipeLink) => {
     return async (dispatch) => {
 
         if (!recipeName || images.length == 0) {
@@ -31,6 +31,7 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             userId: uid,
             updated_at: timestamp,
             favorite: false,
+            recipeLink: recipeLink,
         }
 
         if(id === "") {

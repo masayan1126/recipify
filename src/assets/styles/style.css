@@ -48,6 +48,9 @@ summary:hover {
 .bg-color__yellow {
     color: #EBB582 !important;
 }
+.bg-color__blue {
+    color: #5467a3 !important;
+}
 
 
 .img-trimming {
@@ -106,7 +109,8 @@ summary:hover {
     width: 71%;
     /* border: #ede9e5 3px solid; */
     border-radius: 4px;
-    border: 2px dashed  rgba(255, 202, 77, 0.347);
+    /* border: 2px dashed  rgba(255, 202, 77, 0.347); */
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
 
 .color__test {

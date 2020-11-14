@@ -15,6 +15,9 @@ import {deleteRecipe} from '../../redux/recipes/operations';
 import { getUserId } from '../../redux/users/selecotors';
 
 const useStyles = makeStyles(() => ({
+  card: {
+    boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important"
+  },
   media: {
     height: 140,
     // maxWidth: "150px",
@@ -51,7 +54,7 @@ const RecipeCard = (props) => {
 
   return (
     <>
-      <Card key={1}>
+      <Card key={1} className={classes.card}>
         <CardActionArea>
           <CardMedia
             className={classes.media}

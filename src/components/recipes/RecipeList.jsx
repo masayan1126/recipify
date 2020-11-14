@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         margin: "0 auto",
         maxWidth: "530px",
+        boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
     },
     searchIcon: {
         padding: theme.spacing(1.5, 2),
@@ -87,7 +88,7 @@ const RecipeList = () => {
                 />
             </div>
             : ""}
-            <div className="spacer-xs"/>
+            <div className="spacer-sm"/>
             {/* <CSSTransition
                 in={fade}
                 timeout={1000}

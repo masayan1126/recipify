@@ -29,11 +29,16 @@ const RecipeEdit = () => {
             [recipeCategory, setRecipeCategory] = useState(""),
             [recipeGenre, setRecipeGenre] = useState(""),
             [cookingTime, setCookingTime] = useState(""),
+            [recipeLink, setRecipeLink] = useState(""),
             [images , setImages] = useState([]);
 
     const inputRecipeName = useCallback((event) => {
         setRecipeName(event.target.value)
     },[setRecipeName])
+
+    const inputRecipeLink = useCallback((event) => {
+        setRecipeLink(event.target.value)
+    },[setRecipeLink])
 
     const categories = [
         { id:"japanese" ,name:"和食" },
@@ -144,6 +149,10 @@ const RecipeEdit = () => {
                     label={"調理時間"} options={cookingTimes} 
                     select={setCookingTime} value={cookingTime}
                 />
+                <TextInput
+                    fullWidth={true} label={"レシピURL"} multiline={true} required={false}
+                    rows={2} value={recipeLink} type={"text"} onChange={inputRecipeLink}
+                />
                 </details>
                 <div className="spacer-sm"/>
                 <div className="center">
@@ -153,7 +162,7 @@ const RecipeEdit = () => {
                             necessaryIngredientsOne, necessaryIngredientsTwo, 
                             necessaryIngredientsThree, necessaryIngredientsFour, 
                             necessaryIngredientsFive, recipeCategory, recipeGenre, 
-                            cookingTime, images, uid))}
+                            cookingTime, images, uid, recipeLink))}
                     />
                 </div>
             </div> 

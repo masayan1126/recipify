@@ -8,6 +8,21 @@ import { useSelector,useDispatch } from 'react-redux';
 import { signInAction } from './redux/users/actions';
 import './assets/styles/style.css';
 import { getUserId, getUserProfileImage, getSignedIn} from "./redux/users/selecotors";
+import {MuiThemeProvider} from "@material-ui/core/styles";
+import {createMuiTheme} from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({ 
+  typography: {
+    fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif !important",
+  },
+  input: {
+    fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif !important",
+  },
+  inputbase: {
+    fontFamily: "ヒラギノ丸ゴ ProN Hiragino Maru Gothic ProN sans-serif !important",
+  },
+}); 
 
 const useStyles = makeStyles({
   container: {
@@ -26,13 +41,14 @@ function App() {
 
   return (
     <div className="pt-small">
-      <div className="App">
-        
-        <MenuAppBar uid={uid} />
-        <div className={classes.container}>
-          <Router />
+      <MuiThemeProvider theme={theme}> 
+        <div className="App">
+            <MenuAppBar uid={uid} />
+            <div className={classes.container}>
+              <Router />
+            </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     </div>
   );
 }
