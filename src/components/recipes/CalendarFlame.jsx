@@ -150,7 +150,7 @@ const CalendarFlame = (props) => {
                 value={targetDate}
                 onClickDay={(event) => makeUrl(event) }
             />
-
+            <div className="spacer-xs"/>
             <div id="recipe-calendar-form" 
                 // className="display-toggle"
             >

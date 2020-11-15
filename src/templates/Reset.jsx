@@ -15,8 +15,8 @@ const Reset = () => {
 
     return(
         <div>
-            <h3 className="title">パスワード再登録</h3>
             <div className="form-container">
+                <h3 className="title">パスワード再登録</h3>
                 <TextInput 
                     fullWidth={true} label={'メールアドレス'}
                     multiline={false} required={true}

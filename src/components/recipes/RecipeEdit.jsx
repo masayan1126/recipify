@@ -13,6 +13,7 @@ const RecipeEdit = () => {
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
     const recipesRef = db.collection('users').doc(uid).collection('recipes');
+    const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
 
     let id = window.location.pathname.split('/recipe/edit')[1];
     
@@ -30,7 +31,12 @@ const RecipeEdit = () => {
             [recipeGenre, setRecipeGenre] = useState(""),
             [cookingTime, setCookingTime] = useState(""),
             [recipeLink, setRecipeLink] = useState(""),
-            [images , setImages] = useState([]);
+            [images , setImages] = useState([]),
+            [vegs, setVegs] = useState([]),
+            [meats, setMeats] = useState([]),
+            [fishes, setFishes] = useState([]),
+            [cereals, setCereals] = useState([]),
+            [others, setOthers] = useState([]);
 
     const inputRecipeName = useCallback((event) => {
         setRecipeName(event.target.value)
@@ -86,6 +92,7 @@ const RecipeEdit = () => {
                     setRecipeGenre(data.recipeGenre);
                     setCookingTime(data.cookingTime);
                     setImages(data.images);
+                    setRecipeLink(data.recipeLink);
                 })
         } else {
             setRecipeName("");
@@ -98,13 +105,31 @@ const RecipeEdit = () => {
             setRecipeGenre("");
             setCookingTime("");
             setImages([]);
+            setRecipeLink("");
         }
     }, [id])
 
+    useEffect(() => {
+        ingredientsRef.get()
+            .then((snapshots) => {
+                snapshots.forEach(snapshot => {
+                    const data = snapshot.data();
+                    setVegs(data.vegs);
+                    setMeats(data.meats);
+                    setFishes(data.fishes);
+                    setCereals(data.cereals);
+                    setOthers(data.others)
+                })
+            })
+    }, [])
+
+    console.log(vegs);
+
     return(
         <section>
-            <h3 className="title">レシピの登録・編集</h3>
             <div className="form-container">
+                <h3 className="title">レシピの登録・編集</h3>
+                <div className="spacer-xs"/>
                 <ImageArea images={images} setImages={setImages} title={"レシピ画像の登録"}/>
                 <TextInput
                     fullWidth={true} label={"レシピ名"} multiline={false} required={true}
@@ -131,7 +156,7 @@ const RecipeEdit = () => {
                 />
                 <SelectBox
                     label={"食材5(芋・でん粉・豆・キノコ類)"} select={setNecessaryIngredientsFive}
-                    options={potatoes_starches_beans_mushrooms}  value={necessaryIngredientsFive}
+                    options={others}  value={necessaryIngredientsFive}
                 />
                 </details>
                 <div className="spacer-xs"/>

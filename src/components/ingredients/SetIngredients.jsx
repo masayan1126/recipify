@@ -33,22 +33,29 @@ const SetIngredients = (props) => {
     const [index, setIndex] = useState(0),
           [ingredients, setIngredients] = useState("");
 
+    console.log(props.ingredientsList);
+
     const inputIngredients = useCallback((event) => {
         setIngredients(event.target.value)
     }, [setIngredients]);
 
     const addIngredients = (index, ingredients) => {
+        console.log(ingredients);
         if (ingredients === "") {
             return false
         } else {
             if (index === props.ingredientsList.length) {
-                props.setIngredients(prevState => [...prevState, {ingredients: ingredients}]);
+                props.setIngredientsList(prevState => [...prevState, {
+                    id: String(index), category: props.category, name: ingredients
+                }]);
                 setIndex(index + 1);
+                setIngredients(ingredients);
                 setIngredients("");
+                
             } else {
                 const newIngredients = props.ingredientsList;
-                newIngredients[index] = {ingredients: ingredients};
-                props.setIngredients(newIngredients);
+                newIngredients[index] = {name: ingredients};
+                props.setIngredientsList(newIngredients);
                 setIndex(newIngredients.length);
                 setIngredients("");
             }
@@ -62,9 +69,10 @@ const SetIngredients = (props) => {
 
     const deleteIngredients = (deleteIndex) => {
         const newIngredients = props.ingredientsList.filter((item, index) => index !== deleteIndex)
-        props.setIngredients(newIngredients);
+        props.setIngredientsList(newIngredients);
     }
 
+    // indexのstateに食材一覧の配列の長さをセットする
     useEffect(() => {
         setIndex(props.ingredientsList.length)
     },[props.ingredientsList.length])
@@ -76,13 +84,13 @@ const SetIngredients = (props) => {
                     <TableBody>
                         {props.ingredientsList.length > 0 && (
                             props.ingredientsList.map((item, i) => (
-                                <TableRow key={item.ingredients}>
+                                <TableRow key={item.id}>
                                     <TableCell component="th" scope="row">
-                                        {item.ingredients}
+                                        {item.name}
                                     </TableCell>
                                     <TableCell className={classes.iconCell}>
                                         <IconButton className={classes.iconCell}
-                                            onClick={() => editIngredients(i, item.ingredients)}>
+                                            onClick={() => editIngredients(i, item.name)}>
                                             <EditIcon />
                                         </IconButton>
                                     </TableCell>

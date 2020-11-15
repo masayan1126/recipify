@@ -6,21 +6,46 @@ import '../../assets/styles/style.css';
 import { Ingredients } from './index';
 import {getIngredients} from '../../redux/ingredients/selecotors';
 import {push,} from 'connected-react-router'
+import {db} from '../../firebase/index';
+import { getUserId } from '../../redux/users/selecotors';
 
 // 食材分類一覧画面の子コンポーネント（親：IngredientsList.jsx）
 const IngredientsList = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  // const ingredientsList = [];
+  const uid = getUserId(selector);
   const ingredientsList = getIngredients(selector);
+  const usersRef = db.collection("users");
+  const ingredientsRef = usersRef.doc(uid).collection("ingredients")
+  // const ingredientsList = [];
+  // const [vegs, setVegs] = useState([]),
+  // const [ingredientsList, setIngredientsList] = useState([]);
+  // [meats, setMeats] = useState([]),
+  // [fishes, setFishes] = useState([]),
+  // [cereals, setCereals] = useState([]),
+  // [others, setOthers] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchIngredients())
+    dispatch(fetchIngredients(uid))
+      // ingredientsRef.get()
+      // .then((snapshots) => {
+      //     snapshots.forEach(snapshot => {
+      //       const data = snapshot.data()
+      //       ingredientsList.push(data); 
+              
+      //     })
+      // })
   }, [])
 
   return(
-      <section className="form-container">
+      <section>
         <h3 className="title">食材分類一覧</h3>
-        <Ingredients ingredientsList={ ingredientsList } message={"まだ食材はありません。"} />
+        <Ingredients 
+          // vegs={vegs} meats={meats} fishes={fishes}
+          // cereals={cereals} others={others}
+          ingredientsList={ingredientsList}
+          message={"まだ食材はありません。"} />
         <div className="spacer-sm"/>
         <div className="center">
           <PrimaryButton

@@ -64,7 +64,7 @@ const RecipeBot = () => {
                     type: 'answer'
                 })
 
-                setTimeout(() => displayNextQuestion(nextQuestionId, dataset[nextQuestionId]),1000)
+                setTimeout(() => displayNextQuestion(nextQuestionId, dataset[nextQuestionId]),2000)
                 break;
         }
     },[answers]);
@@ -75,7 +75,10 @@ const RecipeBot = () => {
             setDataset(defaultDataset);
 
             // 最初の質問を表示
-            displayNextQuestion(currentId, defaultDataset[currentId])
+            setTimeout(() => {
+                displayNextQuestion(currentId, defaultDataset[currentId])
+            }, 3000);
+
         })();
     }, []);
 

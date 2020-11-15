@@ -85,6 +85,7 @@ const UserProfile = (props) => {
 
     return(
         <section>
+                
                 <Modal className={classes.dialogWidth}
                     open={props.open}
                     setOpen={props.setOpen}
@@ -95,6 +96,7 @@ const UserProfile = (props) => {
                     
                 />
                 <div className="form-container">
+                    <h3 className="title">アカウント情報</h3>
                 <div className="text-right">
                     <EditIcon onClick={() => editProfile()} />
                 </div>

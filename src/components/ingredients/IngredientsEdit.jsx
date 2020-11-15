@@ -12,7 +12,7 @@ import {push} from 'connected-react-router'
 const IngredientsEdit = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
-    const ingredientsList = getIngredients(selector);
+    // const ingredientsList = getIngredients(selector);
     const uid = getUserId(selector);
 
     let id = window.location.pathname.split('/ingredients/edit')[1];
@@ -21,7 +21,7 @@ const IngredientsEdit = () => {
     }
 
     const [ingredientsCategory, setIngredientsCategory] = useState(""),
-        [ingredients, setIngredients] = useState([]),
+        [ingredientsList, setIngredientsList] = useState([]),
         [images , setImages] = useState([]);
 
     const inputingredientsCategory = useCallback((event) => {
@@ -35,7 +35,11 @@ const IngredientsEdit = () => {
                 .then((snapshot) => {
                     const data = snapshot.data();
                     setIngredientsCategory(data.ingredientsCategory);
-                    setIngredients(data.ingredientsList)
+                    const arr = data.ingredientsList[0].value.filter((data) => {
+                        return data.name !== "未指定"
+                    })
+                    console.log(data.ingredientsList[0].value);
+                    setIngredientsList(arr)
                     setImages(data.images);
                 })
         }
@@ -51,13 +55,14 @@ const IngredientsEdit = () => {
             />
             <div className="spacer-sm"/>
             <SetIngredients 
-                ingredientsList={ingredients} setIngredients={setIngredients}
+                ingredientsList={ingredientsList} setIngredientsList={setIngredientsList}
+                category={ingredientsCategory}
             />
             <div className="spacer-sm"/>
             <div className="center">
                 <PrimaryButton
                     label={"食材を追加"}
-                    onClick={() => dispatch(saveIngredients(id, ingredientsCategory, ingredients, images))}
+                    onClick={() => dispatch(saveIngredients(id, ingredientsCategory, ingredientsList, images, uid))}
                     />
                 <p className="p-link-menu" onClick={() => dispatch(push('/ingredients/list'))}>＞ 一覧画面に戻る</p>
             </div>

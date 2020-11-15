@@ -2,16 +2,16 @@ import {db, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import {fetchIngredientsAction, deleteIngredientsAction} from '../ingredients/actions';
 
-const ingredientsRef = db.collection('ingredients');
-
-export const saveIngredients = (id, ingredientsCategory, ingredients, images) => {
+export const saveIngredients = (id, ingredientsCategory, ingredientsList, images, uid) => {
     return async (dispatch) => {
+        const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         const timestamp = FirebaseTimestamp.now();
         const data = {
             ingredientsCategory: ingredientsCategory,
             images: images,
-            ingredientsList: ingredients,
+            ingredientsList: ingredientsList,
             updated_at: timestamp,
+            userId: uid,
         }
         
         if(id === "") {
@@ -30,8 +30,9 @@ export const saveIngredients = (id, ingredientsCategory, ingredients, images) =>
     }
 }
 
-export const fetchIngredients = () => {
+export const fetchIngredients = (uid) => {
     return async (dispatch) => {
+        const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         ingredientsRef.get()
             .then(snapshots => {
                 const ingredientsList = []
@@ -44,8 +45,9 @@ export const fetchIngredients = () => {
     }
 }
 
-export const deleteIngredients = (id) => {
+export const deleteIngredients = (id, uid) => {
     return async (dispatch, getState) => {
+        const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         ingredientsRef.doc(id).delete()
             .then(() => {
                 const prevIngredients = getState().ingredients.list

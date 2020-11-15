@@ -11,10 +11,11 @@ import {push} from 'connected-react-router'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '90%',
-      maxWidth: '400px;',
+      width: '100%',
+      maxWidth: '600px;',
       backgroundColor: theme.palette.background.paper,
-      margin: "0 auto"
+      margin: "0 auto",
+      boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important"
     },
   }));
 

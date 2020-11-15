@@ -37,6 +37,10 @@ summary:hover {
     transition: opacity 3000ms;
 }
 
+.hide {
+    display: none;
+}
+
 .mt-small {
     margin-top:50px;
 }
@@ -166,9 +170,10 @@ summary:hover {
 }
 
 .p-chat__bubble {
-    background: #D24136;
+    /* background:#EBB582; */
+    background:#785A46;
     border-radius: 4px;
-    color: #fff;
+    color: white;
     font-size: 14px;
     font-weight: 500;
     padding: .5rem;

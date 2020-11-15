@@ -16,9 +16,10 @@ const Chat = (props) => {
 
     useEffect(() => {
         dispatch(fetchUserProfileImage(uid));
+
     }, [])
 
-    console.log(profileImage);
+    console.log(profileImage.payload);
 
     return (
         <ListItem className={classes}>
@@ -26,7 +27,7 @@ const Chat = (props) => {
                 {isQuestion ? (
                     <Avatar alt="icon" src="/static/images/cards/献立くん.jpg" />
                 ) : (
-                    <Avatar alt="icon" src={profileImage} />
+                    <Avatar alt="icon" src={profileImage.payload} />
                 )}
             </ListItemAvatar>
             <div className="p-chat__bubble">{props.text}</div>

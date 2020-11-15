@@ -92,7 +92,6 @@ const UserProfile = () => {
 
     return(
         <section>
-            <h3 className="title">アカウント情報</h3>
             <UserProfileEdit
                 setOpen={setOpen}
                 open={open}

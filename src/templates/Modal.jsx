@@ -98,7 +98,7 @@ const Modal = (props) => {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => props.handleClose(props.userName, images)} color="">
+          <Button autoFocus onClick={() => props.handleClose(props.userName, images)} color="primary">
             完了
           </Button>
         </DialogActions>

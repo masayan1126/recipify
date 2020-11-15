@@ -5,6 +5,7 @@ import {
     fetchUserProfileImageAction,
 } from "./actions";
 import {push, goBack} from 'connected-react-router'
+import { vegs, meats, fishes, cereals, potatoes_starches_beans_mushrooms } from "../../ingredients";
 
 export const listenAuthState = () => {
     return async (dispatch) => {
@@ -63,16 +64,40 @@ export const signUp = (username, email, password, confirmPassword) => {
                         userProfileImage: [],
                     };
 
+                    const list = [
+                        { category: "野菜類", value: vegs, id: 1, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2FvXwz9A1AG8uyCdJt?alt=media&token=065d0bce-c8bc-4555-b2d7-c0dc2716ff66" },
+                        { category: "肉類", value: meats, id: 2 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
+                        { category:"魚類", value: fishes, id: 3 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
+                        { category:"穀類", value: cereals, id: 4, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
+                        { category:"その他", value: potatoes_starches_beans_mushrooms, id: 5, image: "" },
+                    ] 
+
                     db.collection('users').doc(uid).set(userInitialData).then(async () => {
-                        // const sendThankYouMail = functions.httpsCallable('sendThankYouMail');
-                        // await sendThankYouMail({
-                        //     email: email,
-                        //     userId: uid,
-                        //     username: username,
-                        // });
+                        for (let i = 0; i < list.length; i += 1) {
+                            const data = {
+                                ingredientsCategory: list[i].category,
+                                ingredientsList: [
+                                    { id: list[i].id, category: list[i].category, value: list[i].value },
+                                ],
+                                created_at: timestamp,
+                                userId: uid,
+                                images: [
+                                    { path: list[i].image, id: list[i].id }
+                                ],
+                            }
+                           const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
+                           const ref = ingredientsRef.doc()
+                           const id = ref.id
+                           data.id = id;
+                           ingredientsRef.doc(id).set(data, {merge: true});
+                          
+                       }
+                    
                         dispatch(push('/'))
+
                         // dispatch(hideLoadingAction())
                     })
+
                 }
             }).catch((error) => {
                 // dispatch(hideLoadingAction())
