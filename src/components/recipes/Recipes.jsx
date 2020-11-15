@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
   card: {
     // maxWidth: "200px",
   },
+  
 }));
 
 const Recipes = (props) => {

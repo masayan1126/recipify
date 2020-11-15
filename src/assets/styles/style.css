@@ -105,12 +105,12 @@ summary:hover {
 .form-container {
     margin: 0 auto;
     max-width: 365px;
-    padding: 2rem;
+    padding: 1rem;
     background-color: rgba(207, 184, 131, 0.1);
     /* background-color: none; */
     height: auto;
     width: calc(100% - 2rem);
-    width: 71%;
+    width: 85%;
     /* border: #ede9e5 3px solid; */
     border-radius: 4px;
     /* border: 2px dashed  rgba(255, 202, 77, 0.347); */

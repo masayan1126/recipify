@@ -15,6 +15,11 @@ export const saveRecipe = (id, recipeName, necessaryIngredientsOne, necessaryIng
             return;
         }
 
+        if (recipeName.length > 18) {
+            alert("レシピ名は１８文字以下で登録して下さい");
+            return;
+        }
+
         const recipesRef = db.collection('users').doc(uid).collection('recipes');
         const timestamp = FirebaseTimestamp.now();
         const data = {

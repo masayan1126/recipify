@@ -54,17 +54,17 @@ const RecipeFromIngredients = () => {
 
     return(
         <div>
-            <CSSTransition
+            {/* <CSSTransition
                 in={fade}
                 timeout={1000}
                 classNames="fade"
-            >
+            > */}
                 <Recipes recipes={targetRecipes} message = {message}
             
             // onChange={handleChange} 
                 />
 
-            </CSSTransition>
+            {/* </CSSTransition> */}
         </div>
     )
 }

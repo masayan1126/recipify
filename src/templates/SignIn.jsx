@@ -48,7 +48,7 @@ const SignIn = () => {
                     rows={1} value={email}
                     type={'email'} onChange={inputEmail}
                     // variant="outlined"
-                    variant="filled"
+                    // variant="filled"
                     
                     
                 />
@@ -57,7 +57,7 @@ const SignIn = () => {
                     multiline={false} required={true}
                     rows={1} value={password}
                     type={'password'} onChange={inputPassword}
-                    variant="filled"
+                    // variant="filled"
                 />
                 {/* <div className="spacer-sm"/> */}
                 <div className="spacer-sm"/>
@@ -74,7 +74,7 @@ const SignIn = () => {
                         {/* </ListItemIcon> */}
                     <div className="spacer-sm"/>
                         <p className={classes.simpleSignin}
-                            onClick={() => signInGuestUser() }>かんたんログインで試す</p>
+                            onClick={() => signInGuestUser() }>かんたんログイン</p>
                     {/* </MenuItem> */}
                 </div>
 

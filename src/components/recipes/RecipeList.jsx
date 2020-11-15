@@ -66,6 +66,11 @@ const RecipeList = () => {
         }
     },[query]);　
 
+    useEffect(() => {
+        setFade(true);
+
+    },[]);　
+
     return(
         <section>
             <h3 className="title">レシピ一覧</h3>
@@ -91,7 +96,7 @@ const RecipeList = () => {
             <div className="spacer-sm"/>
             {/* <CSSTransition
                 in={fade}
-                timeout={1000}
+                timeout={3000}
                 classNames="fade"
             > */}
                     <Recipes recipes={recipes} 

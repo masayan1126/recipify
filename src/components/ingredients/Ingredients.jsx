@@ -18,7 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      width: '90%',
+      width: '100%',
       maxWidth: '600px;',
       backgroundColor: theme.palette.background.paper,
       margin: "0 auto",
@@ -70,6 +70,7 @@ const Ingredients = (props) => {
                                     </ListItemSecondaryAction>
                                 </ListItem>
                                 <Divider variant="inset" component="li" />
+                                <div className="spacer-xs"/>
                             </>
                         );
                     })

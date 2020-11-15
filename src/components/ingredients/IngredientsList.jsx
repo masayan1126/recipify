@@ -39,7 +39,7 @@ const IngredientsList = () => {
   }, [])
 
   return(
-      <section>
+      <section className="form-container">
         <h3 className="title">食材分類一覧</h3>
         <Ingredients 
           // vegs={vegs} meats={meats} fishes={fishes}

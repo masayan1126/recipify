@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     icon: {
         marginRight: 8,
         height: 48,
-        width: 48
+        width: 48,       
     }
 })
 

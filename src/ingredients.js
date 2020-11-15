@@ -137,6 +137,7 @@ export const potatoes_starches_beans_mushrooms = [
   { id:"natto", name: "納豆", category: "芋・でん粉・豆・キノコ類" },
   // mushrooms
   { id:"enokitake", name: "えのきたけ", category: "芋・でん粉・豆・キノコ類" },
+  { id:"eringi", name: "エリンギ", category: "芋・でん粉・豆・キノコ類" },
   { id:"shiitake", name: "しいたけ", category: "芋・でん粉・豆・キノコ類" },
   { id:"nameko", name: "なめこ", category: "芋・でん粉・豆・キノコ類" },
   { id:"shimeji_mushroom", name: "しめじ", category: "芋・でん粉・豆・キノコ類" },

@@ -6,7 +6,6 @@ import ImageArea from '../UIkit/ImageArea';
 import { db } from '../../firebase/index';
 import '../../assets/styles/style.css';
 import { getUserId } from '../../redux/users/selecotors';
-import { vegs, meats, fishes, cereals, potatoes_starches_beans_mushrooms } from '../../ingredients';
 
 const RecipeEdit = () => {
     const dispatch = useDispatch();
@@ -110,20 +109,74 @@ const RecipeEdit = () => {
     }, [id])
 
     useEffect(() => {
-        ingredientsRef.get()
+        // 肉類
+        ingredientsRef.where('ingredientsCategory', '==', "肉類").get()
             .then((snapshots) => {
                 snapshots.forEach(snapshot => {
-                    const data = snapshot.data();
-                    setVegs(data.vegs);
-                    setMeats(data.meats);
-                    setFishes(data.fishes);
-                    setCereals(data.cereals);
-                    setOthers(data.others)
+                    // const data = snapshot.data();
+                    console.log(snapshot.data().ingredientsList);
+                    setMeats(snapshot.data().ingredientsList[0].value);
+                    // setVegs(data.vegs);
+                    // setFishes(data.fishes);
+                    // setCereals(data.cereals);
+                    // setOthers(data.others)
                 })
             })
+
+        ingredientsRef.where('ingredientsCategory', '==', "魚類").get()
+            .then((snapshots) => {
+                snapshots.forEach(snapshot => {
+                    // const data = snapshot.data();
+                    console.log(snapshot.data().ingredientsList);
+                    setFishes(snapshot.data().ingredientsList[0].value);
+                    // setVegs(data.vegs);
+                    // setFishes(data.fishes);
+                    // setCereals(data.cereals);
+                    // setOthers(data.others)
+                })
+            })
+
+        ingredientsRef.where('ingredientsCategory', '==', "野菜類").get()
+            .then((snapshots) => {
+                snapshots.forEach(snapshot => {
+                    // const data = snapshot.data();
+                    console.log(snapshot.data().ingredientsList);
+                    setVegs(snapshot.data().ingredientsList[0].value);
+                    // setVegs(data.vegs);
+                    // setFishes(data.fishes);
+                    // setCereals(data.cereals);
+                    // setOthers(data.others)
+                })
+            })
+
+        ingredientsRef.where('ingredientsCategory', '==', "穀類").get()
+            .then((snapshots) => {
+                snapshots.forEach(snapshot => {
+                    // const data = snapshot.data();
+                    console.log(snapshot.data().ingredientsList);
+                    setCereals(snapshot.data().ingredientsList[0].value);
+                    // setVegs(data.vegs);
+                    // setFishes(data.fishes);
+                    // setCereals(data.cereals);
+                    // setOthers(data.others)
+                })
+            })
+
+        ingredientsRef.where('ingredientsCategory', '==', "その他").get()
+            .then((snapshots) => {
+                snapshots.forEach(snapshot => {
+                    // const data = snapshot.data();
+                    console.log(snapshot.data().ingredientsList);
+                    setOthers(snapshot.data().ingredientsList[0].value);
+                    // setVegs(data.vegs);
+                    // setFishes(data.fishes);
+                    // setCereals(data.cereals);
+                    // setOthers(data.others)
+                })
+            })
+
     }, [])
 
-    console.log(vegs);
 
     return(
         <section>

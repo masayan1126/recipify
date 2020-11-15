@@ -8,12 +8,14 @@ import { Recipes } from "../index";
 import { CSSTransition } from 'react-transition-group';
 import {push} from 'connected-react-router';
 
+
 const AiRecommendedRecipe = () => {
     const dispatch = useDispatch();
     const selector = useSelector(state => state);
     const uid = getUserId(selector);
     const recipes = getRecipes(selector);
     const [fade, setFade] = useState(false);
+          
     const botResult = getBotResult(selector);
     const aiRecipes = [];
 

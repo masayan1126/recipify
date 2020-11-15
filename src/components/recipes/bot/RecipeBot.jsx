@@ -4,6 +4,7 @@ import { AnswersList, Chats } from './index';
 import defaultDataset from '../../../dataset';
 import {push} from 'connected-react-router';
 import {addBotResult} from "../../../redux/bot/operations";
+import Loading from "../../../Loading";
 
 const RecipeBot = () => {
     const selector = useSelector((state) => state);
@@ -14,7 +15,8 @@ const RecipeBot = () => {
           [currentId, setCurrentId] = useState('init'),
           [dataset, setDataset] = useState({}),
         //  選択結果
-          [results, setResults] = useState([]);
+          [results, setResults] = useState([]),
+          [loading, setLoading] = useState(false);
 
     // 新しいチャットを追加するCallback関数
     const addChats = useCallback((chat) => {
@@ -55,7 +57,11 @@ const RecipeBot = () => {
             // 「結果を確認する」が選択された場合
             case (nextQuestionId === 'result'):
                 dispatch(addBotResult(results));
-                dispatch(push("/recipe/bot/recommend"));
+                setLoading(true);
+                setTimeout(() => {
+                    setLoading(false);
+                    dispatch(push("/recipe/bot/recommend"));
+                }, 3500);    
                 break;
             default:
                 // 現在のチャット一覧を取得
@@ -77,7 +83,7 @@ const RecipeBot = () => {
             // 最初の質問を表示
             setTimeout(() => {
                 displayNextQuestion(currentId, defaultDataset[currentId])
-            }, 3000);
+            }, 2000);
 
         })();
     }, []);
@@ -92,11 +98,12 @@ const RecipeBot = () => {
 
     return(
         <section className="chat-container">
-            {/* <h3 className="title">献立くん</h3> */}
-            <div className="chat-box">
-                <Chats chats={chats} />
-                <AnswersList answers={answers} select={selectAnswer}/>
-            </div>
+            { loading == true ? <Loading /> :
+                <div className="chat-box">
+                    <Chats chats={chats} />
+                    <AnswersList answers={answers} select={selectAnswer}/>
+                </div>
+            }
         </section>
     )
 }
