@@ -13,6 +13,7 @@ import {
 
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import {db} from '../../firebase/index';
 
 const useStyles = makeStyles((theme) => ({
     // root: {

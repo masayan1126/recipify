@@ -5,6 +5,7 @@ import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import { getSelectedIngredients, getRecipes } from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
 import { Recipes } from "./index";
+import {goBack} from 'connected-react-router'
 import {
     CSSTransition,
     TransitionGroup,
@@ -19,6 +20,8 @@ const RecipeFromIngredients = () => {
     const [fade, setFade] = useState(false);
     const selectedIngredients = getSelectedIngredients(selector);
 
+    console.log(selectedIngredients);
+    console.log(recipes);
     const vegs = selectedIngredients.filter((ingredients) => {
         return ingredients.category == "野菜";
     })
@@ -35,14 +38,15 @@ const RecipeFromIngredients = () => {
         return ingredients.category == "穀類";
     })
 
-    const potatoes_starches_beans_mushrooms = selectedIngredients.filter((ingredients) => {
+    const others = selectedIngredients.filter((ingredients) => {
         return ingredients.category == "その他";
     })
 
+    // 食材のどれかが一致（部分一致であれば、表示する）
     const targetRecipes = recipes.filter((recipe) => {
         return recipe.necessaryIngredientsOne　== vegs[0].name || recipe.necessaryIngredientsTwo　== meats[0].name ||
                recipe.necessaryIngredientsThree　== fishes[0].name || recipe.necessaryIngredientsFour　== cereals[0].name ||
-               recipe.necessaryIngredientsFive　== potatoes_starches_beans_mushrooms[0].name
+               recipe.necessaryIngredientsFive　== others[0].name
     })
 
     const message = "該当するレシピはありませんでした"
@@ -60,7 +64,7 @@ const RecipeFromIngredients = () => {
                 classNames="fade"
             > */}
                 <Recipes recipes={targetRecipes} message = {message}
-            
+                
             // onChange={handleChange} 
                 />
 

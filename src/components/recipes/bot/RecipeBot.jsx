@@ -1,10 +1,10 @@
 import React,{useCallback, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnswersList, Chats } from './index';
-import defaultDataset from '../../../dataset';
 import {push} from 'connected-react-router';
 import {addBotResult} from "../../../redux/bot/operations";
 import Loading from "../../../Loading";
+import { db } from '../../../firebase';
 
 const RecipeBot = () => {
     const selector = useSelector((state) => state);
@@ -78,15 +78,27 @@ const RecipeBot = () => {
     // 最初の質問をチャットエリアに表示する
     useEffect(() => {
         (async() => {
-            setDataset(defaultDataset);
+            const initDataset = {};
+
+            // Fetch questions dataset from Firestore
+            await db.collection('bot').get()
+                .then(snapshots => {
+                    snapshots.forEach(doc => {
+                        initDataset[doc.id] = doc.data()
+                    })
+            });
+
+            // Firestoreから取得したデータセットを反映
+            setDataset(initDataset);
+            
 
             // 最初の質問を表示
-            setTimeout(() => {
-                displayNextQuestion(currentId, defaultDataset[currentId])
-            }, 2000);
+            displayNextQuestion(currentId, initDataset[currentId])
 
         })();
     }, []);
+
+    console.log(dataset);
 
     // 最新のチャットが見えるように、スクロール位置の頂点をスクロール領域の最下部に設定する
     useEffect(() => {

@@ -27,7 +27,7 @@ const SelectBox = (props) => {
                 className={classes.fontFamily}
                 value={props.value} required={props.required}
                 onChange={(e) => props.select(e.target.value)}
-
+                variant={props.variant}
             >
                 {props.options.map((value) => {
                     return <MenuItem key={value.id} value={value.name}>{value.name}</MenuItem>

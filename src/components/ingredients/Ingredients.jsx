@@ -32,9 +32,6 @@ const Ingredients = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
-
-    console.log(props.ingredientsList);
-
     return (
         <>
             <List className={classes.root}>

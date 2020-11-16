@@ -33,20 +33,17 @@ const SetIngredients = (props) => {
     const [index, setIndex] = useState(0),
           [ingredients, setIngredients] = useState("");
 
-    console.log(props.ingredientsList);
-
     const inputIngredients = useCallback((event) => {
         setIngredients(event.target.value)
     }, [setIngredients]);
 
     const addIngredients = (index, ingredients) => {
-        console.log(ingredients);
         if (ingredients === "") {
             return false
         } else {
             if (index === props.ingredientsList.length) {
                 props.setIngredientsList(prevState => [...prevState, {
-                    id: String(index), category: props.category, name: ingredients
+                    id: `U_${String(index)}`, category: props.category, name: ingredients
                 }]);
                 setIndex(index + 1);
                 setIngredients(ingredients);
@@ -54,7 +51,7 @@ const SetIngredients = (props) => {
                 
             } else {
                 const newIngredients = props.ingredientsList;
-                newIngredients[index] = {name: ingredients};
+                newIngredients[index] = {category: props.category, name: ingredients};
                 props.setIngredientsList(newIngredients);
                 setIndex(newIngredients.length);
                 setIngredients("");

@@ -65,11 +65,11 @@ export const signUp = (username, email, password, confirmPassword) => {
                     };
 
                     const list = [
-                        { category: "野菜類", value: vegs, id: 1, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2FvXwz9A1AG8uyCdJt?alt=media&token=065d0bce-c8bc-4555-b2d7-c0dc2716ff66" },
-                        { category: "肉類", value: meats, id: 2 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
-                        { category:"魚類", value: fishes, id: 3 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
-                        { category:"穀類", value: cereals, id: 4, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Ft4DHqCqucb3NtySB?alt=media&token=ff9ccacf-1f35-4fd3-86a4-b75c986e7b48" },
-                        { category:"その他", value: potatoes_starches_beans_mushrooms, id: 5, image: "" },
+                        { category: "野菜類", category_sub: "vegetables", value: vegs, id: 1, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FhCQx3RpzLQxok3Uh?alt=media&token=6c253575-786a-45c3-943e-a7e77fc81160" },
+                        { category: "肉類", category_sub: "meats", value: meats, id: 2 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FyLv0yj02lFbTIVKM?alt=media&token=bda7d1a2-309d-4f6b-816c-748218c5dc29" },
+                        { category:"魚類", category_sub: "fishes", value: fishes, id: 3 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FeVoFoSGwlr7xQ4IL?alt=media&token=b62201dd-490a-4d78-a05b-6ae672786897" },
+                        { category:"穀類", category_sub: "cereals", value: cereals, id: 4, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2Fhr0jJ2TqjhYMnlsg?alt=media&token=45fe36ca-bc75-4511-a33e-df132bf5415b" },
+                        { category:"その他", category_sub: "others", value: potatoes_starches_beans_mushrooms, id: 5, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FxcT5wGXLxb7SbiWE?alt=media&token=a807aa9a-7037-4540-b820-3c0a3e22ad96" },
                     ] 
 
                     db.collection('users').doc(uid).set(userInitialData).then(async () => {
@@ -85,11 +85,11 @@ export const signUp = (username, email, password, confirmPassword) => {
                                     { path: list[i].image, id: list[i].id }
                                 ],
                             }
-                           const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
-                           const ref = ingredientsRef.doc()
-                           const id = ref.id
-                           data.id = id;
-                           ingredientsRef.doc(id).set(data, {merge: true});
+                            const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
+                            const ref = ingredientsRef.doc()
+                            const id = ref.id
+                            data.id = id;
+                            ingredientsRef.doc(id).set(data, {merge: true});
                           
                        }
                     

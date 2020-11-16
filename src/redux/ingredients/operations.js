@@ -33,7 +33,7 @@ export const saveIngredients = (id, ingredientsCategory, ingredientsList, images
 export const fetchIngredients = (uid) => {
     return async (dispatch) => {
         const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
-        ingredientsRef.get()
+        return ingredientsRef.get()
             .then(snapshots => {
                 const ingredientsList = []
                 snapshots.forEach(snapshot => {

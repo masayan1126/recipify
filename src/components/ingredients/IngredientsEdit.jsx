@@ -30,20 +30,30 @@ const IngredientsEdit = () => {
 
     // idが空白でない時（編集モードの時）は、DBからデータ取得して表示する
     useEffect(() => {
+
+        const arr = []
         if (id !== "") {
-            db.collection('users').doc(uid).collection('ingredients').doc(id).get()
-                .then((snapshot) => {
-                    const data = snapshot.data();
+            db.collection('users').doc(uid).collection('ingredients').doc(id)
+                .get()
+                .then(doc => {
+                    const data = doc.data()
+                    console.log(data);
+                    // const arr = data.ingredientsList.filter((data) => {
+                    //     return data.name !== "未指定"
+                    // })
                     setIngredientsCategory(data.ingredientsCategory);
-                    const arr = data.ingredientsList[0].value.filter((data) => {
-                        return data.name !== "未指定"
-                    })
-                    console.log(data.ingredientsList[0].value);
-                    setIngredientsList(arr)
                     setImages(data.images);
+                    // arr.push()
+                    setIngredientsList(data.ingredientsList)
                 })
-        }
+            
+            }
+
     }, [])
+
+    console.log(ingredientsList);
+
+    
 
     return(
         <section className="form-container">
