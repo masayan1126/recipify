@@ -1,27 +1,46 @@
 import {db, FirebaseTimestamp} from '../../firebase/index';
 import {push} from 'connected-react-router'
 import {fetchIngredientsAction, deleteIngredientsAction} from '../ingredients/actions';
+import { IngredientsList } from '../../components/ingredients';
 
 export const saveIngredients = (id, ingredientsCategory, ingredientsList, images, uid) => {
     return async (dispatch) => {
+        console.log(ingredientsList);
         const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         const timestamp = FirebaseTimestamp.now();
         const data = {
-            ingredientsCategory: ingredientsCategory,
+            id: id,
             images: images,
-            ingredientsList: ingredientsList,
+            ingredientsCategory: ingredientsCategory,
+            ingredientsList: [{
+                id: "",
+                category: "",
+                value: [],
+            }],
             updated_at: timestamp,
             userId: uid,
         }
+
+        console.log(data.ingredientsList);
+        ingredientsList.forEach(ingredients => {
+            data.ingredientsList[0].value.push(ingredients)
+            
+        })
+
+        // const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
+        // const ref = ingredientsRef.doc()
+        // const id = ref.id
+        // data.id = id;
         
-        if(id === "") {
-            const ref = ingredientsRef.doc();
-            id = ref.id
-            data.id = id
-            data.created_at = timestamp 
-        }
+        // if(id === "") {
+        //     const ref = ingredientsRef.doc();
+        //     id = ref.id
+        //     data.id = id
+        //     data.created_at = timestamp 
+        // }
+    
         
-        return ingredientsRef.doc(id).set(data, {merge: true})
+        return await ingredientsRef.doc(id).set(data, {merge: true})
         .then(() => {
             dispatch(push('/ingredients/list'))
         }).catch((error) => {
@@ -53,6 +72,7 @@ export const deleteIngredients = (id, uid) => {
                 const prevIngredients = getState().ingredients.list
                 const nextIngredients = prevIngredients.filter(recipe => recipe.id !== id)
                 dispatch(deleteIngredientsAction(nextIngredients))
+                dispatch(push('/ingredients/list'))
             })
     }
 }

@@ -32,6 +32,11 @@ const Ingredients = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
+
+    // useEffect(() => {
+
+    // }, [props.ingredientsList])
+
     return (
         <>
             <List className={classes.root}>

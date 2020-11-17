@@ -30,30 +30,40 @@ const IngredientsList = () => {
     const arr = []
     // dispatch(fetchIngredients(uid))
     ingredientsRef.get()
-    .then((snapshots) => {
-        snapshots.forEach(snapshot => {
-          const data = snapshot.data()
-          arr.push(data);
-        })
-    setIngredientsList(arr);
-      })
-  }, [])
+      .then((snapshots) => {
+          snapshots.forEach(snapshot => {
+            const data = snapshot.data()
+            arr.push(data);
+          })
+      setIngredientsList(arr);
+    })
+  }, [ingredientsList.length])
+
+  console.log(ingredientsList);
 
   return(
       <section className="form-container">
         <h3 className="title">食材分類一覧</h3>
-        <Ingredients 
-          // vegs={vegs} meats={meats} fishes={fishes}
-          // cereals={cereals} others={others}
-          ingredientsList={ingredientsList}
-          message={"まだ食材はありません。"} />
-        <div className="spacer-sm"/>
-        <div className="center">
-          <PrimaryButton
-              label={"分類を追加"}
-              onClick={() => dispatch(push('/ingredients/edit'))}
-          />
-        </div>
+        {ingredientsList.length > 0 ? 
+        <>
+          <Ingredients 
+            // vegs={vegs} meats={meats} fishes={fishes}
+            // cereals={cereals} others={others}
+            ingredientsList={ingredientsList}
+            message={"まだ食材はありません。"} />
+          <div className="spacer-sm"/>
+          {/* <div className="center">
+            <PrimaryButton
+                label={"分類を追加"}
+                onClick={() => dispatch(push('/ingredients/edit'))}
+            />
+          </div> */}
+        </>
+        
+        :<div className="center">
+          <p>データはありません</p>
+          </div>
+        }
       </section>
   )
 }

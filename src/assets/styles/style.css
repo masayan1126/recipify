@@ -105,6 +105,7 @@ summary:hover {
 .form-container {
     margin: 0 auto;
     max-width: 365px;
+    min-height: 300px;
     padding: 1rem;
     background-color: rgba(207, 184, 131, 0.1);
     /* background-color: none; */

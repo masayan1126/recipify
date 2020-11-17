@@ -76,15 +76,18 @@ export const signUp = (username, email, password, confirmPassword) => {
                         for (let i = 0; i < list.length; i += 1) {
                             const data = {
                                 ingredientsCategory: list[i].category,
-                                ingredientsList: [
-                                    { id: list[i].id, category: list[i].category, value: list[i].value },
-                                ],
+                                ingredientsList: [],
                                 created_at: timestamp,
                                 userId: uid,
                                 images: [
                                     { path: list[i].image, id: list[i].id }
                                 ],
                             }
+                            data.ingredientsList.push({ 
+                                id: list[i].id, 
+                                category: list[i].category, 
+                                value: list[i].value, 
+                            })
                             const ingredientsRef = db.collection('users').doc(uid).collection('ingredients');
                             const ref = ingredientsRef.doc()
                             const id = ref.id

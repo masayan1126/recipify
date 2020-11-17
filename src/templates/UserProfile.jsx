@@ -1,16 +1,9 @@
 import React,{useCallback, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {db, auth, FirebaseTimestamp} from '../firebase/index';
+import {db} from '../firebase/index';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from "@material-ui/core/Avatar";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import EditIcon from '@material-ui/icons/Edit';
 import { getUserId, getUsername, getUserProfileImage } from "../redux/users/selecotors";
-import { Modal, UserProfileEdit } from "./index";
+import { UserProfileEdit } from "./index";
 import {getRecipes} from '../redux/recipes/selecotors';
 import {push} from 'connected-react-router';
 import {fetchUserProfileImage} from "../redux/users/operations";
@@ -26,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
       
     },
     center: {
-        // textAlign: "center",
         margin: "0 auto"
     },
     divider: {
@@ -59,11 +51,6 @@ const UserProfile = () => {
 
     const inputUserName = useCallback((event) => {
         setUserName(event.target.value)
-        // const usersRef = db.collection('users').doc(uid);
-        // usersRef.update({
-        //     username: userName,
-
-        // })
     },[])
 
     useEffect(() => {
@@ -82,13 +69,6 @@ const UserProfile = () => {
         const usersRef = db.collection('users').doc(uid);
         dispatch(fetchUserProfileImage(uid));
     }, [open])
-
-    console.log(profileImage.payload);
-
-    console.log();
-
-
-
 
     return(
         <section>

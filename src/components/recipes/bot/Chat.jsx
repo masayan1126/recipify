@@ -19,8 +19,6 @@ const Chat = (props) => {
 
     }, [])
 
-    console.log(profileImage.payload);
-
     return (
         <ListItem className={classes}>
             <ListItemAvatar>

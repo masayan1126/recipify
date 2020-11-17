@@ -41,17 +41,21 @@ const SetIngredients = (props) => {
         if (ingredients === "") {
             return false
         } else {
+            // 新規追加
             if (index === props.ingredientsList.length) {
                 props.setIngredientsList(prevState => [...prevState, {
                     id: `U_${String(index)}`, category: props.category, name: ingredients
                 }]);
                 setIndex(index + 1);
-                setIngredients(ingredients);
                 setIngredients("");
-                
+                // 編集
             } else {
                 const newIngredients = props.ingredientsList;
-                newIngredients[index] = {category: props.category, name: ingredients};
+                newIngredients[index] = {
+                    id: `U_${String(index)}`, 
+                    category: props.category, 
+                    name: ingredients
+                };
                 props.setIngredientsList(newIngredients);
                 setIndex(newIngredients.length);
                 setIngredients("");

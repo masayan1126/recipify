@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from "react-router";
-import { SignIn, SignUp, Reset, RecipeDetail, UserProfile, UserProfileEdit } from "./templates";
+import { SignIn, SignUp, Reset, RecipeDetail, UserProfile, UserProfileEdit, Contact } from "./templates";
 import App from './App';
 import Auth from './Auth';
 import { RecipeVideos, RecipeCalendar, RecipeEdit, RecipeList, FavoriteRecipes,AutoMakeRecipeCalendar, RecipeFromIngredients } from './components/recipes/index';
@@ -32,6 +32,7 @@ const Router = () => {
                 <Route exact path={"/recipe/bot/recommend"} component={AiRecommendedRecipe} />
                 <Route exact path={"/recipe/search/ingredients/result"} component={RecipeFromIngredients} />
                 <Route path={"/recipe/detail(/:id)?"} component={RecipeDetail} />
+                <Route exact path={"/contact"} component={Contact} />
             </Auth>
         </Switch>
     )
