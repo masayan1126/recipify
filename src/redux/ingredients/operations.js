@@ -3,6 +3,7 @@ import {push} from 'connected-react-router'
 import {fetchIngredientsAction, deleteIngredientsAction} from '../ingredients/actions';
 import { IngredientsList } from '../../components/ingredients';
 
+
 export const saveIngredients = (id, ingredientsCategory, ingredientsList, images, uid) => {
     return async (dispatch) => {
         console.log(ingredientsList);

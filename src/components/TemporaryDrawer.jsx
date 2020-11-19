@@ -98,6 +98,10 @@ export default function TemporaryDrawer() {
     dispatch(push("/profile"))
   }
 
+  const menuContact = () => {
+    dispatch(push("/contact"))
+  }
+
   const list = (anchor) => (
     
     <div
@@ -118,18 +122,6 @@ export default function TemporaryDrawer() {
           <HomeIcon/>
           <SideMenu primary={'ホーム'} menuAciton={() => menuHome()} />
         </ListItem>
-
-        <ListItem Button> 
-          <ExitToAppIcon />
-          <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
-        </ListItem>
-
-        <ListItem Button> 
-          <AccountBoxIcon />
-          <SideMenu primary={'アカウント情報'} menuAciton={() => menuProfile() } />
-        </ListItem>
-
-        <Divider />
 
         <ListItem Button> 
           <EditIcon/>
@@ -170,6 +162,23 @@ export default function TemporaryDrawer() {
           <KitchenIcon/>
           <SideMenu primary={'食材一覧'} menuAciton={() => {menuIngredientsList()}} />
         </ListItem>
+
+        <Divider />
+
+        <ListItem Button> 
+          <ExitToAppIcon />
+          <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
+        </ListItem>
+
+        <ListItem Button> 
+          <AccountBoxIcon />
+          <SideMenu primary={'アカウント情報'} menuAciton={() => menuProfile() } />
+        </ListItem>
+
+        <ListItem Button>
+          <MailIcon/>
+          <SideMenu primary={'お問い合わせ'} menuAciton={() => {menuContact()}} />
+        </ListItem>
       </List>
       
     </div>
@@ -177,7 +186,7 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {['left'].map((anchor) => (
+      {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>

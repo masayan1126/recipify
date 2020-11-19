@@ -19,80 +19,58 @@ import { getUserId, getUserProfileImage, getSignedIn} from "../redux/users/selec
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    // marginRight: theme.spacing(2),
-    color:"white"
-  },
-  title: {
-    textAlign: 'center',
-  },
-
   Navbar: {
     position: 'fixed',
     top: 0,
     zIndex:999,
     // backgroundColor:'#EB8A3E',
-    backgroundColor:'#785A46',
-    color:"white"
+    backgroundColor:'#fff',
+    // backgroundColor:'#785A46',
+    // justifyContent: "right !important",
+    padding: "0 0 0 16px",
   },
-  headerLogo: {
-    color: 'white',
-    lineHeight: '60px',
-    textDecoration: "none",
-    fontSize: '20px',
-  },
-  small: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-  },
-
+  menuButton : {
+    padding: "0",
+  }
 }));
 
 const MenuAppBar = (props) => {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const isSignedIn = getSignedIn;
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  console.log(props.uid);
+  // const [auth, setAuth] = React.useState(true);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  // const isSignedIn = getSignedIn;
+  // const dispatch = useDispatch();
+  // const selector = useSelector((state) => state);
+  // console.log(props.uid);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleMenu = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
-    <div className={classes.root}>
-      <FormGroup>
-        {/* <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        /> */}
-      </FormGroup>
-      <AppBar position="static" className={classes.Navbar} >
+    <>
+      <AppBar position="" className={classes.Navbar} >
         <Toolbar >
-          <IconButton edge="start" aria-label="menu">
+          <img src="https://recipify-e1b95.web.app/favicon.ico" height="40px" width="40px" alt=""/>
+          {/* <Typography variant="h6" className={classes.title}>
+            <a href="" className={classes.headerLogo} >Recipify</a>
+          </Typography> */}
+          <IconButton className={classes.menuButton} edge="start" aria-label="menu">
             <TemporaryDrawer />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            {/* <a href="" className={classes.headerLogo} >Recipify</a> */}
-          </Typography>
           
         </Toolbar>
       </AppBar>
-    </div>
+    </>
   );
 }
 

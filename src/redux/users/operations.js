@@ -6,6 +6,10 @@ import {
 } from "./actions";
 import {push, goBack} from 'connected-react-router'
 import { vegs, meats, fishes, cereals, potatoes_starches_beans_mushrooms } from "../../ingredients";
+import firebase from "firebase"
+import functions from '../../firebase/index';
+import recipeDataset from "../../dataset.json"
+
 
 export const listenAuthState = () => {
     return async (dispatch) => {
@@ -64,6 +68,8 @@ export const signUp = (username, email, password, confirmPassword) => {
                         userProfileImage: [],
                     };
 
+                    
+
                     const list = [
                         { category: "野菜類", category_sub: "vegetables", value: vegs, id: 1, image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FhCQx3RpzLQxok3Uh?alt=media&token=6c253575-786a-45c3-943e-a7e77fc81160" },
                         { category: "肉類", category_sub: "meats", value: meats, id: 2 , image: "https://firebasestorage.googleapis.com/v0/b/recipify-e1b95.appspot.com/o/images%2Fingredients%2FyLv0yj02lFbTIVKM?alt=media&token=bda7d1a2-309d-4f6b-816c-748218c5dc29" },
@@ -92,7 +98,9 @@ export const signUp = (username, email, password, confirmPassword) => {
                             const ref = ingredientsRef.doc()
                             const id = ref.id
                             data.id = id;
-                            ingredientsRef.doc(id).set(data, {merge: true});
+                            await ingredientsRef.doc(id).set(data, {merge: true});
+                            // let addDefaultRecipes = firebase.functions().httpsCallable('addDefaultRecipes');
+                            // await addDefaultRecipes(recipeDataset, uid)
                           
                        }
                     

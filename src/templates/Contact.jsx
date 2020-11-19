@@ -13,6 +13,7 @@ import { getUserId, getUsername, getUserProfileImage } from "../redux/users/sele
 import { ScannerSharp } from '@material-ui/icons';
 import firebase from "firebase"
 import functions from '../firebase/index';
+import recipeDataset from "../dataset.json"
 // import sendMail from "../../functions/src/index";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +47,7 @@ const Contact = () => {
         setInquiry(event.target.value)
     },[setInquiry]);
 
-    const onSubmit = (username, email, inquiry) => {
+    const submitForm = (username, email, inquiry) => {
         const payload = {
             text: 'お問い合わせがありました\n'
                 + 'お名前: ' + username + '\n'
@@ -54,7 +55,7 @@ const Contact = () => {
                 + '【問い合わせ内容】\n' + inquiry
         };
 
-        const url = "https://hooks.slack.com/services/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"
+        const url = "https://hooks.slack.com/services/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"
 
         // fetchメソッドでフォームの内容をSlackのIncoming Webhook URL に送信する
         fetch(url, {
@@ -62,8 +63,6 @@ const Contact = () => {
             body: JSON.stringify(payload)
         }).then(() => {
             alert('送信が完了しました。追ってご連絡いたします🙌');
-            setUsername("")
-            setEmail("");
             setInquiry("")
         })
         // e.preventDefault()
@@ -71,8 +70,8 @@ const Contact = () => {
         // data.name = username
         // data.email = email
         // data.content = inquiry
-        // let sendMail = firebase.functions().httpsCallable('sendMail');
-        // sendMail(data)
+        // let addDefaultRecipes = firebase.functions().httpsCallable('addDefaultRecipes');
+        // addDefaultRecipes(recipeDataset, uid)
         // setUsername("")
         // setEmail("");
         // setInquiry("")
@@ -90,7 +89,6 @@ const Contact = () => {
 
     return(
         <>
-            <form>
             <div className="form-container text-center">
                 <h3 className="title">お問い合わせ</h3>
                 <div className="spacer-sm"/>
@@ -121,14 +119,13 @@ const Contact = () => {
                 <div className="spacer-sm"/>
                 <div className="center">
                     <PrimaryButton 
-                        label="問い合わせする"
-                        type="submit"    
-                        onClick={() => onSubmit(username, email, inquiry)}
+                        label="問い合わせする"  
+                        onClick={submitForm}
                     />
                 </div>
 
             </div>
-            </form>
+
         </>
     )
 }
