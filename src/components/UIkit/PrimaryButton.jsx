@@ -11,6 +11,7 @@ const useStyles = makeStyles({
         height :40,
         marginBottom: 13,
         width: "100%",
+        fontFamily: "ヒラギノ丸ゴ ProN' 'Hiragino Maru Gothic ProN' sans-serif !important"
     }
 })
 

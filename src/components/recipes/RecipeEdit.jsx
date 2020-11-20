@@ -243,6 +243,7 @@ const RecipeEdit = () => {
                             cookingTime, images, uid, recipeLink))}
                     />
                 </div>
+                <div className="spacer-sm"/>
             </div> 
             <div className="spacer-sm"/>
         </section>

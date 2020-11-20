@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:'#fff',
     // backgroundColor:'#785A46',
     // justifyContent: "right !important",
-    padding: "0 0 0 16px",
+    padding: "0 0 0 8px",
   },
   menuButton : {
     padding: "0",

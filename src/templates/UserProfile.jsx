@@ -7,6 +7,7 @@ import { UserProfileEdit } from "./index";
 import {getRecipes} from '../redux/recipes/selecotors';
 import {push} from 'connected-react-router';
 import {fetchUserProfileImage} from "../redux/users/operations";
+import {fetchRecommendedRecipe} from '../redux/recipes/operations';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -42,6 +43,7 @@ const UserProfile = () => {
 
     const [open, setOpen] = useState(false),
           [userName, setUserName] = useState(""),  
+          [userProfileImage, setProfileImage] = useState(""),  
           [loginDays, setLoginDays] = useState(""),
           [numberOfRecipes, setNumberOfRecipes] = useState("");
 
@@ -53,22 +55,22 @@ const UserProfile = () => {
         setUserName(event.target.value)
     },[])
 
+    // モーダルの真偽値が変更したら常にページを更新して最新のデータを取得して描画する
     useEffect(() => {
+        dispatch(fetchRecommendedRecipe(uid))
         const usersRef = db.collection('users').doc(uid);
         usersRef.get()
             .then(snapshot => {
                 const data = snapshot.data();
                 setUserName(data.username);
-                console.log(userName);
-
+                setProfileImage(data.userProfileImage[0].path)
             })
-        
-    }, [])
+    }, [open])
 
     useEffect(() => {
         const usersRef = db.collection('users').doc(uid);
         dispatch(fetchUserProfileImage(uid));
-    }, [open])
+    }, [userProfileImage])
 
     return(
         <section>
@@ -79,7 +81,7 @@ const UserProfile = () => {
                 setUserName={setUserName}
                 inputUserName={inputUserName}
                 recipes={recipes}
-                profileImage={profileImage.payload}
+                profileImage={userProfileImage}
             />
         </section>
     )

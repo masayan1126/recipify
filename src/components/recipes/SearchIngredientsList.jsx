@@ -31,7 +31,6 @@ const SearchIngredientsList = () => {
                         const data = doc.data();
                         ingredientsList.push(data.ingredientsList[0].value);
                     })
-                    console.log(ingredientsList);
                     setCereals(ingredientsList[0]);
                     setFishes(ingredientsList[1]);
                     setMeats(ingredientsList[2]);

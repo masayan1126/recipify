@@ -65,15 +65,20 @@ export const fetchIngredients = (uid) => {
     }
 }
 
-export const deleteIngredients = (id, uid) => {
+export const deleteIngredients = (id, uid, setBoolean) => {
     return async (dispatch, getState) => {
         const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         ingredientsRef.doc(id).delete()
             .then(() => {
-                const prevIngredients = getState().ingredients.list
-                const nextIngredients = prevIngredients.filter(recipe => recipe.id !== id)
-                dispatch(deleteIngredientsAction(nextIngredients))
-                dispatch(push('/ingredients/list'))
+                const result = window.confirm("本当に削除してもよろしいですか？")
+                if (result == true) {
+                    setBoolean(true)
+                    const prevIngredients = getState().ingredients.list
+                    const nextIngredients = prevIngredients.filter(recipe => recipe.id !== id)
+                    dispatch(deleteIngredientsAction(nextIngredients))
+                    dispatch(push('/ingredients/list'))
+                    setBoolean(false)
+                }
             })
     }
 }

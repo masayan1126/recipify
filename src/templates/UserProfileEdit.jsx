@@ -16,7 +16,6 @@ import {getRecipes} from '../redux/recipes/selecotors';
 import {push} from 'connected-react-router';
 import {fetchUserProfileImage} from "../redux/users/operations";
 
-
 const useStyles = makeStyles((theme) => ({
     small: {
       width: theme.spacing(3),
@@ -37,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center"
     },
     editIcon: {
-        marginRight: 0,
+        color: "#55423d !important", 
+
     },
     dialogWidth: {
         width:"700px",
@@ -53,7 +53,6 @@ const UserProfile = (props) => {
     // const userName = "masayan"
     const recipes = getRecipes(selector);
 
-
     const inputUserName = (event) => {
 
     }
@@ -61,15 +60,20 @@ const UserProfile = (props) => {
     const handleClickOpen = () => {
       props.setOpen(true);
     };
-    const handleClose = (username, images) => {
-        if (images > 1) {
+    const handleClose = async(username, images) => {
+        if (images.length > 1) {
             alert("登録できる画像は１つまでです")
+            return;
+        }
+        
+        if (images.length === 0) {
+            alert("画像を選択して下さい")
             return;
         }
 
         props.setOpen(false);
         const usersRef = db.collection('users').doc(uid);
-        usersRef.update({
+        await usersRef.update({
             username: username,
             userProfileImage: images,
         })
@@ -79,8 +83,6 @@ const UserProfile = (props) => {
     const editProfile = () => {
         handleClickOpen()
     }
-
-
     
 
     return(
@@ -93,17 +95,19 @@ const UserProfile = (props) => {
                     userName={props.userName}
                     setUserName={props.setUserName}
                     inputUserName={props.inputUserName}
+                    profileImage= {props.profileImage}
                     
                 />
                 <div className="form-container">
+                    <div className="spacer-sm"/>
                     <h3 className="title">アカウント情報</h3>
                 <div className="text-right">
-                    <EditIcon onClick={() => editProfile()} />
+                    <EditIcon className={classes.editIcon} onClick={() => editProfile()} />
                 </div>
             <List>
                 <ListItem>
                     <ListItemAvatar className={classes.center}>
-                        {props.profileImage !== "" ? (
+                        {props.profileImage.length > 0 ? (
                             <Avatar alt="icon" className={classes.large} src={props.profileImage} /> 
                          ) : (
                             <Avatar alt="icon" className={classes.large} src="/static/images/cards/no-profile.png" />
@@ -118,6 +122,9 @@ const UserProfile = (props) => {
                         value={props.userName}
                         onChange={props.inputUserName}
                         type={"text"} 
+                        InputProps={{
+                            readOnly: true,
+                        }}
                     />
                 </ListItem>
                 {/* <ListItem button>
@@ -126,12 +133,13 @@ const UserProfile = (props) => {
                 <Divider className={classes.divider} /> */}
                 <ListItem button>
                     <TextInput 
+                        label="登録済みレシピの数"
                         fullWidth={true} 
                         InputProps={{
                             readOnly: true,
                         }}
                         className={classes.input}
-                        value={`登録済みレシピの数：${props.recipes.length}`}
+                        value={props.recipes.length}
                         
                         type={"text"} 
                     />
@@ -140,6 +148,7 @@ const UserProfile = (props) => {
                     <ListItemText primary="Spam" />
                 </ListItemLink> */}
             </List>
+            <div className="spacer-sm"/>
             </div>
         </section>
     )

@@ -8,10 +8,10 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import EditIcon from '@material-ui/icons/Edit';
-import {TextInput, SelectBox, PrimaryButton} from "../components/UIkit/index";
+// import EditIcon from '@material-ui/icons/Edit';
+import {TextInput} from "../components/UIkit/index";
 import { ImageArea } from '../components/UIkit/index';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getUserId } from '../../src/redux/users/selecotors';
 import { db } from '../firebase/index';
 
@@ -67,14 +67,14 @@ const Modal = (props) => {
   const usersRef = db.collection('users').doc(uid)
   const [images , setImages] = useState([]);
 
-  // useEffect(() => {
-  //   usersRef.get()
-  //       .then((snapshot) => {
-  //           const data = snapshot.data();
-  //           console.log(data.images);
-  //           setImages(data.images);
-  //     })
-  // }, [])
+  useEffect(() => {
+    const usersRef = db.collection('users').doc(uid);
+    usersRef.get()
+        .then((snapshot) => {
+            const data = snapshot.data();
+            setImages(data.userProfileImage);
+      })
+  }, [])
 
   return (
     <div>
@@ -99,7 +99,7 @@ const Modal = (props) => {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={() => props.handleClose(props.userName, images)} color="primary">
-            完了
+            登録
           </Button>
         </DialogActions>
       </Dialog>

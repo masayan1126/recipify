@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '600px;',
       backgroundColor: theme.palette.background.paper,
       margin: "0 auto",
-      boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important"
+      boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
+      borderRadius: "10px",
     },
 }));
 
@@ -35,13 +36,15 @@ const Ingredients = (props) => {
 
     // useEffect(() => {
 
-    // }, [props.ingredientsList])
+    // }, [props.ingredientsList.length])
 
     return (
         <>
+        {props.ingredientsList.length > 0 && (
             <List className={classes.root}>
-                {
-                    props.ingredientsList.map((ingredients) => {
+                
+                
+                    {props.ingredientsList.map((ingredients) => {
                         const labelId = `checkbox-list-secondary-label-${ingredients.ingredientsCategory}`;
                         return (
                             <>
@@ -65,7 +68,7 @@ const Ingredients = (props) => {
                                         <IconButton>
                                             <DeleteIcon
                                                 onClick={() => {
-                                                    dispatch(deleteIngredients(ingredients.id, uid))
+                                                    dispatch(deleteIngredients(ingredients.id, uid, props.setBoolean ))
                                                 }}
                                             />
                                         </IconButton>
@@ -75,9 +78,9 @@ const Ingredients = (props) => {
                                 <div className="spacer-xs"/>
                             </>
                         );
-                    })
-                }
+                    })}
             </List>
+            )}
         </>
     )
 }

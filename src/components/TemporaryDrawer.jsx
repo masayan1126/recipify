@@ -27,6 +27,7 @@ import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import SmsIcon from '@material-ui/icons/Sms';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles({
   list: {
@@ -115,12 +116,17 @@ export default function TemporaryDrawer() {
       <List className="p-link-menu">
         <ListItem Button> 
           {/* <SideMenu primary={'Recipify'}/> */}
-          <h2>Recipify</h2>
+          <h1>Recette</h1>
         </ListItem>
 
         <ListItem Button> 
           <HomeIcon/>
           <SideMenu primary={'ホーム'} menuAciton={() => menuHome()} />
+        </ListItem>
+
+        <ListItem Button> 
+          <EventIcon/>
+          <SideMenu primary={'献立カレンダー'} menuAciton={() => {menuRecipeCalendar()}} />
         </ListItem>
 
         <ListItem Button> 
@@ -133,10 +139,6 @@ export default function TemporaryDrawer() {
           <SideMenu primary={'お気に入りレシピ'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
 
-        <ListItem Button> 
-          <EventIcon/>
-          <SideMenu primary={'献立カレンダー'} menuAciton={() => {menuRecipeCalendar()}} />
-        </ListItem>
 
         <ListItem Button>
           <RestaurantMenuIcon/>
@@ -148,7 +150,7 @@ export default function TemporaryDrawer() {
           <SideMenu primary={'献立くん'} menuAciton={() => {menuRecipeBot()}} />
         </ListItem>
 
-        <ListItem Button>
+        {/* <ListItem Button>
           <ListAltIcon/>
           <SideMenu primary={'(作成中)買い物リスト'} menuAciton={() => {menuFavoriteRecipe()}} />
         </ListItem>
@@ -156,7 +158,7 @@ export default function TemporaryDrawer() {
         <ListItem Button>
           <OndemandVideoIcon/>
           <SideMenu primary={'(作成中)レシピ動画'} menuAciton={() => {menuRecipeVideo()}} />
-        </ListItem>
+        </ListItem> */}
 
         <ListItem Button>
           <KitchenIcon/>
@@ -166,8 +168,8 @@ export default function TemporaryDrawer() {
         <Divider />
 
         <ListItem Button> 
-          <ExitToAppIcon />
-          <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
+          <InfoIcon />
+          <SideMenu primary={'Recette(ルセッテ)とは'} menuAciton={() => menuProfile() } />
         </ListItem>
 
         <ListItem Button> 
@@ -178,6 +180,11 @@ export default function TemporaryDrawer() {
         <ListItem Button>
           <MailIcon/>
           <SideMenu primary={'お問い合わせ'} menuAciton={() => {menuContact()}} />
+        </ListItem>
+        
+        <ListItem Button> 
+          <ExitToAppIcon />
+          <SideMenu primary={'ログアウト'} menuAciton={() => { dispatch(signOut()) }} />
         </ListItem>
       </List>
       

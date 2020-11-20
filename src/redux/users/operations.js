@@ -65,7 +65,9 @@ export const signUp = (username, email, password, confirmPassword) => {
                         uid: uid,
                         updated_at: timestamp,
                         username: username,
-                        userProfileImage: [],
+                        userProfileImage: [
+                            { path: "/static/images/cards/no-profile.png", id: "" }
+                        ],
                     };
 
                     
@@ -141,7 +143,8 @@ export const signIn = (email, password) => {
                         // role: data.role,
                         // payment_method_id: (data.payment_method_id) ? data.payment_method_id : "",
                         uid: userId,
-                        // username: data.username,
+                        username: data.username,
+                        userProfileImage: data.userProfileImage
                     }));
                     dispatch(push('/'))
                 })

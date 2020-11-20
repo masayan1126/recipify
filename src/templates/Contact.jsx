@@ -29,7 +29,6 @@ const Contact = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
-    console.log(uid);
 
     const [username, setUsername] = useState(''),
           [email, setEmail] = useState(''),
@@ -55,14 +54,14 @@ const Contact = () => {
                 + '【問い合わせ内容】\n' + inquiry
         };
 
-        const url = "https://hooks.slack.com/services/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"
+        const url = "https://hooks.slack.com/services/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"
 
         // fetchメソッドでフォームの内容をSlackのIncoming Webhook URL に送信する
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(payload)
         }).then(() => {
-            alert('送信が完了しました。追ってご連絡いたします🙌');
+            alert('送信が完了しました。追ってご連絡いたします');
             setInquiry("")
         })
         // e.preventDefault()
@@ -90,6 +89,7 @@ const Contact = () => {
     return(
         <>
             <div className="form-container text-center">
+                <div className="spacer-sm"/>
                 <h3 className="title">お問い合わせ</h3>
                 <div className="spacer-sm"/>
                 <TextInput 
@@ -111,7 +111,7 @@ const Contact = () => {
                 <TextInput 
                     fullWidth={true} label={'お問い合わせ内容'}
                     multiline={true} required={true}
-                    rows={7} value={inquiry}
+                    rows={5} value={inquiry}
                     type={'text'} onChange={inputInquiry}
                     // variant="filled"
                 />
@@ -120,10 +120,10 @@ const Contact = () => {
                 <div className="center">
                     <PrimaryButton 
                         label="問い合わせする"  
-                        onClick={submitForm}
+                        onClick={() => submitForm(username, email, inquiry)}
                     />
                 </div>
-
+                <div className="spacer-sm"/>
             </div>
 
         </>

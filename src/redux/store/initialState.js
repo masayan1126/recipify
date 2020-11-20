@@ -31,7 +31,7 @@ const initialState = {
         role: "",
         uid: "",
         username: "",
-        userProfileImage: "",
+        userProfileImage: [],
     }
 };
 

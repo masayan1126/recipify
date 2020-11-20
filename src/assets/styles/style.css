@@ -1,6 +1,11 @@
 .MuiButton-root {
     /* color: white !important; */
     color: #55423d !important;
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif !important;
+}
+
+.MuiButton-label {
+    font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif !important;
 }
 
 .MuiToolbar-root {
@@ -55,7 +60,7 @@ summary:hover {
 }
 
 .pt-small {
-    padding-top:80px;
+    padding-top:100px;
 }
 
 .bg-color__yellow {
@@ -85,10 +90,10 @@ summary:hover {
     margin-bottom: 10px;
 }
 
-.react-calendar {
+/* .react-calendar {
     width: 90% !important;
     max-width: 430px !important;
-}
+} */
 
 .text-center { 
     text-align: center;
@@ -114,8 +119,8 @@ summary:hover {
 .form-container {
     margin: 0 auto;
     max-width: 365px;
-    min-height: 300px;
-    padding: 1rem;
+    min-height: 280px;
+    padding: 1.2rem;
     background-color:white;
     /* background-color: none; */
     height: auto;
@@ -346,6 +351,7 @@ summary:hover {
 
 .u-text-right {
     text-align: right;
+    font-size: 12px;
 }
 
 

@@ -17,9 +17,9 @@ const IngredientsList = () => {
   const uid = getUserId(selector);
   // const ingredientsList = getIngredients(selector);
   const usersRef = db.collection("users");
-  const ingredientsRef = usersRef.doc(uid).collection("ingredients")
-  const [ingredientsList, setIngredientsList] = useState([]);
-  // const [vegs, setVegs] = useState([]),
+  
+  const [ingredientsList, setIngredientsList] = useState([]),
+        [boolean, setBoolean] = useState(false);
   // const [ingredientsList, setIngredientsList] = useState([]);
   // [meats, setMeats] = useState([]),
   // [fishes, setFishes] = useState([]),
@@ -27,6 +27,8 @@ const IngredientsList = () => {
   // [others, setOthers] = useState([]);
 
   useEffect(() => {
+    const ingredientsRef = usersRef.doc(uid).collection("ingredients")
+    console.log(ingredientsList.length);
     const arr = []
     // dispatch(fetchIngredients(uid))
     ingredientsRef.get()
@@ -37,33 +39,32 @@ const IngredientsList = () => {
           })
       setIngredientsList(arr);
     })
-  }, [ingredientsList.length])
+  }, [boolean])
 
-  console.log(ingredientsList);
+  console.log(ingredientsList.length);
 
   return(
       <section className="form-container">
+        <div className="spacer-sm"/>
         <h3 className="title">食材分類一覧</h3>
-        {ingredientsList.length > 0 ? 
+
         <>
           <Ingredients 
             // vegs={vegs} meats={meats} fishes={fishes}
             // cereals={cereals} others={others}
-            ingredientsList={ingredientsList}
-            message={"まだ食材はありません。"} />
+              ingredientsList={ingredientsList}
+              message={"まだ食材はありません。"} 
+              setBoolean={setBoolean}
+            />
           <div className="spacer-sm"/>
-          {/* <div className="center">
+          <div className="center">
             <PrimaryButton
                 label={"分類を追加"}
                 onClick={() => dispatch(push('/ingredients/edit'))}
             />
-          </div> */}
-        </>
-        
-        :<div className="center">
-          <p>データはありません</p>
           </div>
-        }
+        </>
+        <div className="spacer-sm"/>
       </section>
   )
 }

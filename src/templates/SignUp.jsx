@@ -2,12 +2,10 @@ import React ,{useCallback,useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {TextInput, PrimaryButton} from '../components/UIkit/index'
 import {signUp} from '../redux/users/operations';
-import {push, goBack} from 'connected-react-router'
-
+import {push} from 'connected-react-router'
 
 const SignUp = () => {
     const dispatch = useDispatch();
-
     const [username, setUsername] = useState(''),
           [email, setEmail] = useState(''),
           [password, setPassword] = useState(''),
@@ -30,8 +28,9 @@ const SignUp = () => {
     },[setConfirmPassword]);
 
     return(
-        <div>
+        <section>
             <div className="form-container">
+                <div className="spacer-sm"/>
                 <h3 className="title">アカウント登録</h3>
                 <TextInput 
                     fullWidth={true} label={'ユーザー名'}
@@ -63,11 +62,14 @@ const SignUp = () => {
                         label={"登録する"}
                         onClick={() => dispatch(signUp(username,email,password,confirmPassword))}
                     />
-                    <p className="p-link-menu" onClick={() => dispatch(push('/signin'))}>アカウントをお持ちの方はこちら</p>
+                    <div className="spacer-sm"/>
+                    <p className="p-link-menu"
+                        onClick={() => dispatch(push('/signin'))}>アカウントをお持ちの方はこちら
+                    </p>
                 </div>
-            </div>
-            
-        </div>
+                <div className="spacer-sm"/>
+            </div>   
+        </section>
     )
 }
 export default SignUp
