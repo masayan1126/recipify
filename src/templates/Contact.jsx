@@ -15,6 +15,7 @@ import firebase from "firebase"
 import functions from '../firebase/index';
 import recipeDataset from "../dataset.json"
 // import sendMail from "../../functions/src/index";
+import webhookUrl from '../../webhook/webhookUrl';
 
 const useStyles = makeStyles((theme) => ({
     simpleSignin: {
@@ -54,10 +55,10 @@ const Contact = () => {
                 + '【問い合わせ内容】\n' + inquiry
         };
 
-        const url = "https://hooks.slack.com/services/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"
+        
 
         // fetchメソッドでフォームの内容をSlackのIncoming Webhook URL に送信する
-        fetch(url, {
+        fetch(webhookUrl, {
             method: 'POST',
             body: JSON.stringify(payload)
         }).then(() => {
