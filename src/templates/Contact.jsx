@@ -15,7 +15,7 @@ import firebase from "firebase"
 import functions from '../firebase/index';
 import recipeDataset from "../dataset.json"
 // import sendMail from "../../functions/src/index";
-import  {webhookUrl} from '../../src/components/webhook/webhookUrl';
+import  {webhookUrl} from '../webhook/webhookUrl';
 
 const useStyles = makeStyles((theme) => ({
     simpleSignin: {
