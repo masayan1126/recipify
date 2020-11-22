@@ -54,7 +54,7 @@ const Contact = () => {
         
 
         // fetchメソッドでフォームの内容をSlackのIncoming Webhook URL に送信する
-        fetch("", {
+        fetch(webhookUrl, {
             method: 'POST',
             body: JSON.stringify(payload)
         }).then(() => {
