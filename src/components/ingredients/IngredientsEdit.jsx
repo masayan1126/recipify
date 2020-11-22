@@ -48,9 +48,9 @@ const IngredientsEdit = () => {
  
 
     return(
-        <section className="form-container">
+        <section className="form-container fadein__bottom__fast">
             <h3 className="title">食材の登録・編集</h3>
-            <ImageArea images={images} setImages={setImages} title={"食材画像の登録"}/>
+            <ImageArea className="" images={images} setImages={setImages} title={"食材画像の登録"}/>
             <TextInput
                 fullWidth={false} label={"カテゴリ(肉類等)"} multiline={false} required={true}
                 rows={1} value={ingredientsCategory} type={"text"} onChange={inputingredientsCategory}

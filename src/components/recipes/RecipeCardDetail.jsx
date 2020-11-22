@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: "500px",
     margin: "0 auto",
     width: "90%",
     boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
@@ -89,7 +89,10 @@ export default function RecipeReviewCard(props) {
   }, [])
 
   return (
-    <Card className={classes.root}>
+    <Card 
+      className={classes.root}
+      className="fadein__bottom__fast"
+    >
       <CardHeader className={classes.cardHeader}
         title={props.recipe.recipeName}
         titleTypographyProps={{variant:'h6' }}

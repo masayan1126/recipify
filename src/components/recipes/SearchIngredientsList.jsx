@@ -41,7 +41,7 @@ const SearchIngredientsList = () => {
     }, []);
 
     return(
-        <section className="form-container">
+        <section className="form-container fadein__bottom__fast">
             <SearchIngredients
                 vegs={vegs} 
                 meats={meats} fishes={fishes}

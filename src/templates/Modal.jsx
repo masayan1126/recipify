@@ -79,7 +79,7 @@ const Modal = (props) => {
   return (
     <div>
 
-      <Dialog className={classes.dialogWidth}
+      <Dialog className={classes.dialogWidth} className="fadein__bottom__fast"
         // onClose={props.handleClose}
         aria-labelledby="customized-dialog-title" open={props.open}>
         <DialogTitle id="customized-dialog-title">

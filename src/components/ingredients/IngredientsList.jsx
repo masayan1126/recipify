@@ -44,7 +44,7 @@ const IngredientsList = () => {
   console.log(ingredientsList.length);
 
   return(
-      <section className="form-container">
+      <section className="form-container fadein__bottom__fast">
         <div className="spacer-sm"/>
         <h3 className="title">食材分類一覧</h3>
 
@@ -55,6 +55,7 @@ const IngredientsList = () => {
               ingredientsList={ingredientsList}
               message={"まだ食材はありません。"} 
               setBoolean={setBoolean}
+              
             />
           <div className="spacer-sm"/>
           <div className="center">

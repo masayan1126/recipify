@@ -73,7 +73,7 @@ const UserProfile = () => {
     }, [userProfileImage])
 
     return(
-        <section>
+        <section className="fadein__bottom__fast">
             <UserProfileEdit
                 setOpen={setOpen}
                 open={open}

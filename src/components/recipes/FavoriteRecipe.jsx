@@ -26,7 +26,7 @@ const FavoriteRecipe = (props) => {
 
     return(
         <>
-            <List className={classes.root}>
+            <List className={classes.root} className="fadein__bottom__fast">
                 { props.favoriteRecipes.length > 0 && (
                     props.favoriteRecipes.map(favoriteRecipe => (
                         <>

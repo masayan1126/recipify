@@ -55,7 +55,10 @@ const Recipes = (props) => {
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)
               .map(recipe => (
-                  <Grid item className={classes.card} xs={6} sm={4} md={3} lg={2}>
+                  <Grid 
+                    item className={classes.card} xs={6} sm={4} md={3} lg={2}
+                    className="fadein__bottom__fast"
+                  >
                     <RecipeCard key={recipe.id} recipe={recipe} />
                   </Grid>
               ))

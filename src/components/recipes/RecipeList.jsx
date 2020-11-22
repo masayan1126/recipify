@@ -85,7 +85,7 @@ const RecipeList = () => {
                 <InputBase 
                     onChange={(event) => setQuery(event.target.value)}
                     type={"text"} value={query}
-                    placeholder="検索条件を入力してください"
+                    placeholder="検索条件を入力してください(前方一致)"
                     classes={{
                         input: classes.inputInput,
                     }}

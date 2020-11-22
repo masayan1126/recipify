@@ -179,7 +179,7 @@ const RecipeEdit = () => {
 
 
     return(
-        <section>
+        <section className="fadein__bottom__fast">
             <div className="form-container">
                 <h3 className="title">レシピの登録・編集</h3>
                 <div className="spacer-xs"/>

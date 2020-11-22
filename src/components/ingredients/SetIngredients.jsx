@@ -66,6 +66,8 @@ const SetIngredients = (props) => {
     const editIngredients = (index, ingredients) => {
         setIndex(index)
         setIngredients(ingredients)
+        const inputIngredientsName = document.getElementById("input-ingredients-name");
+        inputIngredientsName.focus()
     }
 
     const deleteIngredients = (deleteIndex) => {
@@ -110,6 +112,7 @@ const SetIngredients = (props) => {
                     <TextInput
                         fullWidth={false} label={"食材名(複数可)"} multiline={false} required={true}
                         onChange={inputIngredients} rows={1} value={ingredients} type={"text"}
+                        id={"input-ingredients-name"}
                     />
                 </div>
                 <IconButton className={classes.checkIcon} 

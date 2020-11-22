@@ -29,6 +29,7 @@ const TextInput = (props) => {
             InputProps={props.InputProps}
             size={props.size}
             variant={props.variant}
+            id={props.id}
         />
     )
 }

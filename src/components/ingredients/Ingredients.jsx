@@ -41,7 +41,7 @@ const Ingredients = (props) => {
     return (
         <>
         {props.ingredientsList.length > 0 && (
-            <List className={classes.root}>
+            <List className={classes.root} >
                 
                 
                     {props.ingredientsList.map((ingredients) => {

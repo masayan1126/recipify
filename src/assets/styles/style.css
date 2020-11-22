@@ -116,6 +116,60 @@ summary:hover {
     display: flex;
 }
 
+.fadein__bottom__fast {
+    opacity: 0;
+    animation-name: fadein-bottom;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+ }
+ @keyframes fadein-bottom {
+    0% {
+       opacity: 0;
+       transform: translateY(20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+ }
+
+.p-chat__row {
+    opacity: 0;
+    animation-name: fadein-right;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+ }
+ @keyframes fadein-right {
+    0% {
+       opacity: 0;
+       transform: translateX(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+
+.p-chat__reverse {
+    opacity: 0;
+    animation-name: fadein-left;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+ }
+ @keyframes fadein-left {
+    0% {
+       opacity: 0;
+       transform: translateX(20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+
 .form-container {
     margin: 0 auto;
     max-width: 365px;
@@ -178,16 +232,18 @@ summary:hover {
     margin: 0 auto;
 }
 
+
 .chat-grid__answer {
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
     height: 192px;
+    /* color: #898280; */
 }
 
 .p-chat__bubble {
     /* background:#EBB582; */
-    background:#785A46;
+    background:#55423d;
     border-radius: 4px;
     color: white;
     font-size: 14px;

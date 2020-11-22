@@ -61,11 +61,12 @@ const AutoMakeRecipeCalendar = () => {
     }, [])
 
     return (
-        <section>
+        <section className="fadein__bottom__fast">
             { loading == true ? <Loading /> : 
             <>
-                <h3 className="title">レシピ一括登録</h3>
                 <div className="form-container text-center">
+                    <div className="spacer-sm"/>
+                    <h3 className="title">レシピ一括登録</h3>
                     <TextInput
                         fullWidth={true} label={"年"} multiline={false} required={true}
                         rows={1} value={startYear} type={"number"} 
@@ -109,6 +110,7 @@ const AutoMakeRecipeCalendar = () => {
                         />
                         <p className="p-link-menu" onClick={() => dispatch(push('/recipe/calendar'))}>＞ カレンダーに戻る</p>
                     </div>
+                    <div className="spacer-sm"/>
                 </div> 
             </>
             }  

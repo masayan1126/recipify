@@ -144,7 +144,7 @@ const CalendarFlame = (props) => {
     
     return (
         <>
-            <Calendar className="recipe-calendar"
+            <Calendar className="recipe-calendar fadein__bottom__fast"
                 onChange={setTargetDate}
                 // YYMMDD形式の日付に変換される前の生の日付
                 value={targetDate}

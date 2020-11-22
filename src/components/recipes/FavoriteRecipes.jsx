@@ -25,13 +25,11 @@ const FavoriteRecipes = () => {
     return(
         <section>
             <h3 className="title">お気に入りレシピ一覧</h3>
-            <CSSTransition
-                in={fade}
-                timeout={1000}
-                classNames="fade"
-            >
-                <FavoriteRecipe favoriteRecipes = {favoriteRecipes} />
-            </CSSTransition>
+            <FavoriteRecipe 
+                favoriteRecipes = {favoriteRecipes} 
+                
+            />
+
         </section>
     )
 }

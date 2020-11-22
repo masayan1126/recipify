@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "right",
         fontSize: "8px",
     }
-    
+
 }));
 
 const Contact = () => {
@@ -54,7 +54,7 @@ const Contact = () => {
                 + '【問い合わせ内容】\n' + inquiry
         };
 
-        const url = "https://hooks.slack.com/services/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"
+        const url = "https://hooks.slack.com/services/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"
 
         // fetchメソッドでフォームの内容をSlackのIncoming Webhook URL に送信する
         fetch(url, {
@@ -83,32 +83,32 @@ const Contact = () => {
                 setUsername(data.username)
                 setEmail(data.email)
             })
-        
+
     }, [])
 
     return(
         <>
-            <div className="form-container text-center">
+            <div className="form-container text-center fadein__bottom__fast">
                 <div className="spacer-sm"/>
                 <h3 className="title">お問い合わせ</h3>
                 <div className="spacer-sm"/>
-                <TextInput 
+                <TextInput
                     fullWidth={true} label={'ユーザー名'}
                     multiline={false} required={true}
                     rows={1} value={username}
                     type={'text'} onChange={inputUsername}
                 />
-                <TextInput 
+                <TextInput
                     fullWidth={true} label={'メールアドレス'}
                     multiline={false} required={true}
                     rows={1} value={email}
                     type={'email'} onChange={inputEmail}
                     // variant="outlined"
                     // variant="filled"
-                    
-                    
+
+
                 />
-                <TextInput 
+                <TextInput
                     fullWidth={true} label={'お問い合わせ内容'}
                     multiline={true} required={true}
                     rows={5} value={inquiry}
@@ -118,8 +118,8 @@ const Contact = () => {
                 {/* <div className="spacer-sm"/> */}
                 <div className="spacer-sm"/>
                 <div className="center">
-                    <PrimaryButton 
-                        label="問い合わせする"  
+                    <PrimaryButton
+                        label="問い合わせする"
                         onClick={() => submitForm(username, email, inquiry)}
                     />
                 </div>
