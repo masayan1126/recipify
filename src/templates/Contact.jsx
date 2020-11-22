@@ -11,14 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import {db} from '../firebase/index';
 import { getUserId, getUsername, getUserProfileImage } from "../redux/users/selecotors";
 import { ScannerSharp } from '@material-ui/icons';
-import  {webhookUrl} from '../../webhook/webhookUrl';
+import  webhookUrl from '../webhook/webhookUrl';
 
 const useStyles = makeStyles((theme) => ({
     simpleSignin: {
         textAlign: "right",
         fontSize: "8px",
     }
-
 }));
 
 const Contact = () => {
