@@ -8,8 +8,9 @@ import {FlashMessage} from "../../templates/index";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  card: {
-    // maxWidth: "200px",
+  recipesContainer: {
+    maxWidth: "1000px",
+    margin: "0 auto"
   },
   
 }));
@@ -35,7 +36,7 @@ const Recipes = (props) => {
   }
   
   return (
-    <>
+    <div className={classes.recipesContainer}>
     
       {/* <FlashMessage /> */}
       {props.recipes.length < 1  ?
@@ -74,7 +75,7 @@ const Recipes = (props) => {
         onClick={(e, offset) => handleClickPagination(offset)}
       />
       <div className="spacer-md"/>
-    </>
+    </div>
   );
 }
 
