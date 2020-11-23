@@ -143,7 +143,7 @@ const CalendarFlame = (props) => {
     },[]);
     
     return (
-        <>
+        <section className="form-container">
             <Calendar className="recipe-calendar fadein__bottom__fast"
                 onChange={setTargetDate}
                 // YYMMDD形式の日付に変換される前の生の日付
@@ -154,7 +154,7 @@ const CalendarFlame = (props) => {
             <div id="recipe-calendar-form" 
                 // className="display-toggle"
             >
-                <div className="form-container">
+                <div className="">
                     <TextInput
                         fullWidth={true} label={"日付"} multiline={false} required={true}
                         rows={1} value={date} type={"text"}　
@@ -192,7 +192,7 @@ const CalendarFlame = (props) => {
                     </div>    
                 </div>
             </div>
-        </>
+        </section>
     );
 }
 export default CalendarFlame
