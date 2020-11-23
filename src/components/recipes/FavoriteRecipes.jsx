@@ -6,6 +6,8 @@ import {CSSTransition } from 'react-transition-group';
 import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import {getRecipes} from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
+import { NoData } from "../../templates/index";
+import {push} from 'connected-react-router'
   
 const FavoriteRecipes = () => {
     const dispatch = useDispatch();
@@ -25,11 +27,19 @@ const FavoriteRecipes = () => {
     return(
         <section>
             <h3 className="title">お気に入りレシピ一覧</h3>
-            <FavoriteRecipe 
-                favoriteRecipes = {favoriteRecipes} 
-                
-            />
-
+            { favoriteRecipes.length == 0 ?
+                <NoData
+                    message={"お気に入りのレシピはありませんでした!!レシピのハートマークをクリックするとお気に入りに追加されます。"}
+                    // linkMenu={"＞レシピ一覧に移動する"}
+                    // onClick={() => dispatch(push("recipe/edit"))}
+                    operateFigure={"/static/images/cards/operate__favorite.png"}
+                />
+                :
+                <FavoriteRecipe 
+                    favoriteRecipes = {favoriteRecipes} 
+                    
+                />
+            }
         </section>
     )
 }

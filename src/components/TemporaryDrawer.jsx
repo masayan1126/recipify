@@ -103,6 +103,10 @@ export default function TemporaryDrawer() {
     dispatch(push("/contact"))
   }
 
+  const menuAbout = () => {
+    dispatch(push("/about"))
+  }
+
   const list = (anchor) => (
     
     <div
@@ -169,7 +173,7 @@ export default function TemporaryDrawer() {
 
         <ListItem Button> 
           <InfoIcon />
-          <SideMenu primary={'Recette(ルセッテ)とは'} menuAciton={() => menuProfile() } />
+          <SideMenu primary={'Recette(ルセッテ)とは'} menuAciton={() => menuAbout() } />
         </ListItem>
 
         <ListItem Button> 

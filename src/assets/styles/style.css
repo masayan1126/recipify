@@ -72,9 +72,9 @@ summary:hover {
 
 
 .img-trimming {
-    width: 90%;
-    height: 90%;
-    max-width: 600px;
+    width: 70%;
+    height: 10%;
+    /* max-width: 600px; */
 }
 
 .display-toggle {
@@ -173,7 +173,7 @@ summary:hover {
 .form-container {
     margin: 0 auto;
     max-width: 365px;
-    min-height: 280px;
+    /* min-height: 280px; */
     padding: 1.2rem;
     background-color:white;
     /* background-color: none; */

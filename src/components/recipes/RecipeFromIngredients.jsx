@@ -5,12 +5,13 @@ import {fetchRecommendedRecipe} from '../../redux/recipes/operations';
 import { getSelectedIngredients, getRecipes } from '../../redux/recipes/selecotors';
 import { getUserId } from '../../redux/users/selecotors';
 import { Recipes } from "./index";
-import {goBack} from 'connected-react-router'
 import {
     CSSTransition,
     TransitionGroup,
   } from 'react-transition-group';
 import { Ingredients } from '../ingredients';
+import { NoData } from "../../templates/index";
+import {push} from 'connected-react-router'
 
 const RecipeFromIngredients = () => {
     const dispatch = useDispatch();
@@ -58,17 +59,19 @@ const RecipeFromIngredients = () => {
 
     return(
         <div>
-            {/* <CSSTransition
-                in={fade}
-                timeout={1000}
-                classNames="fade"
-            > */}
-                <Recipes recipes={targetRecipes} message = {message}
-                
-            // onChange={handleChange} 
+            {targetRecipes.length == 0 ? 
+                <NoData 
+                    message={"検索条件に一致するレシピはありませんでした!!"}
+                    linkMenu={"＞条件を変更して再度検索する"}
+                    onClick={() => dispatch(push("/recipe/search/ingredients"))}
                 />
+                :
+                <Recipes 
+                    recipes={targetRecipes} message = {message} 
+                    
+                />
+            }
 
-            {/* </CSSTransition> */}
         </div>
     )
 }

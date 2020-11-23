@@ -5,7 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import { useDispatch } from 'react-redux';
 import {goBack} from 'connected-react-router'
 import {FlashMessage} from "../../templates/index";
+import { NoData } from "../../templates/index";
 import { makeStyles } from '@material-ui/core/styles';
+import {push} from 'connected-react-router'
 
 const useStyles = makeStyles(() => ({
   recipesContainer: {
@@ -40,18 +42,15 @@ const Recipes = (props) => {
     
       {/* <FlashMessage /> */}
       {props.recipes.length < 1  ?
-        <>
-          <div className="spacer-lg"/>
-          <div className="spacer-lg"/>
-          <p className="nothing__message">{props.message}</p>
-          <div className="center">
-            <p className="p-link-menu"
-              onClick={() => dispatch(goBack())}>＞ 前の画面に戻る
-            </p>
-          </div>
-        </>
-      : ""
-      }
+ 
+      <NoData
+        message={"登録済みのレシピはありませんでした!!"}
+        linkMenu={"＞こちらからレシピを登録してみましょう"}
+        onClick={() => dispatch(push("recipe/edit"))}
+        
+      />
+      :
+      <>
       <Grid container spacing={1}>
           {props.recipes.length > 0 && (
             props.recipes.slice(offset, offset + parPage)
@@ -65,7 +64,7 @@ const Recipes = (props) => {
               ))
           )}   
       </Grid>
-
+      
       <div className="spacer-md"/>
       <Pagination className="text-center"
         limit={parPage}
@@ -73,8 +72,10 @@ const Recipes = (props) => {
         offset={offset}
         total={props.recipes.length}
         onClick={(e, offset) => handleClickPagination(offset)}
-      />
+        />
       <div className="spacer-md"/>
+        </>
+    }
     </div>
   );
 }

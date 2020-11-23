@@ -9,6 +9,7 @@ import { db } from '../../firebase';
 import { getUserId } from '../../redux/users/selecotors';
 import { getIngredients } from '../../redux/ingredients/selecotors';
 
+
 // 食材からレシピを検索する画面の親コンポーネント（子：SearchIngredients.jsx）
 const SearchIngredientsList = () => {
     const selector = useSelector(state => state);
@@ -31,11 +32,11 @@ const SearchIngredientsList = () => {
                         const data = doc.data();
                         ingredientsList.push(data.ingredientsList[0].value);
                     })
-                    setCereals(ingredientsList[0]);
+                    setVegs(ingredientsList[0]);
                     setFishes(ingredientsList[1]);
                     setMeats(ingredientsList[2]);
-                    setOthers(ingredientsList[3]);
-                    setVegs(ingredientsList[4]);
+                    setCereals(ingredientsList[3]);
+                    setOthers(ingredientsList[4]);
             });
         })();
     }, []);

@@ -6,7 +6,8 @@ import {getRecipes} from '../../../redux/recipes/selecotors';
 import { getUserId } from '../../../redux/users/selecotors';
 import { Recipes } from "../index";
 import { CSSTransition } from 'react-transition-group';
-import {push} from 'connected-react-router';
+import { NoData } from "../../../templates/index";
+import {push} from 'connected-react-router'
 
 
 const AiRecommendedRecipe = () => {
@@ -63,16 +64,17 @@ const AiRecommendedRecipe = () => {
 
     return(
         <section>
-            {/* <CSSTransition
-                in={fade}
-                timeout={1000}
-                classNames="fade"
-            > */}
-            <Recipes 
-                recipes={aiRecipes} message = {message}
-            />
-
-            {/* </CSSTransition> */}
+            { aiRecipes.length == 0 ?
+                <NoData
+                    message={"該当するレシピはありませんでした!!"}
+                    linkMenu={"＞もう一度チャットする"}
+                    onClick={() => dispatch(push("/recipe/bot"))}
+                />
+                :
+                <Recipes 
+                    recipes={aiRecipes}
+                />
+            }      
         </section>
     )
 }
