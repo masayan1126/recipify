@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         backgroundColor: "#ede9e5",
-        // border: "1px sok",
+        border: "1px solid #55423d",
         width: '100%',
         margin: "0 auto",
         maxWidth: "530px",
