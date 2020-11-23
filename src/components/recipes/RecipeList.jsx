@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: "#ede9e5",
+
         border: "1px solid #55423d",
         width: '100%',
         margin: "0 auto",
         maxWidth: "530px",
-        boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)!important",
+        boxShadow: "1px 1px rgba(0,0,0,.15)!important",
     },
     searchIcon: {
         padding: theme.spacing(1.5, 2),
