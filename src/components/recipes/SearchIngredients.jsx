@@ -19,6 +19,11 @@ const SearchIngredients = (props) => {
   [loading, setLoading] = useState(false);
 
   const searchRecipe = (veg, meat, fish, cereal, other) => {
+    if (veg == "未指定" && meat == "未指定" && fish == "未指定" && cereal == "未指定" && other　== "未指定") {
+      alert("少なくとも１つは条件を指定してください");
+      return
+    }
+
     const selectedIngredients = [
       { "category": "野菜", "name": veg },
       { "category": "肉", "name": meat },
