@@ -7,8 +7,14 @@ import { addCalendar } from '../../redux/calendar/operations';
 import {push} from 'connected-react-router'
 import { getUserId } from '../../redux/users/selecotors';
 import { db } from '../../firebase/index';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+
+}));
 
 const CalendarFlame = (props) => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
