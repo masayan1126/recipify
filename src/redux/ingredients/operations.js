@@ -6,6 +6,12 @@ import { IngredientsList } from '../../components/ingredients';
 
 export const saveIngredients = (id, ingredientsCategory, ingredientsList, images, uid) => {
     return async (dispatch) => {
+
+        if (!ingredientsCategory || images.length == 0) {
+            alert("食材分類名と食材分類画像は必須です");
+            return;
+        }
+
         console.log(ingredientsList);
         const ingredientsRef = db.collection('users').doc(uid).collection("ingredients")
         const timestamp = FirebaseTimestamp.now();
@@ -33,12 +39,12 @@ export const saveIngredients = (id, ingredientsCategory, ingredientsList, images
         // const id = ref.id
         // data.id = id;
         
-        // if(id === "") {
-        //     const ref = ingredientsRef.doc();
-        //     id = ref.id
-        //     data.id = id
-        //     data.created_at = timestamp 
-        // }
+        if(id === "") {
+            const ref = ingredientsRef.doc();
+            id = ref.id
+            data.id = id
+            data.created_at = timestamp 
+        }
     
         
         return await ingredientsRef.doc(id).set(data, {merge: true})
