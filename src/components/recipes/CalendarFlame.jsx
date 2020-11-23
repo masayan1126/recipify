@@ -36,15 +36,15 @@ const CalendarFlame = (props) => {
     // 選択した月(month)の表記を条件分岐で英語から日本語に変換
     const convertMonth = (month) => {
         switch (month) {
-            case "Jan": month = "1"; break;
-            case "Feb": month = "2"; break;
-            case "Mar": month = "3"; break;
-            case "Apl": month = "4"; break;
-            case "May": month = "5"; break;
-            case "Jue": month = "6"; break;
-            case "Jul": month = "7"; break;
-            case "Aue": month = "8"; break;
-            case "Sep": month = "9"; break;
+            case "Jan": month = "01"; break;
+            case "Feb": month = "02"; break;
+            case "Mar": month = "03"; break;
+            case "Apr": month = "04"; break;
+            case "May": month = "05"; break;
+            case "Jun": month = "06"; break;
+            case "Jul": month = "07"; break;
+            case "Aug": month = "08"; break;
+            case "Sep": month = "09"; break;
             case "Oct": month = "10"; break;
             case "Nov": month = "11"; break;
             case "Dec": month = "12"; break;

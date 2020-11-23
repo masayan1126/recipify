@@ -47,6 +47,16 @@ const AutoMakeRecipeCalendar = () => {
     var nowYear = dt.getFullYear();
 
     const autoSaveRecipeCalendar = (uid, startYear, startMonth, startDay, endDay, recipeNameList) => {
+        if (!startYear || !startMonth || !startDay || !endDay) {
+            alert("期間指定してください")
+            return
+        }
+
+        if (Number(startDay) > Number(endDay)) {
+            alert("終了日は開始日よりも後の日付を入力してください");
+            return
+        }
+        
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -73,7 +83,7 @@ const AutoMakeRecipeCalendar = () => {
                         onChange={inputStartYear}
                     />
                     <TextInput
-                        fullWidth={true} label={"月"} multiline={false} required={true}
+                        fullWidth={true} label={"月(例. ８月 -> ８)"} multiline={false} required={true}
                         rows={1} value={startMonth} type={"number"} 
                         onChange={inputStartMonth}
                         InputProps={{
@@ -83,7 +93,7 @@ const AutoMakeRecipeCalendar = () => {
                         }}
                     />
                     <TextInput
-                        fullWidth={true} label={"開始日"} multiline={false} required={true}
+                        fullWidth={true} label={"開始日(１ 〜 ３１)"} multiline={false} required={true}
                         rows={1} value={startDay} type={"number"} 
                         onChange={inputStartDay}
                         InputProps={{
@@ -93,7 +103,7 @@ const AutoMakeRecipeCalendar = () => {
                         }}
                     />
                     <TextInput
-                        fullWidth={true} label={"終了日"} multiline={false} required={true}
+                        fullWidth={true} label={"終了日(１ 〜 ３１)"} multiline={false} required={true}
                         rows={1} value={endDay} type={"number"} 
                         onChange={inputEndDay}
                         InputProps={{

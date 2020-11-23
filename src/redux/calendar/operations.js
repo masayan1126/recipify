@@ -74,10 +74,6 @@ export const saveCalendar = (id, breakfast, lunch, dinner, date, uid) => {
 
 export const autoSaveCalendar = (uid, startYear, startMonth, startDay, endDay, recipeNameList) => {
     return async (dispatch) => {
-        if (Number(startDay) > Number(endDay)) {
-            alert("終了日は開始日よりも後の日付を入力してください");
-            return
-        }
         
         // recipeNameListの中身をランダムに入れ替える
         for　(let i = recipeNameList.length - 1; i > 0; i--){
