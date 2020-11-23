@@ -89,40 +89,42 @@ export default function RecipeReviewCard(props) {
   }, [])
 
   return (
-    <Card 
-      className={classes.root}
-      className="fadein__bottom__fast"
-    >
-      <CardHeader className={classes.cardHeader}
-        title={props.recipe.recipeName}
-        titleTypographyProps={{variant:'h6' }}
+    <div className="fadein__bottom__fast">
+
+      <Card 
+        className={classes.root}
       >
-      </CardHeader>
-      <CardMedia
-        className={classes.media}
-        image={props.recipe.images[0].path}
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography variant="body2" color="textSecondary" component="p">
-          ジャンル：{props.recipe.recipeGenre}<br/>カテゴリー：{props.recipe.recipeCategory}<br/>調理時間：{props.recipe.cookingTime}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <IconButton aria-label="add to favorites" id="favIcon" 
-          className={classes.iconButton} onClick={() => toggleFav()}>
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton 
-          className={classes.iconButton}
-          id="recipe-site-icon"
-          href={
-            props.recipe.recipeLink.length > 0 ? props.recipe.recipeLink : ""
-          }
-          target="_blank"
-        >    
-          <MenuBookIcon/>
-        </IconButton>
-      </CardActions>
-    </Card>
+        <CardHeader className={classes.cardHeader}
+          title={props.recipe.recipeName}
+          titleTypographyProps={{variant:'h6' }}
+        >
+        </CardHeader>
+        <CardMedia
+          className={classes.media}
+          image={props.recipe.images[0].path}
+        />
+        <CardContent className={classes.cardContent}>
+          <Typography variant="body2" color="textSecondary" component="p">
+            ジャンル：{props.recipe.recipeGenre}<br/>カテゴリー：{props.recipe.recipeCategory}<br/>調理時間：{props.recipe.cookingTime}
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.cardActions}>
+          <IconButton aria-label="add to favorites" id="favIcon" 
+            className={classes.iconButton} onClick={() => toggleFav()}>
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton 
+            className={classes.iconButton}
+            id="recipe-site-icon"
+            href={
+              props.recipe.recipeLink.length > 0 ? props.recipe.recipeLink : ""
+            }
+            target="_blank"
+          >    
+            <MenuBookIcon/>
+          </IconButton>
+        </CardActions>
+      </Card>
+    </div>
   );
 }
